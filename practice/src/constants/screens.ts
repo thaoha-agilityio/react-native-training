@@ -1,0 +1,17 @@
+export const SCREENS = {
+  LOGIN: 'Login',
+  BOARDING: 'Boarding',
+  SUCCESS: 'Success',
+  HOME: 'Home',
+  FAVORITES: 'Favorites',
+  NOTIFICATIONS: 'Notifications',
+  PROFILE: 'Profile',
+  BOTTOM_TAB: 'BottomTab',
+  PRODUCT_DETAILS: 'ProductDetails',
+  CART: 'Cart',
+  CHECK_OUT: 'CheckOut',
+  EDIT_PROFILE: 'EditProfile',
+  PRIVATE_STACK: 'PrivateStack',
+  AUTH_STACK: 'AuthStack',
+  NOT_FOUND: '*',
+} as const;

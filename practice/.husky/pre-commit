@@ -1,0 +1,2 @@
+cd practice
+npx lint-staged
