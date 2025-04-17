@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FastImage Component renders placeholder while loading 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "overflow": "hidden",
+      },
+      undefined,
+    ]
+  }
+>
+  <ActivityIndicator
+    size="small"
+    style={
+      {
+        "position": "absolute",
+        "zIndex": 1,
+      }
+    }
+  />
+  <FastImage
+    onError={[Function]}
+    onLoadEnd={[Function]}
+    source={
+      {
+        "uri": "https://example.com/image.jpg",
+      }
+    }
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+</View>
+`;

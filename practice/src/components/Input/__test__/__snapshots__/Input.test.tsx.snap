@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component should render properly 1`] = `
+<View>
+  <View
+    style={
+      [
+        {
+          "borderBottomWidth": 2,
+        },
+        {
+          "borderColor": "#E0E0E0",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#606060",
+            "fontFamily": "NunitoSans-SemiBold",
+          },
+          {
+            "fontSize": 16,
+            "lineHeight": 20,
+          },
+          [
+            {
+              "color": "#909090",
+              "fontFamily": "NunitoSans-Regular",
+              "fontSize": 14,
+              "lineHeight": 20,
+              "marginBottom": 5,
+            },
+          ],
+          {},
+        ]
+      }
+    >
+      Email
+    </Text>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <TextInput
+        style={
+          [
+            {
+              "paddingVertical": 8,
+              "position": "relative",
+              "width": "100%",
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

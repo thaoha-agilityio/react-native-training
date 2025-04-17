@@ -1,0 +1,12 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "strict": true,
+    "module": "esnext",
+    "baseUrl": ".",
+    "types": ["react-native", "jest", "node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
