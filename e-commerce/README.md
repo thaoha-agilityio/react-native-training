@@ -40,25 +40,25 @@ Ensure sure you have completed the [React Native - Environment Setup](https://do
 
 2. **Checkout into "dev" branch:**
 
-```bash
-  git checkout develop
-```
+   ```bash
+   git checkout develop
+   ```
 
 3. **Install dependencies:**
 
-```bash
- cd e-commerce
-```
+   ```bash
+   cd e-commerce
+   ```
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 4. **Start the app**
 
-```bash
- npx expo start
-```
+   ```bash
+   npx expo start
+   ```
 
 ## Requirements
 
