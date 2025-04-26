@@ -1,50 +1,82 @@
-# Welcome to your Expo app 👋
+# React Native Expo Practice
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+- This document provides the plan, requirements and estimation for React Native Expo Practice.
+- Build E-commerce app
 
-1. Install dependencies
+## Target
+
+- Get started with Expo and become familiar with the Expo SDK
+- Set up an Expo project & understand the directory structure.
+- Use Expo Go for testing without installing Xcode or Android Studio.
+- Work with Expo SDKs like Camera, Image Picker, Notification
+- Build a feature-rich app using multiple Expo APIs.
+- Optimized Performance & UI – FlatList optimization, animations, and styling best practices.
+
+## Technical Stack
+
+- React Native
+- Expo
+- Expo SDK
+- React Navigation
+- Typescript
+- Zustand
+- React Query
+- Jest
+- Testing-library/react-native
+
+## Prerequisites
+
+Ensure sure you have completed the [React Native - Environment Setup](https://docs.expo.dev/get-started/set-up-your-environment/) instructions till "Creating a new application" step, before proceeding.
+
+### Installation
+
+1. **Clone the repository:**
 
    ```bash
-   npm install
+   git@gitlab.asoft-python.com:thao.ha/react-native-training.git
    ```
 
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+2. **Checkout into "dev" branch:**
 
 ```bash
-npm run reset-project
+  git checkout develop
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. **Install dependencies:**
 
-## Learn more
+```bash
+ cd e-commerce
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+4. **Start the app**
 
-## Join the community
+```bash
+ npx expo start
+```
 
-Join our community of developers creating universal apps.
+## Requirements
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Link](https://docs.google.com/document/d/1pHC3DfMbDdvMGoaOtOmJ0vvqB3cMPuOXpGvV-R5M5Ak/edit?tab=t.0)
+
+## Features
+
+- Users can see Boarding screen
+- Users can log in
+- Users can see a list of products
+- Horizontal scrolling category
+- Users can see product details
+  - Swipe effect for image
+- Users can add a product to the cart
+- Users can update the quantity of products in the cart
+- Users can remove the product from the cart
+- Check out product
+- Users can see profile screen
+- Users can edit profile
+  - Using Camera and Image Picker
+- Users can log out
