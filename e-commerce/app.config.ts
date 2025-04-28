@@ -7,7 +7,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
-
   scheme: 'e-commerce-app',
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
@@ -28,6 +27,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     'expo-router',
+    'expo-font',
     [
       'expo-splash-screen',
       {
