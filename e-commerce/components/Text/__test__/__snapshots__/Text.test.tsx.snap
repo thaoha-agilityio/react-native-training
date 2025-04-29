@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render properly 1`] = `
+<Text
+  style={
+    [
+      {
+        "color": "#F83758",
+        "fontFamily": "Montserrat-Regular",
+      },
+      {
+        "fontSize": 14,
+        "lineHeight": 20,
+      },
+      undefined,
+      {},
+    ]
+  }
+>
+  Login Screen
+</Text>
+`;

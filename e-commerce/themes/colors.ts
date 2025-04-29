@@ -26,3 +26,23 @@ export const colors = {
     describe: '#575757',
   },
 };
+
+export const colorTheme = {
+  light: {
+    title: colors.text.primary,
+    helper: colors.text.helper,
+    placeholder: colors.text.placeholder,
+    category: colors.text.category,
+    review: colors.text.review,
+    describe: colors.text.describe,
+  },
+
+  dark: {
+    title: colors.light,
+    helper: colors.light,
+    placeholder: colors.light,
+    category: colors.light,
+    review: colors.light,
+    describe: colors.light,
+  },
+};
