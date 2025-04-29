@@ -7,13 +7,13 @@ export const fontWeights = {
 } as const;
 
 export const fontSizes = {
+  tiny: 10,
   xs: 12,
-  base: 14,
-  sm: 16,
-  md: 18,
-  lg: 20,
-  xl: 24,
-  xxl: 30,
+  sm: 14,
+  md: 16,
+  lg: 18,
+  xl: 20,
+  xxl: 24,
   '3xl': 36,
 } as const;
 

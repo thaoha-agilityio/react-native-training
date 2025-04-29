@@ -6,7 +6,7 @@ export const colors = {
   pagination: '#17223B',
   icon: '#626262',
   star: '#EDB310',
-  disable: '#DEDBDB',
+  disabled: '#DEDBDB',
   search: '#BBBBBB',
   active: '#EB3030',
 
