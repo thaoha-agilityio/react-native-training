@@ -13,6 +13,8 @@ export * from './HeartIcon';
 export * from './HomeIcon';
 export * from './LockIcon';
 export * from './LogoIcon';
+export * from './MinusIcon';
+export * from './PlusIcon';
 export * from './PositionIcon';
 export * from './SettingIcon';
 export * from './SearchBarIcon';
