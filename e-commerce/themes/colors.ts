@@ -29,6 +29,7 @@ export const colors = {
 
 export const colorTheme = {
   light: {
+    primary: colors.primary,
     title: colors.text.primary,
     helper: colors.text.helper,
     placeholder: colors.text.placeholder,
@@ -38,6 +39,7 @@ export const colorTheme = {
   },
 
   dark: {
+    primary: colors.light,
     title: colors.light,
     helper: colors.light,
     placeholder: colors.light,

@@ -6,13 +6,20 @@ import {
   Text as TextBase,
   TextProps as TextBaseProps,
   TextStyle,
+  useColorScheme,
 } from 'react-native';
 
 // Interfaces
 import { TextSize, TextVariant } from '@/interfaces';
 
 // Themes
-import { fontsFamily, colors, fontSizes, lineHeights } from '@/themes';
+import {
+  fontsFamily,
+  colors,
+  fontSizes,
+  lineHeights,
+  colorTheme,
+} from '@/themes';
 
 export interface TextProps extends PropsWithChildren<TextBaseProps> {
   variant?: TextVariant;
@@ -28,41 +35,58 @@ const TextComponent = ({
   style,
   children,
   ...props
-}: TextProps) => (
-  <TextBase
-    style={[
-      textVariant[variant],
-      textSizes[size],
-      style,
-      { ...(color && { color }) },
-    ]}
-    {...props}
-  >
-    {children}
-  </TextBase>
-);
+}: TextProps) => {
+  const colorScheme = useColorScheme() ?? 'light';
+
+  const textColor = () => {
+    switch (variant) {
+      case 'heading':
+        return colorTheme[colorScheme].primary;
+
+      case 'title':
+        return colorTheme[colorScheme].title;
+
+      case 'description':
+        return colorTheme[colorScheme].helper;
+
+      default:
+        return colors.primary;
+    }
+  };
+
+  return (
+    <TextBase
+      style={[
+        textVariant[variant],
+        textSizes[size],
+        style,
+        { color: textColor() },
+        { ...(color && { color }) },
+      ]}
+      {...props}
+    >
+      {children}
+    </TextBase>
+  );
+};
 
 export const Text = memo(TextComponent);
 
 const textVariant = StyleSheet.create({
   heading: {
     fontFamily: fontsFamily.semiBold,
-    color: colors.primary,
   },
 
   title: {
     fontFamily: fontsFamily.extraBold,
-    color: colors.primary,
   },
 
   description: {
     fontFamily: fontsFamily.primary,
-    color: colors.text.helper,
   },
 
   default: {
     fontFamily: fontsFamily.primary,
-    color: colors.primary,
   },
 });
 
