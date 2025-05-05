@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component should render properly 1`] = `
+<View>
+  <View
+    style={
+      [
+        {
+          "gap": 15,
+        },
+        {
+          "borderColor": "#C8C8C8",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "fontFamily": "Montserrat-Regular",
+          },
+          {
+            "fontSize": 14,
+            "lineHeight": 20,
+          },
+          {
+            "color": "#000000",
+          },
+          [
+            {
+              "fontFamily": "Montserrat-Regular",
+              "fontSize": 12,
+            },
+          ],
+        ]
+      }
+    >
+      Email
+    </Text>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <TextInput
+        style={
+          [
+            {
+              "borderColor": "#C8C8C8",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "color": "#000000",
+              "fontFamily": "Montserrat-SemiBold",
+              "fontSize": 13,
+              "height": 48,
+              "paddingHorizontal": 20,
+              "paddingVertical": 14,
+              "width": "100%",
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

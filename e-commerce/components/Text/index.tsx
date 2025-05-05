@@ -13,13 +13,7 @@ import {
 import { TextSize, TextVariant } from '@/interfaces';
 
 // Themes
-import {
-  fontsFamily,
-  colors,
-  fontSizes,
-  lineHeights,
-  colorTheme,
-} from '@/themes';
+import { fontsFamily, fontSizes, lineHeights, colorTheme } from '@/themes';
 
 export interface TextProps extends PropsWithChildren<TextBaseProps> {
   variant?: TextVariant;
@@ -50,7 +44,7 @@ const TextComponent = ({
         return colorTheme[colorScheme].helper;
 
       default:
-        return colors.primary;
+        return colorTheme[colorScheme].default;
     }
   };
 
@@ -59,9 +53,8 @@ const TextComponent = ({
       style={[
         textVariant[variant],
         textSizes[size],
-        style,
         { color: textColor() },
-        { ...(color && { color }) },
+        style,
       ]}
       {...props}
     >
