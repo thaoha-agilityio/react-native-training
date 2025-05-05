@@ -7,6 +7,8 @@ export * from './EditAddressIcon';
 export * from './EditIcon';
 export * from './FacebookIcon';
 export * from './GoogleIcon';
+export * from './HeartIcon';
+export * from './HomeIcon';
 export * from './LogoIcon';
 export * from './PositionIcon';
 export * from './SettingIcon';
