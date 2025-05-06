@@ -85,9 +85,10 @@ const inputVariantStyles = {
       borderColor: colors.text.helper,
       backgroundColor: colors.background.input,
       borderRadius: 10,
-      borderWidth: 2,
+      borderWidth: 1,
       height: 55,
       fontFamily: fontsFamily.semiBold,
+      fontSize: fontSizes.xs,
     },
   }),
 
