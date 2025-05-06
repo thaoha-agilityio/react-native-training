@@ -1,0 +1,720 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Categories should render properly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#fff",
+      "borderRadius": 10,
+      "padding": 8,
+      "paddingRight": 0,
+      "width": "100%",
+    }
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      {
+        "alignItems": "center",
+        "gap": 16,
+      }
+    }
+    data={
+      [
+        {
+          "image": "https://static.thcdn.com/productimg/original/16569611-9025236692853479.jpg",
+          "title": "Beauty",
+        },
+        {
+          "image": "https://d27fp5ulgfd7w2.cloudfront.net/wp-content/uploads/2023/01/12163716/How-to-Become-a-Fashion-Influencer-1920x1080-1.jpg",
+          "title": "Fashion",
+        },
+        {
+          "image": "https://img.freepik.com/free-photo/full-shot-kids-posing-together_23-2149853383.jpg?semt=ais_hybrid&w=740",
+          "title": "Kids",
+        },
+        {
+          "image": "https://media.glamour.com/photos/67e6fc4abab6b233586f0ba0/master/w_2560%2Cc_limit/2157276845",
+          "title": "Mens",
+        },
+        {
+          "image": "https://assets.vogue.com/photos/6127f6fdad6ce2332569bf44/master/w_2560%2Cc_limit/00_story.jpg",
+          "title": "Women",
+        },
+        {
+          "image": "https://i.pinimg.com/736x/83/03/8c/83038c4e880aa58801d3b21a619ca2ad.jpg",
+          "title": "Pinterest",
+        },
+        {
+          "image": "https://cdn.mos.cms.futurecdn.net/n48hMQxbzBhosSMzZc8GWV.jpg",
+          "title": "Casual",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={true}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={0.0001}
+    showsHorizontalScrollIndicator={false}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
+  >
+    <View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://static.thcdn.com/productimg/original/16569611-9025236692853479.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Beauty
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://d27fp5ulgfd7w2.cloudfront.net/wp-content/uploads/2023/01/12163716/How-to-Become-a-Fashion-Influencer-1920x1080-1.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Fashion
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://img.freepik.com/free-photo/full-shot-kids-posing-together_23-2149853383.jpg?semt=ais_hybrid&w=740",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Kids
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://media.glamour.com/photos/67e6fc4abab6b233586f0ba0/master/w_2560%2Cc_limit/2157276845",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Mens
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://assets.vogue.com/photos/6127f6fdad6ce2332569bf44/master/w_2560%2Cc_limit/00_story.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Women
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://i.pinimg.com/736x/83/03/8c/83038c4e880aa58801d3b21a619ca2ad.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Pinterest
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://cdn.mos.cms.futurecdn.net/n48hMQxbzBhosSMzZc8GWV.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Casual
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
