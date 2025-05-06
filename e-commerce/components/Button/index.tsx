@@ -16,8 +16,8 @@ import { colors, fontsFamily, fontSizes, lineHeights } from '@/themes';
 type ButtonProps = PropsWithChildren<PressableProps> & {
   title?: string;
   isLoading?: boolean;
-  variant?: 'primary' | 'outline' | 'text';
-  size?: 'sm' | 'md';
+  variant?: 'primary' | 'outline' | 'text' | 'secondary' | 'link';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   extraTextStyle?: StyleProp<TextStyle>;
 };
 
@@ -82,7 +82,7 @@ const buttonStyles = {
     title: {
       color: colors.light,
       textTransform: 'capitalize',
-      fontFamily: fontsFamily.extraBold,
+      fontFamily: fontsFamily.bold,
     },
   }),
 
@@ -105,9 +105,25 @@ const buttonStyles = {
       fontFamily: fontsFamily.semiBold,
     },
   }),
+
+  link: StyleSheet.create({
+    button: {},
+    title: {
+      color: colors.primary,
+      fontFamily: fontsFamily.primary,
+    },
+  }),
 };
 
 const buttonSizes = {
+  xs: StyleSheet.create({
+    button: {
+      paddingVertical: 2,
+    },
+    title: {
+      fontSize: fontSizes.xs,
+    },
+  }),
   sm: StyleSheet.create({
     button: {
       paddingVertical: 2,
@@ -126,10 +142,18 @@ const buttonSizes = {
       lineHeight: lineHeights.sm,
     },
   }),
+
+  lg: StyleSheet.create({
+    button: {},
+    title: {
+      fontSize: fontSizes.xl,
+      lineHeight: lineHeights.sm,
+    },
+  }),
 };
 
 const disabledButtonStyle: ViewStyle = {
-  backgroundColor: colors.disabled,
+  opacity: 0.7,
 };
 
 const buttonBaseStyles: ViewStyle = {

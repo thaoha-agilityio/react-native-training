@@ -5,7 +5,8 @@
     "paths": {
       "@/*": ["./*"],
       "test-utils": ["./test-utils.tsx"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true
   },
 
   "include": [

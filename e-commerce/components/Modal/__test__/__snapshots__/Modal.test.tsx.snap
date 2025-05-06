@@ -44,11 +44,11 @@ exports[`Modal component renders correctly 1`] = `
     <View
       style={
         {
-          "backgroundColor": "#fff",
+          "backgroundColor": "#FFFFFF",
           "borderRadius": 12,
           "maxWidth": 400,
           "padding": 20,
-          "shadowColor": "#000",
+          "shadowColor": "#000000",
           "shadowOffset": {
             "height": 2,
             "width": 0,
