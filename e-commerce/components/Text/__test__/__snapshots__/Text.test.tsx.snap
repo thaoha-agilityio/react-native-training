@@ -5,15 +5,16 @@ exports[`Text should render properly 1`] = `
   style={
     [
       {
-        "color": "#F83758",
         "fontFamily": "Montserrat-Regular",
       },
       {
         "fontSize": 14,
         "lineHeight": 20,
       },
+      {
+        "color": "#000000",
+      },
       undefined,
-      {},
     ]
   }
 >
