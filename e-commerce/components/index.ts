@@ -1,4 +1,5 @@
 export * from './Button';
+export * from './CardItem';
 export * from './Categories';
 export * from './Image';
 export * from './Input';

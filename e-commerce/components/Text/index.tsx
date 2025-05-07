@@ -84,9 +84,9 @@ const textVariant = StyleSheet.create({
 });
 
 const textSizes = StyleSheet.create({
-  base: {
+  tiny: {
     fontSize: fontSizes.tiny,
-    lineHeight: lineHeights.xs,
+    lineHeight: lineHeights.base,
   },
 
   xs: {

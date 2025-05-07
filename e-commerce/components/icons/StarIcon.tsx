@@ -1,6 +1,6 @@
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-export const StarIcon = ({ width = 12, height = 12, ...rest }: SvgProps) => (
+export const StarIcon = ({ width = 14, height = 14, ...rest }: SvgProps) => (
   <Svg width={width} height={height} fill="none" {...rest}>
     <Path
       fill="#F7B305"
