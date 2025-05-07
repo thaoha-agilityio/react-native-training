@@ -27,6 +27,7 @@ export const colors = {
     category: '#21003D',
     review: '#222222',
     describe: '#575757',
+    reviewNumber: '#A4A9B3',
   },
 };
 
@@ -40,6 +41,7 @@ export const colorTheme = {
     category: colors.text.category,
     review: colors.text.review,
     describe: colors.text.describe,
+    reviewNumber: colors.text.reviewNumber,
   },
 
   dark: {
@@ -51,5 +53,6 @@ export const colorTheme = {
     category: colors.light,
     review: colors.light,
     describe: colors.light,
+    reviewNumber: colors.light,
   },
 };
