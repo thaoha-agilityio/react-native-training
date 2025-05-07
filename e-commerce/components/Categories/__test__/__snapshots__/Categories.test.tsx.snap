@@ -149,7 +149,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -241,7 +241,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -333,7 +333,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -425,7 +425,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -517,7 +517,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -609,7 +609,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",
@@ -701,7 +701,7 @@ exports[`Categories should render properly 1`] = `
                 },
                 {
                   "fontSize": 10,
-                  "lineHeight": 20,
+                  "lineHeight": 16,
                 },
                 {
                   "color": "#000000",

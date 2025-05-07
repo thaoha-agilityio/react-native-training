@@ -15,7 +15,7 @@ const CategoryComponent = ({ title, uri }: CategoryProps) => {
       <View style={styles.imageWrapper}>
         <Image source={uri} style={styles.image} />
       </View>
-      <Text size="base">{title}</Text>
+      <Text size="tiny">{title}</Text>
     </View>
   );
 };

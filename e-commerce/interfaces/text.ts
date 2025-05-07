@@ -1,7 +1,7 @@
 export type TextVariant = 'heading' | 'title' | 'description' | 'default';
 
 export type TextSize =
-  | 'base'
+  | 'tiny'
   | 'xs'
   | 'sm'
   | 'md'
