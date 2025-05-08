@@ -3,7 +3,7 @@ export const colors = {
   dark: '#000000',
   light: '#FFFFFF',
 
-  pagination: '#17223B',
+  pagination: '#C4C4C4',
   icon: '#626262',
   star: '#EDB310',
   disabled: '#DEDBDB',
