@@ -20,7 +20,7 @@ interface CardItemProps {
   description: string;
   rating: number;
   reviewNumber: number;
-  height: number;
+  height?: number;
   onPress: (id: string) => void;
 }
 
@@ -32,7 +32,7 @@ const CardItemComponent = ({
   rating,
   reviewNumber,
   description,
-  height,
+  height = 124,
   onPress,
 }: CardItemProps) => {
   const handleOnPress = () => {
@@ -40,7 +40,7 @@ const CardItemComponent = ({
   };
 
   return (
-    <TouchableOpacity onPress={handleOnPress}>
+    <TouchableOpacity onPress={handleOnPress} style={style.container}>
       <View style={style.content}>
         <View style={[style.imgWrapper, { height }]}>
           <Image source={image} style={[style.img]} alt={name} />
@@ -75,9 +75,12 @@ const screenWidth = Dimensions.get('window').width;
 const imgWidth = screenWidth * 0.41;
 
 const style = StyleSheet.create({
-  content: {
-    width: '48%',
+  container: {
+    boxShadow: '#8A959E1F 1px 1px 2px 2px',
+    borderRadius: 8,
+    width: imgWidth,
   },
+  content: {},
   imgWrapper: {
     borderRadius: 8,
     overflow: 'hidden',
