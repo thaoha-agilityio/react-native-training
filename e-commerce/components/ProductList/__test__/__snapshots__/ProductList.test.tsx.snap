@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Products component should render properly 1`] = `
+<View>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "flexGrow": 1,
+          "overflow": "hidden",
+        },
+        {},
+      ]
+    }
+  >
+    <RCTScrollView
+      bounces={true}
+      contentContainerStyle={
+        {
+          "height": 920,
+          "width": "100%",
+        }
+      }
+      horizontal={false}
+      onScroll={[Function]}
+      scrollEventThrottle={32}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+        />
+        <View
+          style={
+            {
+              "position": "relative",
+              "width": "100%",
+            }
+          }
+        />
+        <View
+          onLayout={[Function]}
+        />
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

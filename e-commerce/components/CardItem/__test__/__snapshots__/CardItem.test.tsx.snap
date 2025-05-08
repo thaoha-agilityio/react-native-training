@@ -31,16 +31,15 @@ exports[`CardItem component should render properly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
+      "borderRadius": 8,
+      "boxShadow": "#8A959E1F 0px 2px 2px",
       "opacity": 1,
+      "width": 307.5,
     }
   }
 >
   <View
-    style={
-      {
-        "width": "48%",
-      }
-    }
+    style={{}}
   >
     <View
       style={

@@ -10,4 +10,6 @@ export interface Product {
   rating: number;
   reviewNumber: number;
   images: ProductImg[];
+  widthRatio?: number;
+  heightRatio?: number;
 }
