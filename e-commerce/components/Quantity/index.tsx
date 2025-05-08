@@ -6,7 +6,7 @@ import { MinusIcon, PlusIcon } from '@/components/icons';
 import { Text } from '../Text';
 
 // Themes
-import { colors, fontWeights, fontsFamily } from '@/themes';
+import { fontWeights, fontsFamily } from '@/themes';
 
 type QuantityProps = {
   initialCount: number;
@@ -38,21 +38,21 @@ const QuantityComponent = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        testID="quantity-increase"
-        style={styles.button}
-        onPress={handleIncrease}
-      >
-        <PlusIcon />
-      </TouchableOpacity>
-      <Text style={styles.count} size="lg">
-        {count}
-      </Text>
-      <TouchableOpacity
         testID="quantity-decrease"
         style={styles.button}
         onPress={handleDecrease}
       >
         <MinusIcon />
+      </TouchableOpacity>
+      <Text style={styles.count} size="lg">
+        {count}
+      </Text>
+      <TouchableOpacity
+        testID="quantity-increase"
+        style={styles.button}
+        onPress={handleIncrease}
+      >
+        <PlusIcon />
       </TouchableOpacity>
     </View>
   );
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     width: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.border,
     borderRadius: 6,
+    borderWidth: 0.5,
   },
   count: {
     textAlign: 'center',
