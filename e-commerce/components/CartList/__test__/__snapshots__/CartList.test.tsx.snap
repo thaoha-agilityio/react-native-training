@@ -1,0 +1,813 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CartList should render properly 1`] = `
+<RCTScrollView
+  ListEmptyComponent={
+    <Memo(TextComponent)
+      size="sm"
+      style={
+        {
+          "paddingVertical": 20,
+          "textAlign": "center",
+        }
+      }
+    >
+      No items in your cart
+    </Memo(TextComponent)>
+  }
+  contentContainerStyle={
+    {
+      "gap": 12,
+    }
+  }
+  data={
+    [
+      {
+        "id": "1",
+        "image": "https://media.istockphoto.com/id/520887829/photo/something-to-brighten-up-your-day.jpg?s=612x612&w=0&k=20&c=K2ZNTmZKyPU5icqZmYRwl6uKxNvLIlIpqO8FhTaDmbU=",
+        "name": "table",
+        "price": 10,
+        "productId": "1",
+        "quantity": 3,
+      },
+      {
+        "id": "2",
+        "image": "https://media.istockphoto.com/id/520887829/photo/something-to-brighten-up-your-day.jpg?s=612x612&w=0&k=20&c=K2ZNTmZKyPU5icqZmYRwl6uKxNvLIlIpqO8FhTaDmbU=",
+        "name": "Chair",
+        "price": 10,
+        "productId": "2",
+        "quantity": 2,
+      },
+    ]
+  }
+  getItem={[Function]}
+  getItemCount={[Function]}
+  initialNumToRender={6}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={6}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={0.0001}
+  showsVerticalScrollIndicator={false}
+  stickyHeaderIndices={[]}
+  viewabilityConfigCallbackPairs={[]}
+>
+  <View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          [
+            {
+              "borderBottomColor": "#C8C8C8",
+              "borderBottomWidth": 1,
+              "flexDirection": "row",
+              "gap": 20,
+              "paddingBottom": 12,
+              "paddingLeft": 10,
+            },
+            false,
+          ]
+        }
+      >
+        <ViewManagerAdapter_ExpoImage
+          borderRadius={10}
+          containerViewRef={"[React.ref]"}
+          contentFit="cover"
+          contentPosition={
+            {
+              "left": "50%",
+              "top": "50%",
+            }
+          }
+          height={100}
+          nativeViewRef={"[React.ref]"}
+          onError={[Function]}
+          onLoad={[Function]}
+          onLoadStart={[Function]}
+          onProgress={[Function]}
+          placeholder={
+            [
+              {
+                "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+              },
+            ]
+          }
+          source={
+            [
+              {
+                "uri": "https://media.istockphoto.com/id/520887829/photo/something-to-brighten-up-your-day.jpg?s=612x612&w=0&k=20&c=K2ZNTmZKyPU5icqZmYRwl6uKxNvLIlIpqO8FhTaDmbU=",
+              },
+            ]
+          }
+          style={
+            {
+              "borderRadius": 10,
+              "height": 100,
+              "width": 100,
+            }
+          }
+          transition={null}
+          width={100}
+        />
+        <View
+          style={
+            {
+              "flex": 1,
+              "justifyContent": "space-between",
+              "paddingRight": 20,
+            }
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 16,
+                  "lineHeight": 25,
+                },
+                {
+                  "color": "#000000",
+                },
+                {
+                  "fontFamily": "Montserrat-SemiBold",
+                },
+              ]
+            }
+          >
+            table
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#A8A8A9",
+                },
+                undefined,
+              ]
+            }
+          >
+            Size : XL
+          </Text>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "fontFamily": "Montserrat-Regular",
+                  },
+                  {
+                    "fontSize": 14,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "color": "#000000",
+                  },
+                  {
+                    "fontFamily": "Montserrat-SemiBold",
+                  },
+                ]
+              }
+            >
+              $ 
+              10.00
+            </Text>
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderRadius": 6,
+                    "borderWidth": 0.5,
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": 30,
+                  }
+                }
+                testID="quantity-decrease"
+              >
+                <RNSVGSvgView
+                  align="xMidYMid"
+                  bbHeight={2}
+                  bbWidth={14}
+                  color="#000000"
+                  fill="none"
+                  focusable={false}
+                  height={2}
+                  meetOrSlice={0}
+                  minX={0}
+                  minY={0}
+                  style={
+                    [
+                      {
+                        "backgroundColor": "transparent",
+                        "borderWidth": 0,
+                      },
+                      {
+                        "flex": 0,
+                        "height": 2,
+                        "width": 14,
+                      },
+                    ]
+                  }
+                  tintColor="#000000"
+                  vbHeight={2}
+                  vbWidth={14}
+                  width={14}
+                >
+                  <RNSVGGroup
+                    fill={null}
+                    propList={
+                      [
+                        "fill",
+                      ]
+                    }
+                  >
+                    <RNSVGRect
+                      fill={
+                        {
+                          "payload": 4278190080,
+                          "type": 0,
+                        }
+                      }
+                      height={2}
+                      propList={
+                        [
+                          "fill",
+                        ]
+                      }
+                      rx="1"
+                      width={14}
+                      x={0}
+                      y={0}
+                    />
+                  </RNSVGGroup>
+                </RNSVGSvgView>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontFamily": "Montserrat-Regular",
+                    },
+                    {
+                      "fontSize": 18,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "color": "#000000",
+                    },
+                    {
+                      "fontFamily": "Montserrat-SemiBold",
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5,
+                      "paddingHorizontal": 15,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                3
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderRadius": 6,
+                    "borderWidth": 0.5,
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": 30,
+                  }
+                }
+                testID="quantity-increase"
+              >
+                <RNSVGSvgView
+                  align="xMidYMid"
+                  bbHeight={14}
+                  bbWidth={14}
+                  color="#000000"
+                  fill="none"
+                  focusable={false}
+                  height={14}
+                  meetOrSlice={0}
+                  minX={0}
+                  minY={0}
+                  style={
+                    [
+                      {
+                        "backgroundColor": "transparent",
+                        "borderWidth": 0,
+                      },
+                      {
+                        "flex": 0,
+                        "height": 14,
+                        "width": 14,
+                      },
+                    ]
+                  }
+                  tintColor="#000000"
+                  vbHeight={14}
+                  vbWidth={14}
+                  width={14}
+                >
+                  <RNSVGGroup
+                    fill={null}
+                    propList={
+                      [
+                        "fill",
+                      ]
+                    }
+                  >
+                    <RNSVGPath
+                      d="M13 8H8V13C8 13.55 7.55 14 7 14C6.45 14 6 13.55 6 13V8H1C0.45 8 0 7.55 0 7C0 6.45 0.45 6 1 6H6V1C6 0.45 6.45 0 7 0C7.55 0 8 0.45 8 1V6H13C13.55 6 14 6.45 14 7C14 7.55 13.55 8 13 8Z"
+                      fill={
+                        {
+                          "payload": 4278190080,
+                          "type": 0,
+                        }
+                      }
+                      propList={
+                        [
+                          "fill",
+                        ]
+                      }
+                    />
+                  </RNSVGGroup>
+                </RNSVGSvgView>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          [
+            {
+              "borderBottomColor": "#C8C8C8",
+              "borderBottomWidth": 1,
+              "flexDirection": "row",
+              "gap": 20,
+              "paddingBottom": 12,
+              "paddingLeft": 10,
+            },
+            {
+              "borderBottomWidth": 0,
+            },
+          ]
+        }
+      >
+        <ViewManagerAdapter_ExpoImage
+          borderRadius={10}
+          containerViewRef={"[React.ref]"}
+          contentFit="cover"
+          contentPosition={
+            {
+              "left": "50%",
+              "top": "50%",
+            }
+          }
+          height={100}
+          nativeViewRef={"[React.ref]"}
+          onError={[Function]}
+          onLoad={[Function]}
+          onLoadStart={[Function]}
+          onProgress={[Function]}
+          placeholder={
+            [
+              {
+                "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+              },
+            ]
+          }
+          source={
+            [
+              {
+                "uri": "https://media.istockphoto.com/id/520887829/photo/something-to-brighten-up-your-day.jpg?s=612x612&w=0&k=20&c=K2ZNTmZKyPU5icqZmYRwl6uKxNvLIlIpqO8FhTaDmbU=",
+              },
+            ]
+          }
+          style={
+            {
+              "borderRadius": 10,
+              "height": 100,
+              "width": 100,
+            }
+          }
+          transition={null}
+          width={100}
+        />
+        <View
+          style={
+            {
+              "flex": 1,
+              "justifyContent": "space-between",
+              "paddingRight": 20,
+            }
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 16,
+                  "lineHeight": 25,
+                },
+                {
+                  "color": "#000000",
+                },
+                {
+                  "fontFamily": "Montserrat-SemiBold",
+                },
+              ]
+            }
+          >
+            Chair
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                },
+                {
+                  "color": "#A8A8A9",
+                },
+                undefined,
+              ]
+            }
+          >
+            Size : XL
+          </Text>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "fontFamily": "Montserrat-Regular",
+                  },
+                  {
+                    "fontSize": 14,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "color": "#000000",
+                  },
+                  {
+                    "fontFamily": "Montserrat-SemiBold",
+                  },
+                ]
+              }
+            >
+              $ 
+              10.00
+            </Text>
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderRadius": 6,
+                    "borderWidth": 0.5,
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": 30,
+                  }
+                }
+                testID="quantity-decrease"
+              >
+                <RNSVGSvgView
+                  align="xMidYMid"
+                  bbHeight={2}
+                  bbWidth={14}
+                  color="#000000"
+                  fill="none"
+                  focusable={false}
+                  height={2}
+                  meetOrSlice={0}
+                  minX={0}
+                  minY={0}
+                  style={
+                    [
+                      {
+                        "backgroundColor": "transparent",
+                        "borderWidth": 0,
+                      },
+                      {
+                        "flex": 0,
+                        "height": 2,
+                        "width": 14,
+                      },
+                    ]
+                  }
+                  tintColor="#000000"
+                  vbHeight={2}
+                  vbWidth={14}
+                  width={14}
+                >
+                  <RNSVGGroup
+                    fill={null}
+                    propList={
+                      [
+                        "fill",
+                      ]
+                    }
+                  >
+                    <RNSVGRect
+                      fill={
+                        {
+                          "payload": 4278190080,
+                          "type": 0,
+                        }
+                      }
+                      height={2}
+                      propList={
+                        [
+                          "fill",
+                        ]
+                      }
+                      rx="1"
+                      width={14}
+                      x={0}
+                      y={0}
+                    />
+                  </RNSVGGroup>
+                </RNSVGSvgView>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontFamily": "Montserrat-Regular",
+                    },
+                    {
+                      "fontSize": 18,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "color": "#000000",
+                    },
+                    {
+                      "fontFamily": "Montserrat-SemiBold",
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5,
+                      "paddingHorizontal": 15,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                2
+              </Text>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderRadius": 6,
+                    "borderWidth": 0.5,
+                    "height": 30,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                    "width": 30,
+                  }
+                }
+                testID="quantity-increase"
+              >
+                <RNSVGSvgView
+                  align="xMidYMid"
+                  bbHeight={14}
+                  bbWidth={14}
+                  color="#000000"
+                  fill="none"
+                  focusable={false}
+                  height={14}
+                  meetOrSlice={0}
+                  minX={0}
+                  minY={0}
+                  style={
+                    [
+                      {
+                        "backgroundColor": "transparent",
+                        "borderWidth": 0,
+                      },
+                      {
+                        "flex": 0,
+                        "height": 14,
+                        "width": 14,
+                      },
+                    ]
+                  }
+                  tintColor="#000000"
+                  vbHeight={14}
+                  vbWidth={14}
+                  width={14}
+                >
+                  <RNSVGGroup
+                    fill={null}
+                    propList={
+                      [
+                        "fill",
+                      ]
+                    }
+                  >
+                    <RNSVGPath
+                      d="M13 8H8V13C8 13.55 7.55 14 7 14C6.45 14 6 13.55 6 13V8H1C0.45 8 0 7.55 0 7C0 6.45 0.45 6 1 6H6V1C6 0.45 6.45 0 7 0C7.55 0 8 0.45 8 1V6H13C13.55 6 14 6.45 14 7C14 7.55 13.55 8 13 8Z"
+                      fill={
+                        {
+                          "payload": 4278190080,
+                          "type": 0,
+                        }
+                      }
+                      propList={
+                        [
+                          "fill",
+                        ]
+                      }
+                    />
+                  </RNSVGGroup>
+                </RNSVGSvgView>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

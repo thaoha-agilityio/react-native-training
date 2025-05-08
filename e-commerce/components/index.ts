@@ -1,6 +1,7 @@
 export * from './Button';
 export * from './CardItem';
 export * from './CartItem';
+export * from './CartList';
 export * from './Categories';
 export * from './Image';
 export * from './Input';

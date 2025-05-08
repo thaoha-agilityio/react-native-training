@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     borderBottomWidth: 1,
     paddingBottom: 12,
+    paddingLeft: 10,
   },
 
   noBorder: {
@@ -84,6 +85,8 @@ const styles = StyleSheet.create({
 
   content: {
     justifyContent: 'space-between',
+    flex: 1,
+    paddingRight: 20,
   },
 
   name: {
