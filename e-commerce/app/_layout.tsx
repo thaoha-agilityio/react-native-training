@@ -44,7 +44,7 @@ export default function RootLayout() {
         <SafeAreaView>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
-          <Stack.Screen name="onboarding" />
+          <Stack.Screen name="public" options={{ headerShown: false }} />
         </SafeAreaView>
       </Stack>
       <StatusBar style="auto" />

@@ -1,9 +1,14 @@
 import Svg, { Path, SvgProps, ClipPath, G, Defs } from 'react-native-svg';
 
-export const SettingIcon = ({ width = 24, height = 24, ...rest }: SvgProps) => (
+export const SettingIcon = ({
+  width = 24,
+  height = 24,
+  color = '#000',
+  ...rest
+}: SvgProps) => (
   <Svg width={width} height={height} fill="none" {...rest}>
     <G
-      stroke="#000"
+      stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

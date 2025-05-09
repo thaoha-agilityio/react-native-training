@@ -3,11 +3,12 @@ import Svg, { Path, SvgProps } from 'react-native-svg';
 export const SearchBarIcon = ({
   width = 24,
   height = 24,
+  color = '#000',
   ...rest
 }: SvgProps) => (
   <Svg width={width} height={height} fill="none" {...rest}>
     <Path
-      stroke="#000"
+      stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
