@@ -42,6 +42,7 @@ export const colorTheme = {
     review: colors.text.review,
     describe: colors.text.describe,
     reviewNumber: colors.text.reviewNumber,
+    background: colors.light,
   },
 
   dark: {
@@ -54,5 +55,6 @@ export const colorTheme = {
     review: colors.light,
     describe: colors.light,
     reviewNumber: colors.light,
+    background: colors.text.helper,
   },
 };

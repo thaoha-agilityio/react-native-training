@@ -9,7 +9,7 @@ import { Text, Image, Button } from '@/components';
 import { colors, fontsFamily, fontSizes } from '@/themes';
 
 // Constants
-import { ONBOARDING_STEPS } from '@/constants';
+import { ONBOARDING_STEPS, ROUTES } from '@/constants';
 
 const { width } = Dimensions.get('window');
 const OnboardingScreen = () => {
@@ -21,27 +21,26 @@ const OnboardingScreen = () => {
     if (currentIndex < ONBOARDING_STEPS.length - 1) {
       flatListRef.current?.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      router.replace('/'); // navigate after onboarding
+      router.replace(ROUTES.LOGIN); // navigate after onboarding
     }
   };
-
   const scrollToPrev = () => {
     if (currentIndex === 0) return;
 
     flatListRef.current?.scrollToIndex({ index: currentIndex - 1 });
   };
 
-  const handleSkip = () => router.replace('/');
+  const handleSkip = () => router.replace(ROUTES.LOGIN);
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
-    if (currentIndex === 0) return;
-
-    setCurrentIndex(viewableItems[0].index);
+    if (viewableItems.length > 0) {
+      setCurrentIndex(viewableItems[0].index);
+    }
   }).current;
 
   const renderItem = ({ item }: any) => (
     <View style={{ width: width * 0.9 }}>
-      <Image source={item.image} style={styles.image} resizeMode="contain" />
+      <Image source={item.image} style={styles.image} contentFit="contain" />
 
       <View style={styles.textWrapper}>
         <Text variant="title" size="xxl" style={styles.title}>
@@ -71,6 +70,7 @@ const OnboardingScreen = () => {
           title="Skip"
           variant="text"
           extraTextStyle={styles.skipButton}
+          onPress={handleSkip}
         />
       </View>
 
