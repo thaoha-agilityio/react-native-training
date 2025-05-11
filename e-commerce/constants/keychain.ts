@@ -1,1 +1,1 @@
-export const KEYCHAIN_SERVICE = 'e-commerce';
+export const KEYCHAIN_SERVICE = 'ecommerce_store';

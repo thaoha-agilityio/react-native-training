@@ -1,8 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 
-// Constants
-import { ROUTES } from '@/constants';
-
 // Interfaces
 import { LoginPayload, LoginResponse } from '@/interfaces';
 
@@ -12,6 +9,9 @@ import { postData } from '@/services';
 // Stores
 import { useAuthStore } from '@/stores';
 
+// Constants
+import { ENDPOINTS } from '@/constants';
+
 export const useAuthSignIn = () => {
   const [setAuthenticated, setAccessToken] = useAuthStore((state) => [
     state.setAuthenticated,
@@ -20,7 +20,7 @@ export const useAuthSignIn = () => {
 
   return useMutation<LoginResponse, string, LoginPayload>({
     mutationFn: async (payload: LoginPayload) =>
-      await postData(ROUTES.LOGIN, payload),
+      await postData(ENDPOINTS.LOGIN, payload),
 
     onSuccess: async (res: LoginResponse) => {
       const { accessToken, user } = res || {};
