@@ -1,7 +1,7 @@
+import * as SecureStore from 'expo-secure-store';
 import { createWithEqualityFn } from 'zustand/traditional';
-import * as Keychain from 'react-native-keychain';
 
-// Constants
+// Store
 import { KEYCHAIN_SERVICE } from '@/constants';
 
 interface AuthState {
@@ -13,7 +13,7 @@ interface AuthState {
 interface AuthStore extends AuthState {
   setAuthenticated: (isAuthenticated: boolean) => void;
   setAccessToken: (accessToken: string, userId: string) => Promise<void>;
-  loadAccessTokenFromKeychain: () => Promise<void>;
+  loadAccessTokenFromStorage: () => Promise<void>;
   clearAuth: () => Promise<void>;
 }
 
@@ -30,37 +30,23 @@ export const useAuthStore = createWithEqualityFn<AuthStore>((set) => ({
     set({ isAuthenticated });
   },
 
-  setAccessToken: async (accessToken: string, userId: string) => {
-    // Save to Keychain securely
-    await Keychain.setGenericPassword(
-      'auth',
-      JSON.stringify({ accessToken, userId }),
-      {
-        service: KEYCHAIN_SERVICE,
-      },
-    );
-
-    set({ accessToken, isAuthenticated: true, userId });
+  setAccessToken: async (accessToken, userId) => {
+    const data = JSON.stringify({ accessToken, userId });
+    await SecureStore.setItemAsync(KEYCHAIN_SERVICE, data);
+    set({ accessToken, userId, isAuthenticated: true });
   },
 
-  loadAccessTokenFromKeychain: async () => {
-    const credentials = await Keychain.getGenericPassword({
-      service: KEYCHAIN_SERVICE,
-    });
+  loadAccessTokenFromStorage: async () => {
+    const result = await SecureStore.getItemAsync(KEYCHAIN_SERVICE);
 
-    if (credentials) {
-      const data = JSON.parse(credentials.password);
-
-      set({
-        accessToken: data.accessToken,
-        isAuthenticated: true,
-        userId: data.userId,
-      });
+    if (result) {
+      const { accessToken, userId } = JSON.parse(result);
+      set({ accessToken, userId, isAuthenticated: true });
     }
   },
 
   clearAuth: async () => {
-    await Keychain.resetGenericPassword({ service: KEYCHAIN_SERVICE });
+    await SecureStore.deleteItemAsync(KEYCHAIN_SERVICE);
     set({ ...INITIAL_AUTH_STATE });
   },
 }));

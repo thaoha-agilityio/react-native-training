@@ -13,6 +13,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// Hooks
+import { useHydration } from '@/hooks';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -32,28 +35,29 @@ export default function RootLayout() {
     PlusJakartaSans: require('../assets/fonts/Montserrat-SemiBold.ttf'),
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
   });
-
+  const isLoading = useHydration();
   useEffect(() => {
-    if (loaded) {
+    if (loaded || isLoading) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [loaded, isLoading]);
 
-  if (!loaded) {
+  if (!loaded || !isLoading) {
     return null;
   }
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <SafeAreaView>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-            <Stack.Screen name="public" options={{ headerShown: false }} />
-          </SafeAreaView>
-        </Stack>
-        <StatusBar style="auto" />
+        <SafeAreaView style={{ flex: 1 }}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          />
+
+          <StatusBar style="auto" />
+        </SafeAreaView>
       </ThemeProvider>
     </QueryClientProvider>
   );
