@@ -11,16 +11,21 @@ import { colors, fontsFamily, fontSizes } from '@/themes';
 // Constants
 import { ONBOARDING_STEPS, ROUTES } from '@/constants';
 
+// Stores
+import { useBootstrapsStore } from '@/stores';
+
 const { width } = Dimensions.get('window');
 const OnboardingScreen = () => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const setFirstLoad = useBootstrapsStore((state) => state.setIsFirstLoad);
 
   const scrollToNext = () => {
     if (currentIndex < ONBOARDING_STEPS.length - 1) {
       flatListRef.current?.scrollToIndex({ index: currentIndex + 1 });
     } else {
+      setFirstLoad(false);
       router.replace(ROUTES.LOGIN); // navigate after onboarding
     }
   };
@@ -30,7 +35,10 @@ const OnboardingScreen = () => {
     flatListRef.current?.scrollToIndex({ index: currentIndex - 1 });
   };
 
-  const handleSkip = () => router.replace(ROUTES.LOGIN);
+  const handleSkip = () => {
+    setFirstLoad(false);
+    router.replace(ROUTES.LOGIN);
+  };
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
     if (viewableItems.length > 0) {

@@ -1,5 +1,6 @@
 // Libs
-import Keychain from 'react-native-keychain';
+import * as SecureStore from 'expo-secure-store';
+
 import { act, renderHook } from 'test-utils';
 
 // Hooks
@@ -29,13 +30,13 @@ describe('useAuthStore hook', () => {
   });
 
   it('should save and set accessToken', async () => {
-    (Keychain.setGenericPassword as jest.Mock).mockResolvedValue(undefined);
+    (SecureStore.setItem as jest.Mock).mockResolvedValue(undefined);
 
     await act(async () => {
       await useAuthStore.getState().setAccessToken('token-abc', 'user-456');
     });
 
-    expect(Keychain.setGenericPassword).toHaveBeenCalledWith(
+    expect(SecureStore.setItem).toHaveBeenCalledWith(
       'auth',
       JSON.stringify({ accessToken: 'token-abc', userId: 'user-456' }),
       { service: expect.any(String) },
@@ -48,7 +49,7 @@ describe('useAuthStore hook', () => {
   });
 
   it('should load accessToken from Keychain', async () => {
-    (Keychain.getGenericPassword as jest.Mock).mockResolvedValue({
+    (SecureStore.getItemAsync as jest.Mock).mockResolvedValue({
       username: 'auth',
       password: JSON.stringify({
         accessToken: 'token-loaded',
@@ -57,7 +58,7 @@ describe('useAuthStore hook', () => {
     });
 
     await act(async () => {
-      await useAuthStore.getState().loadAccessTokenFromKeychain();
+      await useAuthStore.getState().loadAccessTokenFromStorage();
     });
 
     const state = useAuthStore.getState();
@@ -67,7 +68,7 @@ describe('useAuthStore hook', () => {
   });
 
   it('should clear auth', async () => {
-    (Keychain.resetGenericPassword as jest.Mock).mockResolvedValue(true);
+    (SecureStore.deleteItemAsync as jest.Mock).mockResolvedValue(true);
 
     // First, set a state
     act(() => {
@@ -86,6 +87,6 @@ describe('useAuthStore hook', () => {
     expect(state.isAuthenticated).toBe(false);
     expect(state.accessToken).toBe('');
     expect(state.userId).toBe('');
-    expect(Keychain.resetGenericPassword).toHaveBeenCalled();
+    expect(SecureStore.deleteItemAsync).toHaveBeenCalled();
   });
 });

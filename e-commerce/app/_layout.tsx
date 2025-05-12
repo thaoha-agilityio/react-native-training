@@ -35,14 +35,15 @@ export default function RootLayout() {
     PlusJakartaSans: require('../assets/fonts/Montserrat-SemiBold.ttf'),
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
   });
-  const isLoading = useHydration();
+  const hydrated = useHydration();
+
   useEffect(() => {
-    if (loaded || isLoading) {
+    if (loaded && hydrated) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, isLoading]);
+  }, [hydrated, loaded]);
 
-  if (!loaded || !isLoading) {
+  if (!loaded && !hydrated) {
     return null;
   }
 
