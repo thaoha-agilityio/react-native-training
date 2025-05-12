@@ -21,3 +21,18 @@ export const ONBOARDING_STEPS = [
     image: require('../assets/images/step-3.png'),
   },
 ];
+
+export const BANNER_DATA = [
+  {
+    id: '1',
+    image: require('../assets/images/banner-1.jpg'),
+  },
+  {
+    id: '2',
+    image: require('../assets/images/banner-2.jpg'),
+  },
+  {
+    id: '3',
+    image: require('../assets/images/banner-1.jpg'),
+  },
+];

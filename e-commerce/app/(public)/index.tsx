@@ -1,5 +1,11 @@
 import { useRef, useState } from 'react';
-import { View, StyleSheet, Dimensions, FlatList } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+  ListRenderItemInfo,
+} from 'react-native';
 import { useRouter } from 'expo-router';
 
 // Components
@@ -13,6 +19,7 @@ import { ONBOARDING_STEPS, ROUTES } from '@/constants';
 
 // Stores
 import { useBootstrapsStore } from '@/stores';
+import { Onboarding } from '@/interfaces';
 
 const { width } = Dimensions.get('window');
 const OnboardingScreen = () => {
@@ -46,7 +53,7 @@ const OnboardingScreen = () => {
     }
   }).current;
 
-  const renderItem = ({ item }: any) => (
+  const renderItem = ({ item }: ListRenderItemInfo<Onboarding>) => (
     <View style={{ width: width * 0.9 }}>
       <Image source={item.image} style={styles.image} contentFit="contain" />
 
