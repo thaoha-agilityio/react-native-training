@@ -8,5 +8,7 @@ export * from './Input';
 export * from './LoginForm';
 export * from './Modal';
 export * from './PasswordInput';
+export * from './ProductList';
+export * from './ProductList/ProductsLimit';
 export * from './Quantity';
 export * from './Text';
