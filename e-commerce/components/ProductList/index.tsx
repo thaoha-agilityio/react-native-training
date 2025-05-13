@@ -1,4 +1,4 @@
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { ResponsiveGrid } from 'react-native-flexible-grid';
 import { memo, useCallback } from 'react';
 
@@ -18,6 +18,12 @@ interface ProductsProps {
   onShowProductDetails: (id: string) => void;
   onLoadMore?: () => void;
 }
+
+interface RenderItemProps {
+  item: Product;
+  index: number;
+}
+
 const ProductsComponent = ({
   data,
   isFetchingNextPage = false,
@@ -31,7 +37,7 @@ const ProductsComponent = ({
   }, []);
 
   const renderItem = useCallback(
-    ({ item, index }: any) => {
+    ({ item, index }: RenderItemProps) => {
       const {
         id = '',
         name = '',
@@ -60,22 +66,21 @@ const ProductsComponent = ({
   );
 
   return (
-    <View>
-      <ResponsiveGrid
-        maxItemsPerColumn={2}
-        data={data}
-        renderItem={renderItem}
-        itemUnitHeight={80}
-        showScrollIndicator={false}
-        keyExtractor={getKeyExtractor}
-        onEndReached={onLoadMore}
-        FooterComponent={
-          isFetchingNextPage ? (
-            <ActivityIndicator testID="loading-indicator" />
-          ) : null
-        }
-      />
-    </View>
+    <ResponsiveGrid
+      maxItemsPerColumn={2}
+      data={data}
+      renderItem={renderItem}
+      itemUnitHeight={80}
+      showScrollIndicator={false}
+      keyExtractor={getKeyExtractor}
+      onEndReached={onLoadMore}
+      itemContainerStyle={{ padding: 7 }}
+      FooterComponent={
+        isFetchingNextPage ? (
+          <ActivityIndicator testID="loading-indicator" />
+        ) : null
+      }
+    />
   );
 };
 

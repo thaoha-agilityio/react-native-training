@@ -9,7 +9,14 @@ import {
 import { useRef, useState } from 'react';
 
 // Components
-import { Categories, Input, Text, Image, Button } from '@/components';
+import {
+  Categories,
+  Input,
+  Text,
+  Image,
+  Button,
+  ProductsLimit,
+} from '@/components';
 import {
   ChevronIcon,
   ClockIcon,
@@ -18,7 +25,7 @@ import {
 } from '@/components/icons';
 
 // Constants
-import { BANNER_DATA } from '@/constants';
+import { BANNER_DATA, PAGINATION_LIMIT, ROUTES } from '@/constants';
 
 // Types
 import { Banner } from '@/interfaces';
@@ -26,11 +33,16 @@ import { Banner } from '@/interfaces';
 // Themes
 import { colors, fontsFamily } from '@/themes';
 
+// Hooks
+import { useInfiniteProducts } from '@/hooks';
+import { router } from 'expo-router';
+
 const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const { data } = useInfiniteProducts(PAGINATION_LIMIT);
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
@@ -44,6 +56,10 @@ const HomeScreen = () => {
     </View>
   );
 
+  const handleNavigateProductsScreen = () => {
+    router.push(ROUTES.PRODUCTS);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.logo}>
@@ -54,6 +70,7 @@ const HomeScreen = () => {
           placeholder="Search any Product..."
           variant="search"
           startContent={<SearchBarIcon />}
+          style={{ height: 40 }}
         />
         <Text variant="title" size="lg">
           All Featured
@@ -103,7 +120,11 @@ const HomeScreen = () => {
               </Text>
             </View>
           </View>
-          <Button variant="outline" style={styles.viewAllBtn}>
+          <Button
+            variant="outline"
+            style={styles.viewAllBtn}
+            onPress={handleNavigateProductsScreen}
+          >
             <Text style={styles.viewAll} size="xs">
               View All
             </Text>
@@ -113,6 +134,7 @@ const HomeScreen = () => {
       </View>
 
       {/* Products */}
+      <ProductsLimit data={data} />
       <View style={styles.imgWrapper}>
         <Image
           source={require('@/assets/images/mac.jpg')}

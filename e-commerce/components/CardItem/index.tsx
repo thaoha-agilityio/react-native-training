@@ -21,7 +21,7 @@ interface CardItemProps {
   rating: number;
   reviewNumber: number;
   height?: number;
-  onPress: (id: string) => void;
+  onPress?: (id: string) => void;
 }
 
 const CardItemComponent = ({
@@ -36,7 +36,7 @@ const CardItemComponent = ({
   onPress,
 }: CardItemProps) => {
   const handleOnPress = () => {
-    onPress(id);
+    onPress?.(id);
   };
 
   return (
@@ -72,7 +72,7 @@ const CardItemComponent = ({
 export const CardItem = memo(CardItemComponent);
 
 const screenWidth = Dimensions.get('window').width;
-const imgWidth = screenWidth * 0.41;
+const imgWidth = screenWidth * 0.43;
 
 const style = StyleSheet.create({
   container: {
