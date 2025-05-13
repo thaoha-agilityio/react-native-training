@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useRef, useState } from 'react';
+import { router } from 'expo-router';
 
 // Components
 import {
@@ -16,6 +17,7 @@ import {
   Image,
   Button,
   ProductsLimit,
+  PaginationDot,
 } from '@/components';
 import {
   ChevronIcon,
@@ -35,7 +37,6 @@ import { colors, fontsFamily } from '@/themes';
 
 // Hooks
 import { useInfiniteProducts } from '@/hooks';
-import { router } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
@@ -92,20 +93,7 @@ const HomeScreen = () => {
         />
 
         {/* Pagination Dots */}
-        <View style={styles.dots}>
-          {BANNER_DATA.map((_, i) => (
-            <View
-              key={i}
-              style={[
-                styles.dot,
-                {
-                  backgroundColor:
-                    i === currentIndex ? colors.active : colors.pagination,
-                },
-              ]}
-            />
-          ))}
-        </View>
+        <PaginationDot currentIndex={currentIndex} items={BANNER_DATA} />
 
         {/* Ads */}
         <View style={styles.ads}>
