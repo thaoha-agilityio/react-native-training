@@ -7,6 +7,7 @@ export * from './Image';
 export * from './Input';
 export * from './LoginForm';
 export * from './Modal';
+export * from './PaginationDot';
 export * from './PasswordInput';
 export * from './ProductList';
 export * from './ProductList/ProductsLimit';

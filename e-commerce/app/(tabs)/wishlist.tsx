@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 // Components
@@ -9,9 +10,14 @@ import { useInfiniteProducts } from '@/hooks';
 
 // Themes
 import { fontsFamily } from '@/themes';
+import { ROUTES } from '@/constants';
 
 const WishlistScreen = () => {
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteProducts(12);
+
+  const handleNavigateProductsScreen = (id: string) => {
+    router.push(ROUTES.PRODUCT_DETAILS(id) as any);
+  };
 
   return (
     <View style={styles.container}>
@@ -33,7 +39,7 @@ const WishlistScreen = () => {
         data={data}
         onLoadMore={fetchNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        onShowProductDetails={(id: string) => console.log(id)}
+        onShowProductDetails={handleNavigateProductsScreen}
       />
     </View>
   );
