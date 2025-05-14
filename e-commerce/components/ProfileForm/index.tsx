@@ -1,7 +1,10 @@
 import { memo, useCallback } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
+<<<<<<< HEAD
 import Toast from 'react-native-toast-message';
+=======
+>>>>>>> d9036f1 (feat: validate profile form)
 
 // Components
 import { AvatarUploader, Text, Input, Button, Dropdown } from '@/components';
@@ -19,6 +22,7 @@ import { UserPayload } from '@/interfaces';
 import { clearErrorOnChange } from '@/utils';
 
 // Hooks
+<<<<<<< HEAD
 import { useInputRefs, useUploadImage } from '@/hooks';
 
 interface ProfileFormProps {
@@ -50,10 +54,16 @@ const ProfileFormComponent = ({
   state,
   onEdit,
 }: ProfileFormProps) => {
+=======
+import { useInputRefs } from '@/hooks';
+
+const ProfileFormComponent = () => {
+>>>>>>> d9036f1 (feat: validate profile form)
   const {
     control,
     handleSubmit,
     clearErrors,
+<<<<<<< HEAD
     formState: { errors, isDirty },
   } = useForm<UserPayload>({
     mode: 'onBlur',
@@ -70,6 +80,13 @@ const ProfileFormComponent = ({
       bankAccountNumber,
       state,
     },
+=======
+    formState: { errors },
+  } = useForm<UserPayload>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    defaultValues: {},
+>>>>>>> d9036f1 (feat: validate profile form)
   });
 
   const { refs, getOnSubmitEditing } = useInputRefs([
@@ -83,8 +100,11 @@ const ProfileFormComponent = ({
     'bankAccountNumber',
   ]);
 
+<<<<<<< HEAD
   const { mutate: uploadImage, isPending: isUploading } = useUploadImage();
 
+=======
+>>>>>>> d9036f1 (feat: validate profile form)
   const VALIDATION = {
     USERNAME: {
       required: FORM_VALIDATION_MESSAGE.REQUIRED('Name'),
@@ -127,6 +147,7 @@ const ProfileFormComponent = ({
     [clearErrors, errors],
   );
 
+<<<<<<< HEAD
   const handleUpLoadImageError = useCallback((error: string) => {
     Toast.show({ type: 'error', text1: error });
   }, []);
@@ -148,6 +169,14 @@ const ProfileFormComponent = ({
 
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+=======
+  const onSubmit = async (data: UserPayload) => {
+    console.log('data', data);
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+>>>>>>> d9036f1 (feat: validate profile form)
       <Controller
         name="avatar"
         control={control}
@@ -164,10 +193,14 @@ const ProfileFormComponent = ({
         <Controller
           name="email"
           control={control}
+<<<<<<< HEAD
           render={({
             field: { onChange, value, ...rest },
             fieldState: { error },
           }) => (
+=======
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+>>>>>>> d9036f1 (feat: validate profile form)
             <Input
               {...rest}
               label="Email Address"
@@ -176,7 +209,10 @@ const ProfileFormComponent = ({
               returnKeyType="next"
               autoCapitalize="none"
               inputMode="email"
+<<<<<<< HEAD
               value={value}
+=======
+>>>>>>> d9036f1 (feat: validate profile form)
               editable={false}
             />
           )}
@@ -329,8 +365,11 @@ const ProfileFormComponent = ({
 
       <Button
         title="Save"
+<<<<<<< HEAD
         disabled={isLoading || !isDirty}
         isLoading={isLoading || isUploading}
+=======
+>>>>>>> d9036f1 (feat: validate profile form)
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}
       />
@@ -343,7 +382,11 @@ export const ProfileForm = memo(ProfileFormComponent);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
+<<<<<<< HEAD
     marginBottom: 8,
+=======
+    paddingBottom: 20,
+>>>>>>> d9036f1 (feat: validate profile form)
   },
 
   title: {
