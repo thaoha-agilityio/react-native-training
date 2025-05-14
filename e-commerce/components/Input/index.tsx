@@ -4,6 +4,7 @@ import {
   TextInputProps as TextInputPropsBase,
   View,
   StyleSheet,
+  useColorScheme,
 } from 'react-native';
 
 // Components
@@ -34,6 +35,8 @@ const InputComponent = forwardRef(
     ref: Ref<TextInput>,
   ) => {
     const borderClass = errorMessage ? colors.error : colors.border;
+    const colorScheme = useColorScheme();
+    const isDark = colorScheme === 'dark';
 
     return (
       <View>
@@ -53,7 +56,11 @@ const InputComponent = forwardRef(
             )}
             <TextInput
               ref={ref}
-              style={[inputVariantStyles[variant].input, style]}
+              style={[
+                inputVariantStyles[variant].input,
+                { ...(isDark && { color: colors.light }) },
+                style,
+              ]}
               {...props}
             />
             {!!endContent && (

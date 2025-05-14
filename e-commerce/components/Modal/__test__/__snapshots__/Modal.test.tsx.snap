@@ -35,7 +35,6 @@ exports[`Modal component renders correctly 1`] = `
           "backgroundColor": "rgba(0,0,0,0.4)",
           "flex": 1,
           "justifyContent": "flex-end",
-          "padding": 20,
         },
         undefined,
       ]

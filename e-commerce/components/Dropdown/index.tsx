@@ -66,7 +66,10 @@ export const Dropdown = ({
           isFocus && { borderColor: colors.background.secondary },
         ]}
         placeholderStyle={[styles.placeholderStyle, textStyle]}
-        selectedTextStyle={[styles.selectedTextStyle, textStyle]}
+        selectedTextStyle={[
+          styles.selectedTextStyle,
+          { color: colorTheme[colorScheme].title },
+        ]}
         data={data}
         maxHeight={maxHeight}
         labelField="label"
@@ -81,6 +84,7 @@ export const Dropdown = ({
           styles.containerStyle,
           { backgroundColor: colorTheme[colorScheme].background },
         ]}
+        activeColor={colors.primary}
       />
       {!!errorMessage && <Text style={styles.errorMessage}>errorMessage</Text>}
     </View>
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.sm,
   },
   selectedTextStyle: {
-    fontSize: fontSizes.sm,
+    fontSize: fontSizes.xs,
     fontFamily: fontsFamily.semiBold,
   },
   containerStyle: {

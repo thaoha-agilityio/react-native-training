@@ -116,6 +116,7 @@ exports[`LoginForm should render properly 1`] = `
                   "position": "relative",
                   "width": "100%",
                 },
+                {},
                 undefined,
               ]
             }
@@ -225,6 +226,7 @@ exports[`LoginForm should render properly 1`] = `
                   "position": "relative",
                   "width": "100%",
                 },
+                {},
                 {
                   "color": "black",
                 },

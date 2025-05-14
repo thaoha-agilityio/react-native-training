@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    padding: 20,
   },
   content: {
     backgroundColor: colors.light,

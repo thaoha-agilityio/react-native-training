@@ -1,15 +1,20 @@
 import { memo, useEffect, useState } from 'react';
-
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker';
 
 // Components
 import { EditIcon } from '../icons';
-
-// Components
 import { Image } from '../Image';
+import { ImagePickerModal } from './ImagePickerModal';
 
 // Themes
 import { colors } from '@/themes';
+
+// Utils
+import {
+  requestCameraPermission,
+  requestPhotoLibraryPermission,
+} from '@/utils';
 
 interface AvatarUploaderProps {
   avatar?: string;
@@ -23,6 +28,46 @@ const AvatarUploaderComponent = ({
   onChange,
 }: AvatarUploaderProps) => {
   const [currentAvatar, setAvatarSrc] = useState(avatarUpload || avatar);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsVisible(false);
+  };
+
+  const handleChooseFromLibrary = async () => {
+    const hasPermission = await requestPhotoLibraryPermission();
+
+    if (!hasPermission) return;
+
+    let result = await launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setAvatarSrc(result.assets[0].uri);
+      handleCloseModal();
+    }
+  };
+
+  const handleTakePhoto = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (!hasPermission) return;
+
+    let result = await launchCameraAsync({
+      mediaTypes: ['images'],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setAvatarSrc(result.assets[0].uri);
+      handleCloseModal();
+    }
+  };
 
   useEffect(() => {
     setAvatarSrc(avatarUpload || avatar);
@@ -30,7 +75,7 @@ const AvatarUploaderComponent = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleOpenModal}>
         <View style={styles.avatarWrapper}>
           <Image
             source={
@@ -46,6 +91,14 @@ const AvatarUploaderComponent = ({
           </View>
         </View>
       </TouchableOpacity>
+      {isVisible && (
+        <ImagePickerModal
+          visible={isVisible}
+          onClose={handleCloseModal}
+          onTakePhoto={handleTakePhoto}
+          onChooseFromLibrary={handleChooseFromLibrary}
+        />
+      )}
     </View>
   );
 };
