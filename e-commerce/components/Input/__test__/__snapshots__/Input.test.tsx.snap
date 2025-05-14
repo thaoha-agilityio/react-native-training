@@ -61,6 +61,7 @@ exports[`Input component should render properly 1`] = `
               "paddingVertical": 14,
               "width": "100%",
             },
+            {},
             undefined,
           ]
         }

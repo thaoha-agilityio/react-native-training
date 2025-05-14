@@ -19,4 +19,5 @@ module.exports = {
     '!**/*.stories.{ts,tsx}',
     '!components/icons/**/*.{js,jsx,ts,tsx}',
   ],
+  setupFiles: ['./jest-setup.ts'],
 };
