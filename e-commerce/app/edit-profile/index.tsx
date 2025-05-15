@@ -58,6 +58,7 @@ const EditProfileScreen = () => {
       },
     });
   };
+
   return (
     <View style={styles.container}>
       <Pressable onPress={handleGoBack} style={styles.backBtn}>

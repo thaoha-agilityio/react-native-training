@@ -1,4 +1,9 @@
-export type TextVariant = 'heading' | 'title' | 'description' | 'default';
+export type TextVariant =
+  | 'heading'
+  | 'title'
+  | 'description'
+  | 'default'
+  | 'label';
 
 export type TextSize =
   | 'tiny'

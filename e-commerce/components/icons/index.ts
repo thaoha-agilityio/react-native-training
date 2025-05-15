@@ -12,6 +12,7 @@ export * from './EyeSlashIcon';
 export * from './FacebookIcon';
 export * from './GoogleIcon';
 export * from './HeartIcon';
+export * from './LocationIcon';
 export * from './HomeIcon';
 export * from './LockIcon';
 export * from './LogoIcon';
