@@ -16,3 +16,7 @@ export * from './ProductList/ProductsLimit';
 export * from './ProfileForm';
 export * from './Quantity';
 export * from './Text';
+
+// Skeleton
+export * from './Skeleton/ProductsSkeleton';
+export * from './Skeleton/FormSkeleton';

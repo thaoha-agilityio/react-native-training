@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
 // Components
-import { ProfileForm } from '@/components';
+import { FormSkeleton, ProfileForm } from '@/components';
 import { ArrowLeftIcon } from '@/components/icons';
 
 // Stores
@@ -21,7 +21,7 @@ import { UserPayload } from '@/interfaces';
 
 const EditProfileScreen = () => {
   const userId = useAuthStore((state) => state.userId);
-  const { user: userDetails } = useGetUser(userId);
+  const { user: userDetails, isFetching } = useGetUser(userId);
   const { mutate: editUser, isPending } = useEditUser(userId);
 
   const {
@@ -63,20 +63,24 @@ const EditProfileScreen = () => {
       <Pressable onPress={handleGoBack} style={styles.backBtn}>
         <ArrowLeftIcon />
       </Pressable>
-      <ProfileForm
-        username={username}
-        email={email}
-        avatar={avatar}
-        phoneNumber={phoneNumber}
-        address={address}
-        city={city}
-        zipCode={zipCode}
-        accountHolderName={accountHolderName}
-        bankAccountNumber={bankAccountNumber}
-        state={state}
-        isLoading={isPending}
-        onEdit={handleEditProfile}
-      />
+      {isFetching ? (
+        <FormSkeleton />
+      ) : (
+        <ProfileForm
+          username={username}
+          email={email}
+          avatar={avatar}
+          phoneNumber={phoneNumber}
+          address={address}
+          city={city}
+          zipCode={zipCode}
+          accountHolderName={accountHolderName}
+          bankAccountNumber={bankAccountNumber}
+          state={state}
+          isLoading={isPending}
+          onEdit={handleEditProfile}
+        />
+      )}
     </View>
   );
 };

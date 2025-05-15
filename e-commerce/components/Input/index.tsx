@@ -5,6 +5,8 @@ import {
   View,
   StyleSheet,
   useColorScheme,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
 } from 'react-native';
 
 // Components
@@ -30,6 +32,8 @@ const InputComponent = forwardRef(
       style,
       startContent,
       endContent,
+      onBlur,
+      onFocus,
       ...props
     }: TextInputProps,
     ref: Ref<TextInput>,
@@ -45,10 +49,16 @@ const InputComponent = forwardRef(
 
       return colors.border;
     };
-    const handleFocus = () => {
-      setIsFocus(true);
-    };
 
+    const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      setIsFocus(true);
+      onFocus?.(e);
+    };
+    const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      console.log('ssss');
+      setIsFocus(false);
+      onBlur?.(e);
+    };
     return (
       <View>
         <View style={[inputVariantStyles[variant].container]}>
@@ -69,6 +79,7 @@ const InputComponent = forwardRef(
                 style,
               ]}
               onFocus={handleFocus}
+              onBlur={handleBlur}
               {...props}
             />
             {!!endContent && (
