@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCallback } from 'react';
 
@@ -42,14 +42,14 @@ const LoginScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
       <Text variant="title" size="3xl" style={styles.title} numberOfLines={2}>
         Welcome Back!
       </Text>
       <View style={styles.wrapper}>
         <LoginForm onsubmit={handleLogin} isLoading={isPending} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

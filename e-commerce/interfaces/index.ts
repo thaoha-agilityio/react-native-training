@@ -1,4 +1,5 @@
 export * from './cart';
+export * from './image';
 export * from './onboarding';
 export * from './product';
 export * from './text';
