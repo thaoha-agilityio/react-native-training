@@ -8,13 +8,15 @@ import { Button } from '@/components';
 import { ROUTES } from '@/constants';
 
 // Stores
-import { useAuthStore } from '@/stores';
+import { useAuthStore, useCartStore } from '@/stores';
 
 const SettingScreen = () => {
   const clearAuth = useAuthStore((state) => state.clearAuth);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const logout = () => {
     clearAuth();
+    clearCart();
     router.push(ROUTES.LOGIN);
   };
 
