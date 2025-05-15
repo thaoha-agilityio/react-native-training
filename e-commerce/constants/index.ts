@@ -4,6 +4,7 @@ export * from './images';
 export * from './keychain';
 export * from './messages';
 export * from './onboarding';
+export * from './options';
 export * from './pagination';
 export * from './queryKeys';
 export * from './regex';
