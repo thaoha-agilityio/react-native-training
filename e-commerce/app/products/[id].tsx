@@ -7,8 +7,9 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useShallow } from 'zustand/shallow';
 
 // Components
 import { Button, Text, Image, PaginationDot } from '@/components';
@@ -26,6 +27,9 @@ import { formatNumberWithUnit, formatPrice } from '@/utils';
 // Hooks
 import { useFetchProductDetails } from '@/hooks';
 
+// Stores
+import { useCartStore } from '@/stores';
+
 const { width } = Dimensions.get('window');
 
 const ProductDetailsScreen = () => {
@@ -42,6 +46,21 @@ const ProductDetailsScreen = () => {
     rating = 0,
     description = '',
   } = product || {};
+
+  const [addItemToCart] = useCartStore(
+    useShallow((state) => [state.addItemToCart]),
+  );
+
+  const handleAddToCart = useCallback(() => {
+    addItemToCart({
+      productId: id.toString(),
+      name,
+      price,
+      quantity: 1,
+      image: images[0].image,
+      id: id.toString(),
+    });
+  }, [addItemToCart, id, images, name, price]);
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
@@ -104,7 +123,7 @@ const ProductDetailsScreen = () => {
           {description}
         </Text>
 
-        <Button style={styles.addToCartBtn}>
+        <Button style={styles.addToCartBtn} onPress={handleAddToCart}>
           <CartIcon color={colors.light} />
           <Text style={{ color: colors.light }} variant="heading">
             Add to cart

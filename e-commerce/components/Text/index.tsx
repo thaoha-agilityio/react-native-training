@@ -43,6 +43,9 @@ const TextComponent = ({
       case 'description':
         return colorTheme[colorScheme].helper;
 
+      case 'label':
+        return colorTheme[colorScheme].label;
+
       default:
         return colorTheme[colorScheme].default;
     }
@@ -80,6 +83,10 @@ const textVariant = StyleSheet.create({
 
   default: {
     fontFamily: fontsFamily.primary,
+  },
+
+  label: {
+    fontFamily: fontsFamily.semiBold,
   },
 });
 
