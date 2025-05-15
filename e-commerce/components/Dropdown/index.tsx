@@ -86,7 +86,9 @@ export const Dropdown = ({
         ]}
         activeColor={colors.primary}
       />
-      {!!errorMessage && <Text style={styles.errorMessage}>errorMessage</Text>}
+      {!!errorMessage && (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      )}
     </View>
   );
 };

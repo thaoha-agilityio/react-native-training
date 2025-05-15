@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { router } from 'expo-router';
+import Toast from 'react-native-toast-message';
 
 // Components
 import { ProfileForm } from '@/components';
@@ -36,18 +37,17 @@ const EditProfileScreen = () => {
     state = '',
   } = userDetails || {};
 
-  console.log('userDetails', userDetails);
-
   const handleGoBack = () => {
     router.back();
   };
   const handleEditSuccess = useCallback(() => {
-    console.log('Profile updated successfully');
+    Toast.show({ type: 'success', text1: 'Profile updated successfully' });
+
     handleGoBack();
   }, []);
 
   const handleEditError = useCallback((error: string) => {
-    console.log('getAPIErrorMessage', getAPIErrorMessage(error));
+    Toast.show({ type: 'error', text1: getAPIErrorMessage(error) });
   }, []);
 
   const handleEditProfile = (payload: UserPayload) => {

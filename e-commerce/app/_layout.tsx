@@ -12,6 +12,7 @@ import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 
 // Hooks
 import { useHydration } from '@/hooks';
@@ -58,6 +59,7 @@ export default function RootLayout() {
           />
 
           <StatusBar style="auto" />
+          <Toast />
         </SafeAreaView>
       </ThemeProvider>
     </QueryClientProvider>

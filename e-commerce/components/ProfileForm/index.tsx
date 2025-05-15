@@ -1,6 +1,7 @@
 import { memo, useCallback } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
+import Toast from 'react-native-toast-message';
 
 // Components
 import { AvatarUploader, Text, Input, Button, Dropdown } from '@/components';
@@ -82,6 +83,8 @@ const ProfileFormComponent = ({
     'bankAccountNumber',
   ]);
 
+  const { mutate: uploadImage, isPending: isUploading } = useUploadImage();
+
   const VALIDATION = {
     USERNAME: {
       required: FORM_VALIDATION_MESSAGE.REQUIRED('Name'),
@@ -125,9 +128,8 @@ const ProfileFormComponent = ({
   );
 
   const handleUpLoadImageError = useCallback((error: string) => {
-    console.log('error', error);
+    Toast.show({ type: 'error', text1: error });
   }, []);
-  const { mutate: uploadImage, isPending: isUploading } = useUploadImage();
 
   const onSubmit = async (data: UserPayload) => {
     let avatarUrl = data.avatar;

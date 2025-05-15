@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCallback } from 'react';
+import Toast from 'react-native-toast-message';
 
 // Components
 import { LoginForm, Text } from '@/components';
@@ -26,7 +27,7 @@ const LoginScreen = () => {
   }, [router]);
 
   const handleLoginError = useCallback((error: string) => {
-    console.log(getAPIErrorMessage(error));
+    Toast.show({ type: 'error', text1: getAPIErrorMessage(error) });
   }, []);
 
   const handleLogin = useCallback(
