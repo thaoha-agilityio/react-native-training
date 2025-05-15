@@ -6,6 +6,13 @@ export interface User {
   dateOfBirth?: string;
   phoneNumber?: string;
   avatar?: string;
+  address?: string;
+  state?: string;
+  city?: string;
+  country?: string;
+  bankAccountNumber?: string;
+  accountHolderName?: string;
+  zipCode?: string;
 }
 
 export type LoginPayload = Pick<User, 'email' | 'password'>;

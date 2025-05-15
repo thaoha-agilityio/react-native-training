@@ -1,47 +1,276 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
 
-import { AvatarUploader } from '../AvatarUpload';
-import { Text } from '../Text';
+// Components
+import { AvatarUploader, Text, Input, Button, Dropdown } from '@/components';
+
+// Themes
 import { colors, fontsFamily } from '@/themes';
-import { Input } from '../Input';
-import { Dropdown } from '../Dropdown';
 
-const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
-  { label: 'Item 7', value: '7' },
-  { label: 'Item 8', value: '8' },
-];
+// Constants
+import { FORM_VALIDATION_MESSAGE, REGEX, US_STATES } from '@/constants';
+
+// Types
+import { UserPayload } from '@/interfaces';
+
+// Utils
+import { clearErrorOnChange } from '@/utils';
+
+// Hooks
+import { useInputRefs } from '@/hooks';
+
 const ProfileFormComponent = () => {
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<UserPayload>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    defaultValues: {},
+  });
+
+  const { refs, getOnSubmitEditing } = useInputRefs([
+    'password',
+    'phoneNumber',
+    'username',
+    'address',
+    'city',
+    'zipCode',
+    'accountHolderName',
+    'bankAccountNumber',
+  ]);
+
+  const VALIDATION = {
+    USERNAME: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Name'),
+      pattern: {
+        value: REGEX.NAME,
+        message: FORM_VALIDATION_MESSAGE.INVALID('Name'),
+      },
+    },
+    PHONE_NUMBER: {
+      pattern: {
+        value: REGEX.PHONE_NUMBER,
+        message: FORM_VALIDATION_MESSAGE.INVALID('Phone number'),
+      },
+    },
+    ADDRESS: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Address'),
+    },
+    CITY: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('City'),
+    },
+    ZIP_CODE: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Zip code'),
+    },
+    BANK_ACCOUNT_NUMBER: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Bank Account Number'),
+    },
+    ACCOUNT_HOLDER_NAME: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Account Holder Name'),
+    },
+  };
+
+  const handleInputChange = useCallback(
+    (name: keyof UserPayload, onChange: (value: string) => void) => {
+      return (value: string) => {
+        onChange(value);
+
+        clearErrorOnChange(name, errors, clearErrors);
+      };
+    },
+    [clearErrors, errors],
+  );
+
+  const onSubmit = async (data: UserPayload) => {
+    console.log('data', data);
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <AvatarUploader />
+      <Controller
+        name="avatar"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <AvatarUploader avatar={value} onChange={onChange} />
+        )}
+      />
       <Text size="lg" style={styles.title}>
         Personal Details
       </Text>
+
+      {/* Personal Details */}
       <View style={styles.profileWrapper}>
-        <Input label="Email Address" />
-        <Input label="Username" />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              label="Email Address"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('email', onChange)}
+              returnKeyType="next"
+              autoCapitalize="none"
+              inputMode="email"
+              editable={false}
+            />
+          )}
+        />
+
+        <Controller
+          name="username"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.username}
+              label="Username"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('username', onChange)}
+              returnKeyType="next"
+              onSubmitEditing={getOnSubmitEditing('phoneNumber')}
+            />
+          )}
+          rules={VALIDATION.USERNAME}
+        />
       </View>
+
+      {/* Business Address Details */}
       <Text style={styles.title} size="lg">
         Business Address Details
       </Text>
       <View style={styles.profileWrapper}>
-        <Input label="Address" />
-        <Input label="City" />
-        <Dropdown
-          data={data}
-          label="State"
-          onChange={(value) => console.log(value)}
-          value={data[0].value}
+        <Controller
+          name="phoneNumber"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.phoneNumber}
+              label="Phone Number"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('phoneNumber', onChange)}
+              returnKeyType="next"
+              keyboardType="phone-pad"
+              onSubmitEditing={getOnSubmitEditing('address')}
+            />
+          )}
+          rules={VALIDATION.PHONE_NUMBER}
         />
-        <Input label="Zip Code" />
+        <Controller
+          name="address"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.address}
+              label="Address"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('address', onChange)}
+              returnKeyType="next"
+              onSubmitEditing={getOnSubmitEditing('city')}
+            />
+          )}
+          rules={VALIDATION.ADDRESS}
+        />
+        <Controller
+          name="city"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.city}
+              label="City"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('city', onChange)}
+              returnKeyType="next"
+            />
+          )}
+          rules={VALIDATION.CITY}
+        />
+
+        <Controller
+          name="state"
+          control={control}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <Dropdown
+              data={US_STATES}
+              label="State"
+              onChange={onChange}
+              value={value || ''}
+              errorMessage={error?.message}
+            />
+          )}
+          rules={VALIDATION.CITY}
+        />
+
+        <Controller
+          name="zipCode"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.zipCode}
+              label="Zip Code"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('zipCode', onChange)}
+              returnKeyType="next"
+              inputMode="numeric"
+              onSubmitEditing={getOnSubmitEditing('bankAccountNumber')}
+            />
+          )}
+          rules={VALIDATION.CITY}
+        />
       </View>
+
+      {/* Bank Account Details */}
+      <Text style={styles.title} size="lg">
+        Bank Account Details
+      </Text>
+      <View style={styles.profileWrapper}>
+        <Controller
+          name="bankAccountNumber"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.bankAccountNumber}
+              label="Bank Account Number"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('bankAccountNumber', onChange)}
+              returnKeyType="next"
+              inputMode="numeric"
+              onSubmitEditing={getOnSubmitEditing('accountHolderName')}
+            />
+          )}
+          rules={VALIDATION.BANK_ACCOUNT_NUMBER}
+        />
+        <Controller
+          name="accountHolderName"
+          control={control}
+          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+            <Input
+              {...rest}
+              ref={refs.accountHolderName}
+              label="Account Holder’s Name"
+              errorMessage={error?.message}
+              onChangeText={handleInputChange('accountHolderName', onChange)}
+              returnKeyType="next"
+            />
+          )}
+          rules={VALIDATION.ACCOUNT_HOLDER_NAME}
+        />
+      </View>
+
+      <Button
+        title="Save"
+        style={styles.saveButton}
+        onPress={handleSubmit(onSubmit)}
+      />
     </ScrollView>
   );
 };
@@ -51,6 +280,7 @@ export const ProfileForm = memo(ProfileFormComponent);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
+    paddingBottom: 20,
   },
 
   title: {
@@ -64,5 +294,10 @@ const styles = StyleSheet.create({
     paddingBottom: 36,
     borderBottomWidth: 0.5,
     borderColor: colors.border,
+  },
+
+  saveButton: {
+    height: 52,
+    borderRadius: 8,
   },
 });

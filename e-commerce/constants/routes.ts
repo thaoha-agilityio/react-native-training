@@ -4,4 +4,5 @@ export const ROUTES = {
   HOME: '/(tabs)',
   PRODUCTS: '/(tabs)/wishlist',
   PRODUCT_DETAILS: (id: string) => `/products/${id}` as const,
+  EDIT_PROFILE: '/edit-profile',
 } as const;

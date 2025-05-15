@@ -8,6 +8,7 @@ import { ROUTES } from '@/constants';
 
 // Stores
 import { useAuthStore } from '@/stores';
+import { View } from 'react-native';
 
 const SettingScreen = () => {
   const clearAuth = useAuthStore((state) => state.clearAuth);
@@ -17,7 +18,16 @@ const SettingScreen = () => {
     router.push(ROUTES.LOGIN);
   };
 
-  return <Button title="logout" onPress={logout} />;
+  const navigateProfile = () => {
+    router.push(ROUTES.EDIT_PROFILE);
+  };
+
+  return (
+    <View>
+      <Button title="logout" onPress={logout} />
+      <Button title="edit profile" onPress={navigateProfile} />
+    </View>
+  );
 };
 
 export default SettingScreen;
