@@ -21,9 +21,6 @@ exports[`LoginForm should render properly 1`] = `
         style={
           [
             {},
-            {
-              "borderColor": "#C8C8C8",
-            },
           ]
         }
       >
@@ -97,6 +94,7 @@ exports[`LoginForm should render properly 1`] = `
             name="email"
             onBlur={[Function]}
             onChangeText={[Function]}
+            onFocus={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Email"
             placeholderTextColor="#676767"
@@ -116,7 +114,10 @@ exports[`LoginForm should render properly 1`] = `
                   "position": "relative",
                   "width": "100%",
                 },
-                {},
+                false,
+                {
+                  "borderColor": "#C8C8C8",
+                },
                 undefined,
               ]
             }
@@ -129,9 +130,6 @@ exports[`LoginForm should render properly 1`] = `
         style={
           [
             {},
-            {
-              "borderColor": "#C8C8C8",
-            },
           ]
         }
       >
@@ -207,6 +205,7 @@ exports[`LoginForm should render properly 1`] = `
             name="password"
             onBlur={[Function]}
             onChangeText={[Function]}
+            onFocus={[Function]}
             placeholder="Password"
             placeholderTextColor="#676767"
             returnKeyType="done"
@@ -226,7 +225,10 @@ exports[`LoginForm should render properly 1`] = `
                   "position": "relative",
                   "width": "100%",
                 },
-                {},
+                false,
+                {
+                  "borderColor": "#C8C8C8",
+                },
                 {
                   "color": "black",
                 },

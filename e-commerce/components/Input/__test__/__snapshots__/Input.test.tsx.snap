@@ -8,9 +8,6 @@ exports[`Input component should render properly 1`] = `
         {
           "gap": 15,
         },
-        {
-          "borderColor": "#C8C8C8",
-        },
       ]
     }
   >
@@ -47,6 +44,7 @@ exports[`Input component should render properly 1`] = `
       }
     >
       <TextInput
+        onFocus={[Function]}
         style={
           [
             {
@@ -61,7 +59,10 @@ exports[`Input component should render properly 1`] = `
               "paddingVertical": 14,
               "width": "100%",
             },
-            {},
+            false,
+            {
+              "borderColor": "#C8C8C8",
+            },
             undefined,
           ]
         }

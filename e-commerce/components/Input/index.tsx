@@ -1,4 +1,4 @@
-import { forwardRef, memo, PropsWithChildren, Ref } from 'react';
+import { forwardRef, memo, PropsWithChildren, Ref, useState } from 'react';
 import {
   TextInput,
   TextInputProps as TextInputPropsBase,
@@ -34,18 +34,24 @@ const InputComponent = forwardRef(
     }: TextInputProps,
     ref: Ref<TextInput>,
   ) => {
-    const borderClass = errorMessage ? colors.error : colors.border;
     const colorScheme = useColorScheme();
     const isDark = colorScheme === 'dark';
+    const [isFocus, setIsFocus] = useState(false);
+
+    const getBorderColor = () => {
+      if (isFocus && !errorMessage) return colors.background.secondary;
+
+      if (errorMessage) return colors.error;
+
+      return colors.border;
+    };
+    const handleFocus = () => {
+      setIsFocus(true);
+    };
 
     return (
       <View>
-        <View
-          style={[
-            inputVariantStyles[variant].container,
-            { borderColor: borderClass },
-          ]}
-        >
+        <View style={[inputVariantStyles[variant].container]}>
           {!!label && (
             <Text style={[inputVariantStyles[variant].label]}>{label}</Text>
           )}
@@ -58,9 +64,11 @@ const InputComponent = forwardRef(
               ref={ref}
               style={[
                 inputVariantStyles[variant].input,
-                { ...(isDark && { color: colors.light }) },
+                isDark && { color: colors.light },
+                { borderColor: getBorderColor() },
                 style,
               ]}
+              onFocus={handleFocus}
               {...props}
             />
             {!!endContent && (
