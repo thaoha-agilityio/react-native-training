@@ -18,18 +18,57 @@ import { UserPayload } from '@/interfaces';
 import { clearErrorOnChange } from '@/utils';
 
 // Hooks
-import { useInputRefs } from '@/hooks';
+import { useInputRefs, useUploadImage } from '@/hooks';
 
-const ProfileFormComponent = () => {
+interface ProfileFormProps {
+  isLoading?: boolean;
+  avatar?: string;
+  email?: string;
+  username?: string;
+  address?: string;
+  city?: string;
+  zipCode?: string;
+  accountHolderName?: string;
+  bankAccountNumber?: string;
+  state?: string;
+  phoneNumber?: string;
+  onEdit: (payload: UserPayload) => void;
+}
+
+const ProfileFormComponent = ({
+  isLoading,
+  email,
+  avatar,
+  phoneNumber,
+  username,
+  address,
+  city,
+  zipCode,
+  accountHolderName,
+  bankAccountNumber,
+  state,
+  onEdit,
+}: ProfileFormProps) => {
   const {
     control,
     handleSubmit,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<UserPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    defaultValues: {},
+    defaultValues: {
+      avatar,
+      email,
+      phoneNumber,
+      username,
+      address,
+      city,
+      zipCode,
+      accountHolderName,
+      bankAccountNumber,
+      state,
+    },
   });
 
   const { refs, getOnSubmitEditing } = useInputRefs([
@@ -85,12 +124,28 @@ const ProfileFormComponent = () => {
     [clearErrors, errors],
   );
 
+  const handleUpLoadImageError = useCallback((error: string) => {
+    console.log('error', error);
+  }, []);
+  const { mutate: uploadImage, isPending: isUploading } = useUploadImage();
+
   const onSubmit = async (data: UserPayload) => {
-    console.log('data', data);
+    let avatarUrl = data.avatar;
+
+    if (avatarUrl && !avatarUrl.startsWith('http')) {
+      uploadImage(avatarUrl, {
+        onSuccess: (uploadedUrl) => {
+          avatarUrl = uploadedUrl;
+        },
+        onError: (error) => handleUpLoadImageError(error),
+      });
+    }
+
+    onEdit({ ...data, avatar: avatarUrl });
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
       <Controller
         name="avatar"
         control={control}
@@ -107,7 +162,10 @@ const ProfileFormComponent = () => {
         <Controller
           name="email"
           control={control}
-          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+          render={({
+            field: { onChange, value, ...rest },
+            fieldState: { error },
+          }) => (
             <Input
               {...rest}
               label="Email Address"
@@ -116,6 +174,7 @@ const ProfileFormComponent = () => {
               returnKeyType="next"
               autoCapitalize="none"
               inputMode="email"
+              value={value}
               editable={false}
             />
           )}
@@ -268,6 +327,8 @@ const ProfileFormComponent = () => {
 
       <Button
         title="Save"
+        disabled={isLoading || !isDirty}
+        isLoading={isLoading || isUploading}
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}
       />
@@ -280,7 +341,7 @@ export const ProfileForm = memo(ProfileFormComponent);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingBottom: 20,
+    marginBottom: 8,
   },
 
   title: {

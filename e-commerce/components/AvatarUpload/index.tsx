@@ -19,7 +19,7 @@ import {
 interface AvatarUploaderProps {
   avatar?: string;
   avatarUpload?: string;
-  onChange?: (value: string) => void;
+  onChange: (value: string) => void;
 }
 
 const AvatarUploaderComponent = ({
@@ -29,6 +29,14 @@ const AvatarUploaderComponent = ({
 }: AvatarUploaderProps) => {
   const [currentAvatar, setAvatarSrc] = useState(avatarUpload || avatar);
   const [isVisible, setIsVisible] = useState(false);
+
+  const handleSelectImage = (uri?: string) => {
+    if (!uri) return;
+
+    setAvatarSrc(uri);
+    onChange(uri);
+    setIsVisible(false);
+  };
 
   const handleOpenModal = () => {
     setIsVisible(true);
@@ -49,7 +57,7 @@ const AvatarUploaderComponent = ({
     });
 
     if (!result.canceled) {
-      setAvatarSrc(result.assets[0].uri);
+      handleSelectImage(result.assets[0].uri);
       handleCloseModal();
     }
   };
@@ -64,7 +72,7 @@ const AvatarUploaderComponent = ({
     });
 
     if (!result.canceled) {
-      setAvatarSrc(result.assets[0].uri);
+      handleSelectImage(result.assets[0].uri);
       handleCloseModal();
     }
   };

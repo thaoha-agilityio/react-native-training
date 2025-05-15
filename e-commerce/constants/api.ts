@@ -5,3 +5,5 @@ export const ENDPOINTS = {
   USERS: '/users',
   PRODUCTS: '/products',
 };
+
+export const IMGBB_URL = `${process.env.IMGBB_URL}?key=${process.env.IMGBB_API_KEY}`;

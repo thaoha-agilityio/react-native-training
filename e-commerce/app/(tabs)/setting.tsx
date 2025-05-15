@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { View } from 'react-native';
 
 // Components
 import { Button } from '@/components';
@@ -8,7 +9,6 @@ import { ROUTES } from '@/constants';
 
 // Stores
 import { useAuthStore } from '@/stores';
-import { View } from 'react-native';
 
 const SettingScreen = () => {
   const clearAuth = useAuthStore((state) => state.clearAuth);
@@ -25,7 +25,11 @@ const SettingScreen = () => {
   return (
     <View>
       <Button title="logout" onPress={logout} />
-      <Button title="edit profile" onPress={navigateProfile} />
+      <Button
+        title="edit profile"
+        variant="outline"
+        onPress={navigateProfile}
+      />
     </View>
   );
 };
