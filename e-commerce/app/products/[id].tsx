@@ -10,9 +10,14 @@ import {
 import { useCallback, useRef, useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useShallow } from 'zustand/shallow';
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 // Components
-import { Button, Text, Image, PaginationDot } from '@/components';
+import { Button, Text, Image, PaginationDot, ShoppingCart } from '@/components';
 import { ArrowLeftIcon, CartIcon, StarIcon } from '@/components/icons';
 
 // Themes
@@ -29,6 +34,9 @@ import { useFetchProductDetails } from '@/hooks';
 
 // Stores
 import { useCartStore } from '@/stores';
+
+// Constants
+import { ROUTES } from '@/constants';
 
 const { width } = Dimensions.get('window');
 
@@ -50,6 +58,8 @@ const ProductDetailsScreen = () => {
   const [addItemToCart] = useCartStore(
     useShallow((state) => [state.addItemToCart]),
   );
+  const scale = useSharedValue(1);
+  const liked = useSharedValue(false);
 
   const handleAddToCart = useCallback(() => {
     addItemToCart({
@@ -60,7 +70,12 @@ const ProductDetailsScreen = () => {
       image: images[0].image,
       id: id.toString(),
     });
-  }, [addItemToCart, id, images, name, price]);
+
+    liked.value = !liked.value;
+    scale.value = withSpring(1.5, { damping: 5 }, () => {
+      scale.value = withSpring(1);
+    });
+  }, [addItemToCart, id, images, liked, name, price, scale]);
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
@@ -78,15 +93,25 @@ const ProductDetailsScreen = () => {
     router.back();
   };
 
+  const handleGoToCart = () => {
+    router.replace(ROUTES.CART);
+  };
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.headerWrapper}>
         <Pressable onPress={handleGoBack}>
           <ArrowLeftIcon />
         </Pressable>
-        <Button style={styles.cartBtn}>
-          <CartIcon />
-        </Button>
+
+        <ShoppingCart
+          onNavigation={handleGoToCart}
+          animatedStyle={animatedStyle}
+        />
       </View>
 
       <View style={styles.contentWrapper}>
@@ -105,10 +130,12 @@ const ProductDetailsScreen = () => {
       </View>
       {/* Info */}
       <View>
-        <Text variant="title" size="xl">
+        <Text variant="title" size="xl" style={{ lineHeight: 32 }}>
           {name}
         </Text>
-        <Text size="sm">Vision Alta Men’s Shoes Size (All Colors)</Text>
+        <Text size="sm" style={{ lineHeight: 20 }}>
+          Vision Alta Men’s Shoes Size (All Colors)
+        </Text>
         <View style={styles.rating}>
           {new Array(rating).fill(0).map((_, index) => (
             <StarIcon key={index} />
@@ -174,11 +201,12 @@ const styles = StyleSheet.create({
   reviewer: {
     marginLeft: 5,
     color: colors.text.helper,
+    lineHeight: 20,
   },
 
   addToCartBtn: {
     height: 36,
-    width: 136,
+    width: 145,
     marginVertical: 20,
   },
 
