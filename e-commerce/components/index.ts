@@ -16,6 +16,7 @@ export * from './ProductList/ProductsLimit';
 export * from './ProfileForm';
 export * from './Quantity';
 export * from './Text';
+export * from './ShoppingCart';
 
 // Skeleton
 export * from './Skeleton/ProductsSkeleton';
