@@ -16,7 +16,7 @@ import { FORM_VALIDATION_MESSAGE, REGEX, US_STATES } from '@/constants';
 import { UserPayload } from '@/interfaces';
 
 // Utils
-import { clearErrorOnChange } from '@/utils';
+import { clearErrorOnChange, formatUSPhoneNumber } from '@/utils';
 
 // Hooks
 import { useInputRefs, useUploadImage } from '@/hooks';
@@ -208,7 +208,10 @@ const ProfileFormComponent = ({
         <Controller
           name="phoneNumber"
           control={control}
-          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+          render={({
+            field: { onChange, value, ...rest },
+            fieldState: { error },
+          }) => (
             <Input
               {...rest}
               ref={refs.phoneNumber}
@@ -218,6 +221,7 @@ const ProfileFormComponent = ({
               returnKeyType="next"
               keyboardType="phone-pad"
               onSubmitEditing={getOnSubmitEditing('address')}
+              value={formatUSPhoneNumber(value || '')}
             />
           )}
           rules={VALIDATION.PHONE_NUMBER}

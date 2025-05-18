@@ -1,4 +1,10 @@
-import { Pressable, StyleSheet, View, Dimensions } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { router } from 'expo-router';
 import { useShallow } from 'zustand/shallow';
 import { useCallback } from 'react';
@@ -11,10 +17,16 @@ import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
 import { colors, fontsFamily, lineHeights } from '@/themes';
 
 // Utils
-import { formatPrice } from '@/utils';
+import { formatPrice, formatUSPhoneNumber } from '@/utils';
 
 // Stores
-import { useCartStore } from '@/stores';
+import { useAuthStore, useCartStore } from '@/stores';
+
+// Hooks
+import { useGetUser } from '@/hooks';
+
+// Constants
+import { ROUTES } from '@/constants';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -31,6 +43,17 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
       state.getTotalPrice,
     ]),
   );
+  const userId = useAuthStore((state) => state.userId);
+
+  const { user } = useGetUser(userId);
+
+  const { address = '', phoneNumber = '' } = user || {};
+
+  const hasAddress = !!address && !!phoneNumber;
+
+  const navigateEditProfile = () => {
+    router.push(ROUTES.EDIT_PROFILE);
+  };
 
   const handleUpdateQuantity = useCallback(
     (id: string, quantity: number) => {
@@ -65,19 +88,30 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
             Delivery Address
           </Text>
         </View>
-        <View style={styles.infoAddress}>
-          <View style={{ gap: 8 }}>
-            <Text variant="label" numberOfLines={2} size="xs">
-              Address :
-              <Text size="xs"> 216 St Paul's Rd, London N1 2LL, UK</Text>
-            </Text>
-            <Text variant="label" size="xs">
-              Contact:
-              <Text size="xs"> 0123456789</Text>
-            </Text>
+        {hasAddress ? (
+          <View style={styles.infoAddress}>
+            <View style={{ gap: 8 }}>
+              <Text variant="label" numberOfLines={2} size="xs">
+                Address :<Text size="xs"> {address}</Text>
+              </Text>
+              <Text variant="label" size="xs">
+                Contact:
+                <Text size="xs"> {formatUSPhoneNumber(phoneNumber)}</Text>
+              </Text>
+            </View>
+            <TouchableOpacity onPress={navigateEditProfile}>
+              <LocationIcon />
+            </TouchableOpacity>
           </View>
-          <LocationIcon />
-        </View>
+        ) : (
+          <View style={styles.infoAddress}>
+            <Button
+              title="+ Add new address"
+              variant="link"
+              onPress={navigateEditProfile}
+            />
+          </View>
+        )}
 
         <Text variant="label" size="sm">
           Shopping List
@@ -107,7 +141,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
           </Text>
         </View>
         <Button
-          disabled={!cart.length}
+          disabled={!cart.length || !hasAddress}
           title="Check out"
           style={styles.checkOutButton}
         />
@@ -189,4 +223,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+
+  addNewAddress: {},
 });
