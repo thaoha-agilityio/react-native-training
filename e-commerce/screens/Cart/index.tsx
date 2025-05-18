@@ -55,6 +55,10 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
     router.push(ROUTES.EDIT_PROFILE);
   };
 
+  const navigateCheckout = () => {
+    router.push(ROUTES.CHECKOUT);
+  };
+
   const handleUpdateQuantity = useCallback(
     (id: string, quantity: number) => {
       updateQuantity(id, quantity);
@@ -144,6 +148,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
           disabled={!cart.length || !hasAddress}
           title="Check out"
           style={styles.checkOutButton}
+          onPress={navigateCheckout}
         />
       </View>
     </View>
@@ -162,6 +167,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     borderColor: colors.border,
     borderBottomWidth: 0.6,
+    paddingBottom: 18,
   },
 
   heading: {

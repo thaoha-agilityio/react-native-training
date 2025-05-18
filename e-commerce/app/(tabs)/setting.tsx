@@ -25,11 +25,12 @@ const SettingScreen = () => {
   };
 
   return (
-    <View>
-      <Button title="logout" onPress={logout} />
+    <View style={{ gap: 20, padding: 10 }}>
+      <Button title="Logout" onPress={logout} style={{ height: 50 }} />
       <Button
-        title="edit profile"
+        title="Edit profile"
         variant="outline"
+        style={{ height: 50 }}
         onPress={navigateProfile}
       />
     </View>

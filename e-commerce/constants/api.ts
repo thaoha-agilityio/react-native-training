@@ -4,6 +4,7 @@ export const ENDPOINTS = {
   LOGIN: '/login',
   USERS: '/users',
   PRODUCTS: '/products',
+  ORDERS: '/orders',
 };
 
 export const IMGBB_URL = `${process.env.IMGBB_URL}?key=${process.env.IMGBB_API_KEY}`;
