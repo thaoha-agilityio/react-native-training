@@ -1,7 +1,6 @@
-import { Text } from '@/components';
+// Components
+import { Cart } from '@/screens';
 
-const CartScreen = () => {
-  return <Text style={{ color: 'red' }}>Cart Screen</Text>;
-};
+const CartScreen = () => <Cart isTabBar />;
 
 export default CartScreen;
