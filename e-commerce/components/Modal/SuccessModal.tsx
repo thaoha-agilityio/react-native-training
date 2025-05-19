@@ -1,11 +1,10 @@
 import { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 // Components
 import { Modal } from '.';
 import { Button } from '../Button';
 import { SuccessIcon } from '../icons';
-import { Text } from '../Text';
 
 // Themes
 import { fontWeights } from '@/themes';
@@ -31,9 +30,7 @@ const SuccessModalComponent = ({
     <View style={{ alignItems: 'center' }}>
       <SuccessIcon />
     </View>
-    <Text style={styles.text} size="sm">
-      Payment done successfully.
-    </Text>
+    <Text style={styles.text}>Payment done successfully.</Text>
     <Button title="Go to Home" style={styles.button} onPress={onNavigate} />
   </Modal>
 );
@@ -49,6 +46,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     fontWeight: fontWeights.semiBold,
+    fontSize: 14,
   },
 
   button: {

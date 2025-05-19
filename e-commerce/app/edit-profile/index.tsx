@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, Pressable, useColorScheme } from 'react-native';
 import { router } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
@@ -19,7 +19,11 @@ import { getAPIErrorMessage } from '@/utils';
 // Types
 import { UserPayload } from '@/interfaces';
 
+// Themes
+import { colorTheme } from '@/themes';
+
 const EditProfileScreen = () => {
+  const colorScheme = useColorScheme() ?? 'light';
   const userId = useAuthStore((state) => state.userId);
   const { user: userDetails, isFetching } = useGetUser(userId);
   const { mutate: editUser, isPending } = useEditUser(userId);
@@ -62,7 +66,7 @@ const EditProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Pressable onPress={handleGoBack} style={styles.backBtn}>
-        <ArrowLeftIcon />
+        <ArrowLeftIcon color={colorTheme[colorScheme].default} />
       </Pressable>
       {isFetching ? (
         <FormSkeleton />

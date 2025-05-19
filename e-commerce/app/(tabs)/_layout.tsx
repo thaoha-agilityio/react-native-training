@@ -16,13 +16,13 @@ import {
 import { colors, colorTheme } from '@/themes';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme() ?? 'light';
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colorTheme[colorScheme ?? 'light'].default,
+        tabBarInactiveTintColor: colorTheme[colorScheme].default,
         headerShown: false,
         tabBarStyle: {
           height: 84,
@@ -37,11 +37,7 @@ export default function TabLayout() {
           title: 'Home',
           tabBarIcon: ({ focused }) => (
             <HomeIcon
-              color={
-                focused
-                  ? colors.primary
-                  : colorTheme[colorScheme ?? 'light'].default
-              }
+              color={focused ? colors.primary : colorTheme[colorScheme].default}
             />
           ),
         }}
@@ -52,11 +48,7 @@ export default function TabLayout() {
           title: 'Wishlist',
           tabBarIcon: ({ focused }) => (
             <HeartIcon
-              color={
-                focused
-                  ? colors.primary
-                  : colorTheme[colorScheme ?? 'light'].default
-              }
+              color={focused ? colors.primary : colorTheme[colorScheme].default}
             />
           ),
         }}
@@ -67,11 +59,7 @@ export default function TabLayout() {
           title: '',
           tabBarIcon: ({ focused }) => (
             <CartBottomBarIcon
-              color={
-                focused
-                  ? colors.primary
-                  : colorTheme[colorScheme ?? 'light'].default
-              }
+              color={focused ? colors.primary : colorTheme[colorScheme].default}
             />
           ),
           tabBarIconStyle: {
@@ -81,7 +69,7 @@ export default function TabLayout() {
             position: 'absolute',
             boxShadow: '#8A959E1F 1px 2px 2px 1px',
             top: -18,
-            backgroundColor: colorTheme[colorScheme ?? 'light'].background,
+            backgroundColor: colorTheme[colorScheme].background,
           },
         }}
       />
@@ -91,11 +79,7 @@ export default function TabLayout() {
           title: 'Search',
           tabBarIcon: ({ focused }) => (
             <SearchBarIcon
-              color={
-                focused
-                  ? colors.primary
-                  : colorTheme[colorScheme ?? 'light'].default
-              }
+              color={focused ? colors.primary : colorTheme[colorScheme].default}
             />
           ),
         }}
@@ -106,11 +90,7 @@ export default function TabLayout() {
           title: 'Setting',
           tabBarIcon: ({ focused }) => (
             <SettingIcon
-              color={
-                focused
-                  ? colors.primary
-                  : colorTheme[colorScheme ?? 'light'].default
-              }
+              color={focused ? colors.primary : colorTheme[colorScheme].default}
             />
           ),
         }}

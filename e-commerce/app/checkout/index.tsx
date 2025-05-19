@@ -1,6 +1,12 @@
 import { useCallback, useState } from 'react';
 import { router } from 'expo-router';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useShallow } from 'zustand/shallow';
 
@@ -16,6 +22,7 @@ import { useAuthStore, useCartStore } from '@/stores';
 
 // Themes
 import {
+  colorTheme,
   colors,
   fontSizes,
   fontWeights,
@@ -32,6 +39,7 @@ import { ROUTES } from '@/constants';
 const CheckoutScreen = () => {
   // Define shipping fee
   const shippingFee = 5;
+  const colorScheme = useColorScheme() ?? 'light';
 
   const [cart, getTotalPrice, clearCart] = useCartStore(
     useShallow((state) => [state.cart, state.getTotalPrice, state.clearCart]),
@@ -89,7 +97,7 @@ const CheckoutScreen = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.headingWrapper}>
         <TouchableOpacity onPress={handleGoBack}>
-          <ArrowLeftIcon />
+          <ArrowLeftIcon color={colorTheme[colorScheme].default} />
         </TouchableOpacity>
 
         <Text variant="title" size="lg" style={styles.heading}>
@@ -107,7 +115,12 @@ const CheckoutScreen = () => {
               <EditIcon />
             </TouchableOpacity>
           </View>
-          <View style={styles.addressContent}>
+          <View
+            style={[
+              styles.addressContent,
+              { backgroundColor: colorTheme[colorScheme].background },
+            ]}
+          >
             <Text size="md" style={styles.name}>
               {username}
             </Text>
@@ -126,7 +139,12 @@ const CheckoutScreen = () => {
               <EditIcon />
             </TouchableOpacity>
           </View>
-          <View style={styles.payment}>
+          <View
+            style={[
+              styles.payment,
+              { backgroundColor: colorTheme[colorScheme].background },
+            ]}
+          >
             <Text size="sm">**** **** **** {bankAccountNumber}</Text>
           </View>
         </View>
@@ -139,12 +157,22 @@ const CheckoutScreen = () => {
               <EditIcon />
             </TouchableOpacity>
           </View>
-          <View style={styles.payment}>
+          <View
+            style={[
+              styles.payment,
+              { backgroundColor: colorTheme[colorScheme].background },
+            ]}
+          >
             <DeliveryIcon />
             <Text size="sm">Fast (2-3days)</Text>
           </View>
         </View>
-        <View style={styles.totalPayment}>
+        <View
+          style={[
+            styles.totalPayment,
+            { backgroundColor: colorTheme[colorScheme].background },
+          ]}
+        >
           <View style={styles.priceWrapper}>
             <Text size="md" variant="description">
               Order:
@@ -237,7 +265,6 @@ const styles = StyleSheet.create({
   addressContent: {
     shadowColor: colors.border,
     elevation: 40,
-    backgroundColor: colors.light,
     gap: 10,
     borderRadius: 8,
   },
@@ -265,7 +292,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     shadowColor: colors.border,
     elevation: 40,
-    backgroundColor: colors.light,
     paddingHorizontal: 20,
     paddingVertical: 15,
   },
@@ -274,7 +300,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     shadowColor: colors.border,
     elevation: 40,
-    backgroundColor: colors.light,
     paddingHorizontal: 20,
     paddingVertical: 15,
     gap: 15,
