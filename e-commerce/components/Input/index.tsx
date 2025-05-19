@@ -108,7 +108,6 @@ const inputVariantStyles = {
       width: '100%',
       position: 'relative',
       borderColor: colors.text.helper,
-      backgroundColor: colors.background.input,
       borderRadius: 10,
       borderWidth: 1,
       height: 55,
