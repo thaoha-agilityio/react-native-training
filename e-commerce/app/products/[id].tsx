@@ -17,7 +17,14 @@ import {
 } from 'react-native-reanimated';
 
 // Components
-import { Button, Text, Image, PaginationDot, ShoppingCart } from '@/components';
+import {
+  Button,
+  Text,
+  Image,
+  PaginationDot,
+  ShoppingCart,
+  ProductDetailsSkeleton,
+} from '@/components';
 import { ArrowLeftIcon, CartIcon, StarIcon } from '@/components/icons';
 
 // Themes
@@ -44,7 +51,7 @@ const ProductDetailsScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const { id } = useLocalSearchParams();
-  const { product } = useFetchProductDetails(id.toString());
+  const { product, isFetching } = useFetchProductDetails(id.toString());
 
   const {
     name = '',
@@ -114,49 +121,55 @@ const ProductDetailsScreen = () => {
         />
       </View>
 
-      <View style={styles.contentWrapper}>
-        <FlatList
-          data={images}
-          keyExtractor={(item) => item.id}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          ref={flatListRef}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
-          renderItem={renderItem}
-        />
-        <PaginationDot currentIndex={currentIndex} items={images} />
-      </View>
-      {/* Info */}
-      <View>
-        <Text variant="title" size="xl" style={{ lineHeight: 32 }}>
-          {name}
-        </Text>
-        <Text size="sm" style={{ lineHeight: 20 }}>
-          Vision Alta Men’s Shoes Size (All Colors)
-        </Text>
-        <View style={styles.rating}>
-          {new Array(rating).fill(0).map((_, index) => (
-            <StarIcon key={index} />
-          ))}
-          <Text size="sm" style={styles.reviewer}>
-            {formatNumberWithUnit(reviewNumber)}
-          </Text>
-        </View>
-        <Text size="sm">${formatPrice(price)}</Text>
-        <Text style={styles.customText}>Product Details</Text>
-        <Text variant="description" size="xs" style={styles.customText}>
-          {description}
-        </Text>
+      {isFetching ? (
+        <ProductDetailsSkeleton />
+      ) : (
+        <>
+          <View style={styles.contentWrapper}>
+            <FlatList
+              data={images}
+              keyExtractor={(item) => item.id}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              ref={flatListRef}
+              onViewableItemsChanged={onViewableItemsChanged}
+              viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
+              renderItem={renderItem}
+            />
+            <PaginationDot currentIndex={currentIndex} items={images} />
+          </View>
+          {/* Info */}
+          <View>
+            <Text variant="title" size="xl" style={{ lineHeight: 32 }}>
+              {name}
+            </Text>
+            <Text size="sm" style={{ lineHeight: 20 }}>
+              Vision Alta Men’s Shoes Size (All Colors)
+            </Text>
+            <View style={styles.rating}>
+              {new Array(rating).fill(0).map((_, index) => (
+                <StarIcon key={index} />
+              ))}
+              <Text size="sm" style={styles.reviewer}>
+                {formatNumberWithUnit(reviewNumber)}
+              </Text>
+            </View>
+            <Text size="sm">${formatPrice(price)}</Text>
+            <Text style={styles.customText}>Product Details</Text>
+            <Text variant="description" size="xs" style={styles.customText}>
+              {description}
+            </Text>
 
-        <Button style={styles.addToCartBtn} onPress={handleAddToCart}>
-          <CartIcon color={colors.light} />
-          <Text style={{ color: colors.light }} variant="heading">
-            Add to cart
-          </Text>
-        </Button>
-      </View>
+            <Button style={styles.addToCartBtn} onPress={handleAddToCart}>
+              <CartIcon color={colors.light} />
+              <Text style={{ color: colors.light }} variant="heading">
+                Add to cart
+              </Text>
+            </Button>
+          </View>
+        </>
+      )}
     </ScrollView>
   );
 };
