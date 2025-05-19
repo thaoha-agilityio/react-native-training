@@ -55,7 +55,6 @@ const InputComponent = forwardRef(
       onFocus?.(e);
     };
     const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      console.log('ssss');
       setIsFocus(false);
       onBlur?.(e);
     };

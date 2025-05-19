@@ -124,7 +124,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
         <View
           style={[
             styles.items,
-            { height: isTabBar ? screenHeight * 0.4 : screenHeight * 0.5 },
+            { height: isTabBar ? screenHeight * 0.44 : screenHeight * 0.54 },
           ]}
         >
           <CartList
