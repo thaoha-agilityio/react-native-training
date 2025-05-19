@@ -4,8 +4,8 @@ import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 // Components
 import { Image } from '../Image';
 import { Text } from '../Text';
-
 import { StarIcon } from '../icons';
+
 // Utils
 import { formatNumberWithUnit, formatPrice } from '@/utils';
 
@@ -72,19 +72,16 @@ const CardItemComponent = ({
 export const CardItem = memo(CardItemComponent);
 
 const screenWidth = Dimensions.get('window').width;
-const imgWidth = screenWidth * 0.43;
 
 const style = StyleSheet.create({
   container: {
     boxShadow: '#8A959E1F 1px 1px 2px 2px',
     borderRadius: 8,
-    width: imgWidth,
   },
   content: {},
   imgWrapper: {
     borderRadius: 8,
     overflow: 'hidden',
-    width: imgWidth,
   },
   img: {
     width: '100%',

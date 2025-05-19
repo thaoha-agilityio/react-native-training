@@ -33,4 +33,29 @@ export const CATEGORIES = [
     title: 'Casual',
     image: 'https://cdn.mos.cms.futurecdn.net/n48hMQxbzBhosSMzZc8GWV.jpg',
   },
+  {
+    title: 'Dior',
+    image:
+      'https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000/m/dd1a/25e6/5fec/d877/72ad/4d20/f4aa/dc75/7421/c9fd/c9fd.jpg',
+  },
+  {
+    title: 'Chanel',
+    image:
+      'https://assets.vogue.com/photos/6127f6fdad6ce2332569bf44/master/w_2560%2Cc_limit/00_story.jpg',
+  },
+  {
+    title: 'YSL',
+    image:
+      'https://d27fp5ulgfd7w2.cloudfront.net/wp-content/uploads/2023/01/12163716/How-to-Become-a-Fashion-Influencer-1920x1080-1.jpg',
+  },
+  {
+    title: 'Zara',
+    image:
+      'https://wallpapers.com/images/hd/zara-fashion-chain-store-m4g0gru4j3a7ixvs.jpg',
+  },
+  {
+    title: 'H&M',
+    image:
+      'https://i2-prod.derbytelegraph.co.uk/incoming/article7784489.ece/ALTERNATES/s1227b/1_SD_TEM_041122-HM-001JPG.jpg',
+  },
 ];

@@ -10,7 +10,7 @@ import { LoginForm, Text } from '@/components';
 import { ROUTES } from '@/constants';
 
 // Hooks
-import { useAuthSignIn } from '@/hooks';
+import { useAuthSignIn, useMedia } from '@/hooks';
 
 // Utils
 import { getAPIErrorMessage } from '@/utils';
@@ -21,6 +21,7 @@ import { LoginPayload } from '@/interfaces';
 const LoginScreen = () => {
   const { mutate: signIn, isPending } = useAuthSignIn();
   const router = useRouter();
+  const { isTablet } = useMedia();
 
   const handleLoginSuccess = useCallback(() => {
     router.replace(ROUTES.HOME);
@@ -42,8 +43,16 @@ const LoginScreen = () => {
     [handleLoginError, handleLoginSuccess, signIn],
   );
 
+  const marginTop = isTablet ? 200 : 20;
+  const paddingHorizontal = isTablet ? 100 : 32;
+
   return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+    <ScrollView
+      style={[
+        styles.container,
+        { marginTop: marginTop, paddingHorizontal: paddingHorizontal },
+      ]}
+    >
       <Text variant="title" size="3xl" style={styles.title} numberOfLines={2}>
         Welcome Back!
       </Text>
@@ -59,8 +68,6 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 32,
-    paddingVertical: 19,
   },
 
   title: {
