@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  useColorScheme,
 } from 'react-native';
 import { router } from 'expo-router';
 import { useShallow } from 'zustand/shallow';
@@ -14,7 +15,7 @@ import { CartList, Text, Button } from '@/components';
 import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
 
 // Themes
-import { colors, fontsFamily, lineHeights } from '@/themes';
+import { colors, colorTheme, fontsFamily, lineHeights } from '@/themes';
 
 // Utils
 import { formatPrice, formatUSPhoneNumber } from '@/utils';
@@ -34,7 +35,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const handleGoBack = () => {
     router.back();
   };
-
+  const colorScheme = useColorScheme() ?? 'light';
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
@@ -76,9 +77,14 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headingWrapper}>
-        <Pressable onPress={handleGoBack}>
-          <ArrowLeftIcon />
-        </Pressable>
+        {!isTabBar ? (
+          <Pressable onPress={handleGoBack}>
+            <ArrowLeftIcon color={colorTheme[colorScheme].default} />
+          </Pressable>
+        ) : (
+          <View style={styles.block} />
+        )}
+
         <Text size="lg" style={styles.heading}>
           Cart
         </Text>
@@ -87,7 +93,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
 
       <View style={styles.addressWrapper}>
         <View style={styles.address}>
-          <PositionIcon />
+          <PositionIcon color={colorTheme[colorScheme].default} />
           <Text size="sm" style={styles.delivery}>
             Delivery Address
           </Text>
@@ -229,6 +235,4 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-
-  addNewAddress: {},
 });

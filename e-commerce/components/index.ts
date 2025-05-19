@@ -22,3 +22,4 @@ export * from './ShoppingCart';
 // Skeleton
 export * from './Skeleton/ProductsSkeleton';
 export * from './Skeleton/FormSkeleton';
+export * from './Skeleton/ProductDetailsSkeleton';

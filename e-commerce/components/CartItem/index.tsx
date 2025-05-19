@@ -1,5 +1,11 @@
 import { memo, useCallback } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -16,7 +22,7 @@ import { Quantity } from '../Quantity';
 import { TrashIcon } from '../icons';
 
 // Themes
-import { colors, fontsFamily } from '@/themes';
+import { colors, colorTheme, fontsFamily } from '@/themes';
 
 // Utils
 import { formatPrice } from '@/utils';
@@ -59,6 +65,7 @@ const CartItemComponent = ({
   const pressed = useSharedValue(false);
   const itemHeight = useSharedValue(ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
+  const colorScheme = useColorScheme() ?? 'light';
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -121,7 +128,13 @@ const CartItemComponent = ({
         </View>
 
         {/* Card can swipe */}
-        <Animated.View style={[styles.fieldContainer, transformStyle]}>
+        <Animated.View
+          style={[
+            styles.fieldContainer,
+            transformStyle,
+            { backgroundColor: colorTheme[colorScheme].background },
+          ]}
+        >
           <Image style={styles.img} source={img} />
           <View style={styles.content}>
             <Text style={styles.name} size="md" numberOfLines={1}>

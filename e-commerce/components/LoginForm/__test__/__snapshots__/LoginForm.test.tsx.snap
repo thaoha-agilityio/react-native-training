@@ -102,7 +102,6 @@ exports[`LoginForm should render properly 1`] = `
             style={
               [
                 {
-                  "backgroundColor": "#F3F3F3",
                   "borderColor": "#A8A8A9",
                   "borderRadius": 10,
                   "borderWidth": 1,
@@ -213,7 +212,6 @@ exports[`LoginForm should render properly 1`] = `
             style={
               [
                 {
-                  "backgroundColor": "#F3F3F3",
                   "borderColor": "#A8A8A9",
                   "borderRadius": 10,
                   "borderWidth": 1,
