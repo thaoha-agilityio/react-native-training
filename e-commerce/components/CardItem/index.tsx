@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 // Components
 import { Image } from '../Image';
@@ -70,8 +70,6 @@ const CardItemComponent = ({
 };
 
 export const CardItem = memo(CardItemComponent);
-
-const screenWidth = Dimensions.get('window').width;
 
 const style = StyleSheet.create({
   container: {
