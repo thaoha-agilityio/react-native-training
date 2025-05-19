@@ -24,4 +24,5 @@ export * from './SettingIcon';
 export * from './SearchBarIcon';
 export * from './StarIcon';
 export * from './SuccessIcon';
+export * from './TrashIcon';
 export * from './UserIcon';

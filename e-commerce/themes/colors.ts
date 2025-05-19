@@ -17,6 +17,7 @@ export const colors = {
     secondary: '#4392F9',
     icon: '#F2F2F2',
     input: '#F3F3F3',
+    subtle: '#FFEFEF',
   },
 
   text: {

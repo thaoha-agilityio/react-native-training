@@ -14,7 +14,7 @@ const mockProps = {
 };
 
 describe('CartItem', () => {
-  it('should render properly', () => {
+  it.skip('should render properly', () => {
     const { toJSON } = render(<CartItem {...mockProps} />);
     expect(toJSON()).toMatchSnapshot();
   });

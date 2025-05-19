@@ -19,5 +19,8 @@ module.exports = {
     '!**/*.stories.{ts,tsx}',
     '!components/icons/**/*.{js,jsx,ts,tsx}',
   ],
-  setupFiles: ['./jest-setup.ts'],
+  setupFiles: [
+    './jest-setup.ts',
+    './node_modules/react-native-gesture-handler/jestSetup.js',
+  ],
 };
