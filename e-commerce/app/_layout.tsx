@@ -10,7 +10,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from 'react-native';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
@@ -58,7 +59,10 @@ export default function RootLayout() {
             }}
           />
 
-          <StatusBar style="auto" />
+          <StatusBar
+            style="auto"
+            backgroundColor={colorScheme === 'dark' ? '#000' : '#fff'}
+          />
           <Toast />
         </SafeAreaView>
       </ThemeProvider>
