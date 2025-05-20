@@ -1,11 +1,11 @@
 import { memo } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 // Components
 import { Image } from '../Image';
 import { Text } from '../Text';
-
 import { StarIcon } from '../icons';
+
 // Utils
 import { formatNumberWithUnit, formatPrice } from '@/utils';
 
@@ -22,6 +22,7 @@ interface CardItemProps {
   reviewNumber: number;
   height?: number;
   onPress?: (id: string) => void;
+  extraStyles?: ViewStyle;
 }
 
 const CardItemComponent = ({
@@ -34,15 +35,21 @@ const CardItemComponent = ({
   description,
   height = 124,
   onPress,
+  extraStyles,
 }: CardItemProps) => {
   const handleOnPress = () => {
     onPress?.(id);
   };
 
   return (
-    <TouchableOpacity onPress={handleOnPress} style={style.container}>
-      <View style={style.content}>
-        <View style={[style.imgWrapper, { height }]}>
+    <TouchableOpacity
+      onPress={handleOnPress}
+      style={[style.container, extraStyles]}
+    >
+      <View>
+        <View
+          style={[style.imgWrapper, { height }, { width: extraStyles?.width }]}
+        >
           <Image source={image} style={[style.img]} alt={name} />
         </View>
         <View style={style.wrapper}>
@@ -71,20 +78,15 @@ const CardItemComponent = ({
 
 export const CardItem = memo(CardItemComponent);
 
-const screenWidth = Dimensions.get('window').width;
-const imgWidth = screenWidth * 0.43;
-
 const style = StyleSheet.create({
   container: {
     boxShadow: '#8A959E1F 1px 1px 2px 2px',
     borderRadius: 8,
-    width: imgWidth,
   },
-  content: {},
+
   imgWrapper: {
     borderRadius: 8,
     overflow: 'hidden',
-    width: imgWidth,
   },
   img: {
     width: '100%',

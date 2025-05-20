@@ -2,7 +2,6 @@ import {
   Pressable,
   StyleSheet,
   View,
-  Dimensions,
   TouchableOpacity,
   useColorScheme,
 } from 'react-native';
@@ -24,12 +23,10 @@ import { formatPrice, formatUSPhoneNumber } from '@/utils';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Hooks
-import { useGetUser } from '@/hooks';
+import { useGetUser, useMedia } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
-
-const screenHeight = Dimensions.get('window').height;
 
 export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const handleGoBack = () => {
@@ -73,6 +70,12 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
     },
     [removeCart],
   );
+
+  const { isTablet, height: deviceHeight } = useMedia();
+
+  const heighMobile = isTabBar ? deviceHeight * 0.4 : deviceHeight * 0.5;
+  const heightTablet = isTabBar ? deviceHeight - 490 : deviceHeight - 400;
+  const height = isTablet ? heightTablet : heighMobile;
 
   return (
     <View style={styles.container}>
@@ -127,12 +130,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
           Shopping List
         </Text>
 
-        <View
-          style={[
-            styles.items,
-            { height: isTabBar ? screenHeight * 0.44 : screenHeight * 0.54 },
-          ]}
-        >
+        <View style={[styles.items, { height: height }]}>
           <CartList
             data={cart}
             onRemove={handleRemoveCart}

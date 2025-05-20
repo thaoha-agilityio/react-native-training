@@ -34,23 +34,22 @@ exports[`CardItem component should render properly 1`] = `
       "borderRadius": 8,
       "boxShadow": "#8A959E1F 1px 1px 2px 2px",
       "opacity": 1,
-      "width": 322.5,
     }
   }
 >
-  <View
-    style={{}}
-  >
+  <View>
     <View
       style={
         [
           {
             "borderRadius": 8,
             "overflow": "hidden",
-            "width": 322.5,
           },
           {
             "height": 136,
+          },
+          {
+            "width": undefined,
           },
         ]
       }
