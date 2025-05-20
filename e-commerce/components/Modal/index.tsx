@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     width: '100%',
-    maxWidth: 400,
     // Optional: shadow for iOS & elevation for Android
     ...Platform.select({
       ios: {

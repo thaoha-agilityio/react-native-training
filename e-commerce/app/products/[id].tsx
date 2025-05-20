@@ -5,6 +5,7 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
+  useColorScheme,
   View,
 } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
@@ -28,7 +29,7 @@ import {
 import { ArrowLeftIcon, CartIcon, StarIcon } from '@/components/icons';
 
 // Themes
-import { colors, fontsFamily } from '@/themes';
+import { colors, colorTheme, fontsFamily } from '@/themes';
 
 // Types
 import { ProductImg } from '@/interfaces';
@@ -52,6 +53,7 @@ const ProductDetailsScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const { id } = useLocalSearchParams();
   const { product, isFetching } = useFetchProductDetails(id.toString());
+  const colorScheme = useColorScheme() ?? 'light';
 
   const {
     name = '',
@@ -112,7 +114,7 @@ const ProductDetailsScreen = () => {
     <ScrollView style={styles.container}>
       <View style={styles.headerWrapper}>
         <Pressable onPress={handleGoBack}>
-          <ArrowLeftIcon />
+          <ArrowLeftIcon color={colorTheme[colorScheme].default} />
         </Pressable>
 
         <ShoppingCart

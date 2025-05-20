@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Dimensions,
   FlatList,
   ListRenderItemInfo,
   StyleSheet,
@@ -21,6 +22,9 @@ interface ProductsProps {
   isLoading?: boolean;
   isFetchingNextPage?: boolean;
 }
+
+const screenWidth = Dimensions.get('window').width;
+const imgWidth = screenWidth * 0.43;
 const ProductsLimitComponent = ({
   data,
   isFetchingNextPage,
@@ -51,6 +55,7 @@ const ProductsLimitComponent = ({
         description={description}
         rating={rating}
         reviewNumber={reviewNumber}
+        extraStyles={{ width: imgWidth, height: 250 }}
       />
     );
   }, []);

@@ -27,19 +27,9 @@ import { colors, colorTheme, fontsFamily } from '@/themes';
 // Utils
 import { formatPrice } from '@/utils';
 
-const WIDTH_CARD = Dimensions.get('window').width * 0.85;
+const WIDTH_CARD = Dimensions.get('window').width * 0.89;
 const ITEM_HEIGHT = 130;
 const WIDTH_SCREEN = Dimensions.get('window').width;
-
-const SHADOW = {
-  shadowColor: 'black',
-  shadowOffset: {
-    width: 0,
-    height: 10,
-  },
-  shadowOpacity: 0.5,
-  shadowRadius: 5,
-};
 
 interface CartItemProps {
   id: string;
@@ -64,7 +54,7 @@ const CartItemComponent = ({
   const swipeTranslateX = useSharedValue(0);
   const pressed = useSharedValue(false);
   const itemHeight = useSharedValue(ITEM_HEIGHT);
-  const marginVertical = useSharedValue(10);
+  const marginVertical = useSharedValue(18);
   const colorScheme = useColorScheme() ?? 'light';
 
   const pan = Gesture.Pan()
@@ -165,14 +155,19 @@ const styles = StyleSheet.create({
   fieldContainer: {
     backgroundColor: colors.light,
     justifyContent: 'center',
-    width: WIDTH_CARD,
     height: ITEM_HEIGHT,
     alignItems: 'center',
     borderRadius: 20,
     flexDirection: 'row',
     gap: 20,
     paddingLeft: 10,
-    ...SHADOW,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
   },
   iconContainer: {
     position: 'absolute',
