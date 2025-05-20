@@ -53,7 +53,7 @@ const HomeScreen = () => {
 
   const renderItem = ({ item }: ListRenderItemInfo<Banner>) => (
     <View style={{ width: width * 0.9 }}>
-      <Image source={item.image} contentFit="contain" style={styles.image} />
+      <Image source={item.image} contentFit="cover" style={styles.image} />
     </View>
   );
 

@@ -1,11 +1,5 @@
 import { useRef, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  ListRenderItemInfo,
-} from 'react-native';
+import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native';
 import { useRouter } from 'expo-router';
 
 // Components
@@ -19,14 +13,19 @@ import { ONBOARDING_STEPS, ROUTES } from '@/constants';
 
 // Stores
 import { useBootstrapsStore } from '@/stores';
+
+// Types
 import { Onboarding } from '@/interfaces';
 
-const { width } = Dimensions.get('window');
+// Hooks
+import { useMedia } from '@/hooks';
+
 const OnboardingScreen = () => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const setFirstLoad = useBootstrapsStore((state) => state.setIsFirstLoad);
+  const { isTablet, width } = useMedia();
 
   const scrollToNext = () => {
     if (currentIndex < ONBOARDING_STEPS.length - 1) {
@@ -54,7 +53,7 @@ const OnboardingScreen = () => {
   }).current;
 
   const renderItem = ({ item }: ListRenderItemInfo<Onboarding>) => (
-    <View style={{ width: width * 0.9 }}>
+    <View style={{ width: isTablet ? width * 0.95 : width * 0.9 }}>
       <Image source={item.image} style={styles.image} contentFit="contain" />
 
       <View style={styles.textWrapper}>
