@@ -17,6 +17,7 @@ import Toast from 'react-native-toast-message';
 
 // Hooks
 import { useHydration } from '@/hooks';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -50,22 +51,26 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          />
+    <KeyboardProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider
+          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+        >
+          <SafeAreaView style={{ flex: 1 }}>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
 
-          <StatusBar
-            style="auto"
-            backgroundColor={colorScheme === 'dark' ? '#000' : '#fff'}
-          />
-          <Toast />
-        </SafeAreaView>
-      </ThemeProvider>
-    </QueryClientProvider>
+            <StatusBar
+              style="auto"
+              backgroundColor={colorScheme === 'dark' ? '#000' : '#fff'}
+            />
+            <Toast />
+          </SafeAreaView>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </KeyboardProvider>
   );
 }
