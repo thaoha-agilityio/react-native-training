@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import Toast from 'react-native-toast-message';
 
@@ -20,6 +20,7 @@ import { clearErrorOnChange, formatUSPhoneNumber } from '@/utils';
 
 // Hooks
 import { useInputRefs, useUploadImage } from '@/hooks';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 interface ProfileFormProps {
   isLoading?: boolean;
@@ -147,7 +148,7 @@ const ProfileFormComponent = ({
   };
 
   return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+    <KeyboardAwareScrollView style={styles.container}>
       <Controller
         name="avatar"
         control={control}
@@ -338,7 +339,7 @@ const ProfileFormComponent = ({
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
