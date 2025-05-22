@@ -5,24 +5,16 @@ import { Image as ExpoImage, ImageProps } from 'expo-image';
 import { BLUR_IMAGE } from '@/constants';
 
 interface Props extends Partial<ImageProps> {
-  fallbackImage?: string;
   alt?: string;
 }
 
-const ImageComponent = ({
-  source,
-  fallbackImage = BLUR_IMAGE,
-  style,
-  ...props
-}: Props) => {
-  return (
-    <ExpoImage
-      source={source}
-      placeholder={{ fallbackImage }}
-      style={style}
-      {...props}
-    />
-  );
-};
+const ImageComponent = ({ source, style, ...props }: Props) => (
+  <ExpoImage
+    source={source}
+    placeholder={{ blurhash: BLUR_IMAGE }}
+    style={style}
+    {...props}
+  />
+);
 
 export const Image = memo(ImageComponent);
