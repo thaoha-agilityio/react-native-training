@@ -6,7 +6,6 @@ import {
   Text as TextBase,
   TextProps as TextBaseProps,
   TextStyle,
-  useColorScheme,
 } from 'react-native';
 
 // Interfaces
@@ -14,6 +13,9 @@ import { TextSize, TextVariant } from '@/interfaces';
 
 // Themes
 import { fontsFamily, fontSizes, lineHeights, colorTheme } from '@/themes';
+
+// Hooks
+import { useColorScheme } from '@/hooks';
 
 export interface TextProps extends PropsWithChildren<TextBaseProps> {
   variant?: TextVariant;
@@ -30,7 +32,7 @@ const TextComponent = ({
   children,
   ...props
 }: TextProps) => {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   const textColor = () => {
     switch (variant) {

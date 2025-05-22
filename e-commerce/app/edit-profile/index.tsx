@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { View, StyleSheet, Pressable, useColorScheme } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import { router } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from '@/components/icons';
 import { useAuthStore } from '@/stores';
 
 // Hooks
-import { useEditUser, useGetUser } from '@/hooks';
+import { useColorScheme, useEditUser, useGetUser } from '@/hooks';
 
 // Utils
 import { getAPIErrorMessage } from '@/utils';
@@ -23,7 +23,7 @@ import { UserPayload } from '@/interfaces';
 import { colorTheme } from '@/themes';
 
 const EditProfileScreen = () => {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
   const userId = useAuthStore((state) => state.userId);
   const { user: userDetails, isFetching } = useGetUser(userId);
   const { mutate: editUser, isPending } = useEditUser(userId);

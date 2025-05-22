@@ -1,11 +1,5 @@
 import { memo, useCallback } from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -26,6 +20,9 @@ import { colors, colorTheme, fontsFamily } from '@/themes';
 
 // Utils
 import { formatPrice } from '@/utils';
+
+// Hooks
+import { useColorScheme } from '@/hooks';
 
 const WIDTH_CARD = Dimensions.get('window').width * 0.89;
 const ITEM_HEIGHT = 130;
@@ -55,7 +52,7 @@ const CartItemComponent = ({
   const pressed = useSharedValue(false);
   const itemHeight = useSharedValue(ITEM_HEIGHT);
   const marginVertical = useSharedValue(18);
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   const pan = Gesture.Pan()
     .onBegin(() => {

@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 
 // Components
-import { Image, Text } from '@/components';
+import { Image, Text, ProfileSkeleton } from '@/components';
 import { EditIcon, LogoutIcon } from '@/components/icons';
 
 // Themes
@@ -24,7 +24,7 @@ export const Setting = () => {
   const clearCart = useCartStore((state) => state.clearCart);
   const userId = useAuthStore((state) => state.userId);
 
-  const { user } = useGetUser(userId);
+  const { user, isFetching } = useGetUser(userId);
   const { username = '', email = '', avatar = '' } = user || {};
 
   const logout = () => {
@@ -49,27 +49,31 @@ export const Setting = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.infoWrapper}>
-        <View style={styles.info}>
-          <Image
-            source={
-              !!avatar
-                ? { uri: avatar }
-                : require('@/assets/images/avatar-default.jpg')
-            }
-            style={styles.img}
-          />
-          <View>
-            <Text size="lg" variant="label">
-              {username}
-            </Text>
-            <Text size="sm">{email}</Text>
+      {isFetching ? (
+        <ProfileSkeleton />
+      ) : (
+        <View style={styles.infoWrapper}>
+          <View style={styles.info}>
+            <Image
+              source={
+                !!avatar
+                  ? { uri: avatar }
+                  : require('@/assets/images/avatar-default.jpg')
+              }
+              style={styles.img}
+            />
+            <View>
+              <Text size="lg" variant="label">
+                {username}
+              </Text>
+              <Text size="sm">{email}</Text>
+            </View>
           </View>
+          <TouchableOpacity onPress={navigateProfile}>
+            <EditIcon color={colorTheme[colorScheme].default} />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={navigateProfile}>
-          <EditIcon color={colorTheme[colorScheme].default} />
-        </TouchableOpacity>
-      </View>
+      )}
     </View>
   );
 };
@@ -120,11 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.text.primary,
   },
-  loadingWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   block: {
     width: 20,
   },

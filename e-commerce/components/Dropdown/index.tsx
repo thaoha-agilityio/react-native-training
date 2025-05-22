@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  ViewStyle,
-  TextStyle,
-  useColorScheme,
-} from 'react-native';
+import { StyleSheet, View, ViewStyle, TextStyle } from 'react-native';
 import { Dropdown as DropdownElement } from 'react-native-element-dropdown';
 
 // Themes
@@ -13,6 +7,9 @@ import { colors, colorTheme, fontsFamily, fontSizes } from '@/themes';
 
 // Components
 import { Text } from '../Text';
+
+// Hooks
+import { useColorScheme } from '@/hooks';
 
 type DropdownItem = {
   label: string;
@@ -45,7 +42,7 @@ export const Dropdown = ({
   textStyle,
 }: DropdownProps) => {
   const [isFocus, setIsFocus] = useState(false);
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   const handleFocus = () => {
     setIsFocus(true);
