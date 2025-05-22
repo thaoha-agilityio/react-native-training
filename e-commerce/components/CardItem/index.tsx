@@ -67,7 +67,7 @@ const CardItemComponent = ({
               <StarIcon key={index} />
             ))}
             <Text size="xs" style={style.reviewer}>
-              {formatNumberWithUnit(reviewNumber)}
+              {formatNumberWithUnit(reviewNumber, 'review')}
             </Text>
           </View>
         </View>
