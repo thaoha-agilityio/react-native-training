@@ -33,7 +33,7 @@ const LoginFormComponent = ({
     control,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isValid },
   } = useForm<LoginPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -95,10 +95,14 @@ const LoginFormComponent = ({
         <Controller
           name="email"
           control={control}
-          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+          render={({
+            field: { onChange, value, ...rest },
+            fieldState: { error },
+          }) => (
             <Input
               {...rest}
               ref={emailRef}
+              value={value?.trim()}
               variant="subtle"
               placeholder="Email"
               errorMessage={error?.message}
@@ -142,7 +146,7 @@ const LoginFormComponent = ({
       <Button
         variant="secondary"
         size="lg"
-        disabled={isLoading || !isDirty}
+        disabled={isLoading || !isDirty || !isValid}
         isLoading={isLoading}
         style={styles.submitButton}
         onPress={handleSubmit(onSubmit)}
