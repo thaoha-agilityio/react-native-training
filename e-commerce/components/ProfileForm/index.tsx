@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import Toast from 'react-native-toast-message';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 // Components
 import { AvatarUploader, Text, Input, Button, Dropdown } from '@/components';
@@ -20,7 +21,6 @@ import { clearErrorOnChange, formatUSPhoneNumber } from '@/utils';
 
 // Hooks
 import { useInputRefs, useUploadImage } from '@/hooks';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 interface ProfileFormProps {
   isLoading?: boolean;
@@ -55,7 +55,7 @@ const ProfileFormComponent = ({
     control,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, isValid },
   } = useForm<UserPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -95,6 +95,7 @@ const ProfileFormComponent = ({
       },
     },
     PHONE_NUMBER: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Phone number'),
       pattern: {
         value: REGEX.PHONE_NUMBER,
         message: FORM_VALIDATION_MESSAGE.INVALID('Phone number'),
@@ -334,7 +335,7 @@ const ProfileFormComponent = ({
 
       <Button
         title="Save"
-        disabled={isLoading || !isDirty}
+        disabled={isLoading || !isDirty || !isValid}
         isLoading={isLoading || isUploading}
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}

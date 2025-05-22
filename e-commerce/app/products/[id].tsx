@@ -102,9 +102,9 @@ const ProductDetailsScreen = () => {
     router.back();
   };
 
-  const handleGoToCart = () => {
+  const handleGoToCart = useCallback(() => {
     router.replace(ROUTES.CART);
-  };
+  }, []);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],

@@ -6,7 +6,7 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { router } from 'expo-router';
 
 // Components
@@ -60,6 +60,10 @@ const HomeScreen = () => {
   const handleNavigateProductsScreen = () => {
     router.push(ROUTES.PRODUCTS);
   };
+
+  const handleNavigateProductDetails = useCallback((id: string) => {
+    router.push(ROUTES.PRODUCT_DETAILS(id) as any);
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -122,7 +126,10 @@ const HomeScreen = () => {
       </View>
 
       {/* Products */}
-      <ProductsLimit data={data} />
+      <ProductsLimit
+        data={data}
+        onNavigateProductDetails={handleNavigateProductDetails}
+      />
       <View style={styles.imgWrapper}>
         <Image
           source={require('@/assets/images/mac.jpg')}
