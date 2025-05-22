@@ -21,35 +21,25 @@ exports[`Button should render properly 1`] = `
   }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
+  focusable={false}
   onClick={[Function]}
-  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="button"
   style={
-    [
-      {
-        "alignItems": "center",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "gap": 10,
-        "justifyContent": "center",
-      },
-      {
-        "backgroundColor": "#F83758",
-      },
-      {
-        "paddingVertical": 2,
-      },
-      undefined,
-      {},
-    ]
+    {
+      "alignItems": "center",
+      "backgroundColor": "#F83758",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "gap": 10,
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingVertical": 2,
+    }
   }
 >
   Press me
