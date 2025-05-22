@@ -1,12 +1,6 @@
 import { useCallback, useState } from 'react';
 import { router } from 'expo-router';
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useShallow } from 'zustand/shallow';
 
@@ -15,7 +9,7 @@ import { Button, SuccessModal, Text } from '@/components';
 import { ArrowLeftIcon, DeliveryIcon, EditIcon } from '@/components/icons';
 
 // Hooks
-import { useGetUser, useOrderCreated } from '@/hooks';
+import { useColorScheme, useGetUser, useOrderCreated } from '@/hooks';
 
 // Stores
 import { useAuthStore, useCartStore } from '@/stores';
@@ -39,7 +33,7 @@ import { ROUTES } from '@/constants';
 const CheckoutScreen = () => {
   // Define shipping fee
   const shippingFee = 5;
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   const [cart, getTotalPrice, clearCart] = useCartStore(
     useShallow((state) => [state.cart, state.getTotalPrice, state.clearCart]),

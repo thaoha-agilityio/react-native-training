@@ -1,5 +1,4 @@
 import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
 
 // Components
 import {
@@ -13,8 +12,11 @@ import {
 // Themes
 import { colors, colorTheme } from '@/themes';
 
+// Hooks
+import { useColorScheme } from '@/hooks';
+
 export default function TabLayout() {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   return (
     <Tabs

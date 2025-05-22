@@ -5,7 +5,6 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
-  useColorScheme,
   View,
 } from 'react-native';
 import { useCallback, useRef, useState } from 'react';
@@ -38,7 +37,7 @@ import { ProductImg } from '@/interfaces';
 import { formatNumberWithUnit, formatPrice } from '@/utils';
 
 // Hooks
-import { useFetchProductDetails } from '@/hooks';
+import { useColorScheme, useFetchProductDetails } from '@/hooks';
 
 // Stores
 import { useCartStore } from '@/stores';
@@ -53,7 +52,7 @@ const ProductDetailsScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const { id } = useLocalSearchParams();
   const { product, isFetching } = useFetchProductDetails(id.toString());
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
 
   const {
     name = '',

@@ -23,3 +23,4 @@ export * from './ShoppingCart';
 export * from './Skeleton/ProductsSkeleton';
 export * from './Skeleton/FormSkeleton';
 export * from './Skeleton/ProductDetailsSkeleton';
+export * from './Skeleton/ProfileSkeleton';

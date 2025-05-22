@@ -1,10 +1,4 @@
-import {
-  Pressable,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
+import { Pressable, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { useShallow } from 'zustand/shallow';
 import { useCallback } from 'react';
@@ -23,7 +17,7 @@ import { formatPrice, formatUSPhoneNumber } from '@/utils';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Hooks
-import { useGetUser, useMedia } from '@/hooks';
+import { useColorScheme, useGetUser, useMedia } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
@@ -32,7 +26,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const handleGoBack = () => {
     router.back();
   };
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme();
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
