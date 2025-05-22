@@ -153,7 +153,7 @@ const ProductDetailsScreen = () => {
                 <StarIcon key={index} />
               ))}
               <Text size="sm" style={styles.reviewer}>
-                {formatNumberWithUnit(reviewNumber)}
+                {formatNumberWithUnit(reviewNumber, 'review')}
               </Text>
             </View>
             <Text size="sm">${formatPrice(price)}</Text>
