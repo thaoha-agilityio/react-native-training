@@ -1,4 +1,4 @@
-import { Setting } from '@/screens/Setting';
+import { Setting } from '@/screens';
 
 const SettingScreen = () => <Setting />;
 
