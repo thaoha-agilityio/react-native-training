@@ -1,12 +1,11 @@
 import { forwardRef, memo, PropsWithChildren, Ref, useState } from 'react';
 import {
+  NativeSyntheticEvent,
+  StyleSheet,
   TextInput,
+  TextInputFocusEventData,
   TextInputProps as TextInputPropsBase,
   View,
-  StyleSheet,
-  useColorScheme,
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
 } from 'react-native';
 
 // Components
@@ -14,6 +13,9 @@ import { Text } from '@/components';
 
 // Themes
 import { colors, fontsFamily, fontSizes } from '@/themes';
+
+// Hooks
+import { useTheme } from '@/hooks';
 
 export interface TextInputProps extends PropsWithChildren<TextInputPropsBase> {
   errorMessage?: string;
@@ -38,8 +40,8 @@ const InputComponent = forwardRef(
     }: TextInputProps,
     ref: Ref<TextInput>,
   ) => {
-    const colorScheme = useColorScheme();
-    const isDark = colorScheme === 'dark';
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
     const [isFocus, setIsFocus] = useState(false);
 
     const getBorderColor = () => {

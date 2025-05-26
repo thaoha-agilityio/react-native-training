@@ -16,6 +16,7 @@ export * from './ProductList';
 export * from './ProductList/ProductsLimit';
 export * from './ProfileForm';
 export * from './Quantity';
+export * from './StatusBar';
 export * from './Text';
 export * from './ShoppingCart';
 

@@ -18,6 +18,7 @@ export const colors = {
     icon: '#F2F2F2',
     input: '#F3F3F3',
     subtle: '#FFEFEF',
+    content: 'rgba(255, 255, 255, 0.47)',
   },
 
   text: {
@@ -32,7 +33,7 @@ export const colors = {
   },
 };
 
-export const colorTheme = {
+export const colorTheme: Record<string, Record<string, string>> = {
   light: {
     default: colors.text.primary,
     primary: colors.primary,
@@ -45,6 +46,8 @@ export const colorTheme = {
     reviewNumber: colors.text.reviewNumber,
     background: colors.light,
     label: colors.text.primary,
+    content: colors.background.content,
+    bottomTab: colors.light,
   },
 
   dark: {
@@ -59,5 +62,7 @@ export const colorTheme = {
     reviewNumber: colors.light,
     background: colors.text.helper,
     label: colors.light,
+    content: colors.dark,
+    bottomTab: colors.dark,
   },
 };

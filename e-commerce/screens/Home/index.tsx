@@ -36,7 +36,7 @@ import { Banner } from '@/interfaces';
 import { colors, fontsFamily } from '@/themes';
 
 // Hooks
-import { useInfiniteProducts } from '@/hooks';
+import { useInfiniteProducts, useTheme } from '@/hooks';
 
 const { width } = Dimensions.get('window');
 
@@ -44,6 +44,7 @@ export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const { data } = useInfiniteProducts(PAGINATION_LIMIT);
+  const { colors } = useTheme();
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
     if (viewableItems.length > 0) {
@@ -66,7 +67,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.logo}>
         <LogoIcon />
       </View>

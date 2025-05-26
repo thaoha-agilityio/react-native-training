@@ -12,10 +12,10 @@ import {
 import { TextSize, TextVariant } from '@/interfaces';
 
 // Themes
-import { fontsFamily, fontSizes, lineHeights, colorTheme } from '@/themes';
+import { fontsFamily, fontSizes, lineHeights } from '@/themes';
 
 // Hooks
-import { useColorScheme } from '@/hooks';
+import { useTheme } from '@/hooks';
 
 export interface TextProps extends PropsWithChildren<TextBaseProps> {
   variant?: TextVariant;
@@ -32,24 +32,24 @@ const TextComponent = ({
   children,
   ...props
 }: TextProps) => {
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   const textColor = () => {
     switch (variant) {
       case 'heading':
-        return colorTheme[colorScheme].primary;
+        return colors.primary;
 
       case 'title':
-        return colorTheme[colorScheme].title;
+        return colors.title;
 
       case 'description':
-        return colorTheme[colorScheme].helper;
+        return colors.helper;
 
       case 'label':
-        return colorTheme[colorScheme].label;
+        return colors.label;
 
       default:
-        return colorTheme[colorScheme].default;
+        return colors.default;
     }
   };
 
