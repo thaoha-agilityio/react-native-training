@@ -6,7 +6,7 @@ import { Input, ProductList, ProductsSkeleton, Text } from '@/components';
 import { LogoIcon, SearchBarIcon } from '@/components/icons';
 
 // Hooks
-import { useInfiniteProducts } from '@/hooks';
+import { useInfiniteProducts, useTheme } from '@/hooks';
 
 // Themes
 import { fontsFamily } from '@/themes';
@@ -24,9 +24,10 @@ export const Products = () => {
   const handleNavigateProductsScreen = (id: string) => {
     router.push(ROUTES.PRODUCT_DETAILS(id) as any);
   };
+  const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.logo}>
         <LogoIcon />
       </View>

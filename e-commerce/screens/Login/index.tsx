@@ -10,7 +10,7 @@ import { LoginForm, Text } from '@/components';
 import { ROUTES } from '@/constants';
 
 // Hooks
-import { useAuthSignIn, useMedia } from '@/hooks';
+import { useAuthSignIn, useMedia, useTheme } from '@/hooks';
 
 // Utils
 import { getAPIErrorMessage } from '@/utils';
@@ -22,6 +22,7 @@ export const Login = () => {
   const { mutate: signIn, isPending } = useAuthSignIn();
   const router = useRouter();
   const { isTablet } = useMedia();
+  const { colors } = useTheme();
 
   const handleLoginSuccess = useCallback(() => {
     router.replace(ROUTES.HOME);
@@ -43,14 +44,18 @@ export const Login = () => {
     [handleLoginError, handleLoginSuccess, signIn],
   );
 
-  const marginTop = isTablet ? 200 : 20;
+  const paddingTop = isTablet ? 200 : 20;
   const paddingHorizontal = isTablet ? 100 : 32;
 
   return (
     <ScrollView
       style={[
         styles.container,
-        { marginTop: marginTop, paddingHorizontal: paddingHorizontal },
+        {
+          paddingTop: paddingTop,
+          paddingHorizontal: paddingHorizontal,
+          backgroundColor: colors.content,
+        },
       ]}
     >
       <Text variant="title" size="3xl" style={styles.title} numberOfLines={2}>

@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { View, StyleSheet, Pressable } from 'react-native';
 import { router } from 'expo-router';
+import { useCallback } from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 // Components
@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from '@/components/icons';
 import { useAuthStore } from '@/stores';
 
 // Hooks
-import { useColorScheme, useEditUser, useGetUser } from '@/hooks';
+import { useEditUser, useGetUser, useTheme } from '@/hooks';
 
 // Utils
 import { getAPIErrorMessage } from '@/utils';
@@ -19,11 +19,8 @@ import { getAPIErrorMessage } from '@/utils';
 // Types
 import { UserPayload } from '@/interfaces';
 
-// Themes
-import { colorTheme } from '@/themes';
-
 export const EditProfile = () => {
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
   const userId = useAuthStore((state) => state.userId);
   const { user: userDetails, isFetching } = useGetUser(userId);
   const { mutate: editUser, isPending } = useEditUser(userId);
@@ -64,9 +61,9 @@ export const EditProfile = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.content }]}>
       <Pressable onPress={handleGoBack} style={styles.backBtn}>
-        <ArrowLeftIcon color={colorTheme[colorScheme].default} />
+        <ArrowLeftIcon color={colors.default} />
       </Pressable>
       {isFetching ? (
         <FormSkeleton />

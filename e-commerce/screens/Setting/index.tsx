@@ -1,12 +1,12 @@
 import { router } from 'expo-router';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 // Components
-import { Image, Text, ProfileSkeleton } from '@/components';
+import { Button, Image, ProfileSkeleton, Text } from '@/components';
 import { EditIcon, LogoutIcon } from '@/components/icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily, fontWeights } from '@/themes';
+import { colors, fontsFamily, fontWeights } from '@/themes';
 
 // Hooks
 import { useAuthStore, useCartStore } from '@/stores';
@@ -15,14 +15,13 @@ import { useAuthStore, useCartStore } from '@/stores';
 import { ROUTES } from '@/constants';
 
 // Hooks
-import { useColorScheme, useGetUser } from '@/hooks';
+import { useGetUser, useTheme } from '@/hooks';
 
 export const Setting = () => {
-  const colorScheme = useColorScheme();
-
   const clearAuth = useAuthStore((state) => state.clearAuth);
   const clearCart = useCartStore((state) => state.clearCart);
   const userId = useAuthStore((state) => state.userId);
+  const { toggleTheme, colors } = useTheme();
 
   const { user, isFetching } = useGetUser(userId);
   const { username = '', email = '', avatar = '' } = user || {};
@@ -38,14 +37,14 @@ export const Setting = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.headerContainer}>
         <View style={styles.block} />
         <Text size="lg" style={styles.heading}>
           Profile
         </Text>
         <TouchableOpacity onPress={logout}>
-          <LogoutIcon color={colorTheme[colorScheme].default} />
+          <LogoutIcon color={colors.default} />
         </TouchableOpacity>
       </View>
 
@@ -70,10 +69,11 @@ export const Setting = () => {
             </View>
           </View>
           <TouchableOpacity onPress={navigateProfile}>
-            <EditIcon color={colorTheme[colorScheme].default} />
+            <EditIcon color={colors.default} />
           </TouchableOpacity>
         </View>
       )}
+      <Button title="toggle theme" onPress={toggleTheme} />
     </View>
   );
 };

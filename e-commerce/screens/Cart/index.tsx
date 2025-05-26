@@ -8,7 +8,7 @@ import { CartList, Text, Button } from '@/components';
 import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily, lineHeights } from '@/themes';
+import { colors, fontsFamily, lineHeights } from '@/themes';
 
 // Utils
 import { formatPrice, formatUSPhoneNumber } from '@/utils';
@@ -17,7 +17,7 @@ import { formatPrice, formatUSPhoneNumber } from '@/utils';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Hooks
-import { useColorScheme, useGetUser, useMedia } from '@/hooks';
+import { useGetUser, useMedia, useTheme } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
@@ -26,7 +26,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const handleGoBack = () => {
     router.back();
   };
-  const colorScheme = useColorScheme();
+
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
@@ -42,6 +42,8 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const { address = '', phoneNumber = '' } = user || {};
 
   const hasAddress = !!address && !!phoneNumber;
+
+  const { colors } = useTheme();
 
   const navigateEditProfile = () => {
     router.push(ROUTES.EDIT_PROFILE);
@@ -72,11 +74,11 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
   const height = isTablet ? heightTablet : heighMobile;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.headingWrapper}>
         {!isTabBar ? (
           <Pressable onPress={handleGoBack}>
-            <ArrowLeftIcon color={colorTheme[colorScheme].default} />
+            <ArrowLeftIcon color={colors.default} />
           </Pressable>
         ) : (
           <View style={styles.block} />
@@ -90,7 +92,7 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
 
       <View style={styles.addressWrapper}>
         <View style={styles.address}>
-          <PositionIcon color={colorTheme[colorScheme].default} />
+          <PositionIcon color={colors.default} />
           <Text size="sm" style={styles.delivery}>
             Delivery Address
           </Text>

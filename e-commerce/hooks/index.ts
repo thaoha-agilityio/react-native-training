@@ -5,5 +5,6 @@ export * from './useMedia';
 export * from './useOrder';
 export * from './useHydration';
 export * from './useProducts';
+export * from './useTheme';
 export * from './useUploadImage';
 export * from './useUser';

@@ -16,13 +16,13 @@ import { Quantity } from '../Quantity';
 import { TrashIcon } from '../icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily } from '@/themes';
+import { colors, fontsFamily } from '@/themes';
 
 // Utils
 import { formatPrice } from '@/utils';
 
 // Hooks
-import { useColorScheme } from '@/hooks';
+import { useTheme } from '@/hooks';
 
 const WIDTH_CARD = Dimensions.get('window').width * 0.89;
 const ITEM_HEIGHT = 130;
@@ -52,7 +52,7 @@ const CartItemComponent = ({
   const pressed = useSharedValue(false);
   const itemHeight = useSharedValue(ITEM_HEIGHT);
   const marginVertical = useSharedValue(18);
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -119,7 +119,7 @@ const CartItemComponent = ({
           style={[
             styles.fieldContainer,
             transformStyle,
-            { backgroundColor: colorTheme[colorScheme].background },
+            { backgroundColor: colors.background },
           ]}
         >
           <Image style={styles.img} source={img} />

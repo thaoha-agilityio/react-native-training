@@ -1,3 +1,5 @@
+import { router, useLocalSearchParams } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -7,28 +9,26 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { useCallback, useRef, useState } from 'react';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useShallow } from 'zustand/shallow';
 import {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import { useShallow } from 'zustand/shallow';
 
 // Components
 import {
   Button,
-  Text,
   Image,
   PaginationDot,
-  ShoppingCart,
   ProductDetailsSkeleton,
+  ShoppingCart,
+  Text,
 } from '@/components';
 import { ArrowLeftIcon, CartIcon, StarIcon } from '@/components/icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily } from '@/themes';
+import { colors, fontsFamily } from '@/themes';
 
 // Types
 import { ProductImg } from '@/interfaces';
@@ -37,7 +37,7 @@ import { ProductImg } from '@/interfaces';
 import { formatNumberWithUnit, formatPrice } from '@/utils';
 
 // Hooks
-import { useColorScheme, useFetchProductDetails } from '@/hooks';
+import { useFetchProductDetails, useTheme } from '@/hooks';
 
 // Stores
 import { useCartStore } from '@/stores';
@@ -52,7 +52,7 @@ export const ProductDetails = () => {
   const flatListRef = useRef<FlatList>(null);
   const { id } = useLocalSearchParams();
   const { product, isFetching } = useFetchProductDetails(id.toString());
-  const colorScheme = useColorScheme();
+  const { colors: colorTheme } = useTheme();
 
   const {
     name = '',
@@ -110,10 +110,12 @@ export const ProductDetails = () => {
   }));
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: colorTheme.content }]}
+    >
       <View style={styles.headerWrapper}>
         <Pressable onPress={handleGoBack}>
-          <ArrowLeftIcon color={colorTheme[colorScheme].default} />
+          <ArrowLeftIcon color={colorTheme.default} />
         </Pressable>
 
         <ShoppingCart

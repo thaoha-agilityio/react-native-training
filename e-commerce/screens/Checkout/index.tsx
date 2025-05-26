@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react';
 import { router } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useShallow } from 'zustand/shallow';
@@ -9,14 +9,13 @@ import { Button, SuccessModal, Text } from '@/components';
 import { ArrowLeftIcon, DeliveryIcon, EditIcon } from '@/components/icons';
 
 // Hooks
-import { useColorScheme, useGetUser, useOrderCreated } from '@/hooks';
+import { useGetUser, useOrderCreated, useTheme } from '@/hooks';
 
 // Stores
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Themes
 import {
-  colorTheme,
   colors,
   fontSizes,
   fontWeights,
@@ -33,7 +32,8 @@ import { ROUTES } from '@/constants';
 export const Checkout = () => {
   // Define shipping fee
   const shippingFee = 5;
-  const colorScheme = useColorScheme();
+
+  const { colors: colorTheme } = useTheme();
 
   const [cart, getTotalPrice, clearCart] = useCartStore(
     useShallow((state) => [state.cart, state.getTotalPrice, state.clearCart]),
@@ -88,10 +88,13 @@ export const Checkout = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: colorTheme.content }]}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.headingWrapper}>
         <TouchableOpacity onPress={handleGoBack}>
-          <ArrowLeftIcon color={colorTheme[colorScheme].default} />
+          <ArrowLeftIcon color={colorTheme.default} />
         </TouchableOpacity>
 
         <Text variant="title" size="lg" style={styles.heading}>
@@ -112,7 +115,7 @@ export const Checkout = () => {
           <View
             style={[
               styles.addressContent,
-              { backgroundColor: colorTheme[colorScheme].background },
+              { backgroundColor: colorTheme.background },
             ]}
           >
             <Text size="md" style={styles.name}>
@@ -134,10 +137,7 @@ export const Checkout = () => {
             </TouchableOpacity>
           </View>
           <View
-            style={[
-              styles.payment,
-              { backgroundColor: colorTheme[colorScheme].background },
-            ]}
+            style={[styles.payment, { backgroundColor: colorTheme.background }]}
           >
             <Text size="sm">**** **** **** {bankAccountNumber}</Text>
           </View>
@@ -152,10 +152,7 @@ export const Checkout = () => {
             </TouchableOpacity>
           </View>
           <View
-            style={[
-              styles.payment,
-              { backgroundColor: colorTheme[colorScheme].background },
-            ]}
+            style={[styles.payment, { backgroundColor: colorTheme.background }]}
           >
             <DeliveryIcon />
             <Text size="sm">Fast (2-3days)</Text>
@@ -164,7 +161,7 @@ export const Checkout = () => {
         <View
           style={[
             styles.totalPayment,
-            { backgroundColor: colorTheme[colorScheme].background },
+            { backgroundColor: colorTheme.background },
           ]}
         >
           <View style={styles.priceWrapper}>
