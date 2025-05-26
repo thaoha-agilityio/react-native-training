@@ -41,7 +41,7 @@ export const Setting = () => {
       <View style={styles.headerContainer}>
         <View style={styles.block} />
         <Text size="lg" style={styles.heading}>
-          Profile
+          Setting
         </Text>
         <TouchableOpacity onPress={logout}>
           <LogoutIcon color={colors.default} />
@@ -73,7 +73,11 @@ export const Setting = () => {
           </TouchableOpacity>
         </View>
       )}
-      <Button title="toggle theme" onPress={toggleTheme} />
+      <Button
+        title="toggle theme"
+        onPress={toggleTheme}
+        style={styles.toggleTheme}
+      />
     </View>
   );
 };
@@ -127,5 +131,11 @@ const styles = StyleSheet.create({
 
   block: {
     width: 20,
+  },
+
+  toggleTheme: {
+    marginTop: 20,
+
+    height: 55,
   },
 });
