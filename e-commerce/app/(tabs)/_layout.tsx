@@ -1,19 +1,13 @@
 import { Tabs } from 'expo-router';
 
-// Components
-import {
-  CartBottomBarIcon,
-  HeartIcon,
-  HomeIcon,
-  SearchBarIcon,
-  SettingIcon,
-} from '@/components/icons';
-
 // Hooks
 import { useTheme } from '@/hooks';
 
 // Themes
 import { colors } from '@/themes';
+
+// Constants
+import { TAB_SCREENS } from '@/constants';
 
 export default function TabLayout() {
   const { colors: colorTheme } = useTheme();
@@ -32,66 +26,29 @@ export default function TabLayout() {
         },
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ focused }) => (
-            <HomeIcon color={focused ? colors.primary : colorTheme.default} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="wishlist"
-        options={{
-          title: 'Wishlist',
-          tabBarIcon: ({ focused }) => (
-            <HeartIcon color={focused ? colors.primary : colorTheme.default} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="cart"
-        options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ focused }) => (
-            <CartBottomBarIcon
-              color={focused ? colors.primary : colorTheme.default}
-            />
-          ),
-          tabBarIconStyle: {
-            width: 54,
-            height: 56,
-            borderRadius: 50,
-            position: 'absolute',
-            boxShadow: '#8A959E1F 1px 2px 2px 1px',
-            top: -18,
-            backgroundColor: colorTheme.background,
-          },
-        }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: 'Search',
-          tabBarIcon: ({ focused }) => (
-            <SearchBarIcon
-              color={focused ? colors.primary : colorTheme.default}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="setting"
-        options={{
-          title: 'Setting',
-          tabBarIcon: ({ focused }) => (
-            <SettingIcon
-              color={focused ? colors.primary : colorTheme.default}
-            />
-          ),
-        }}
-      />
+      {TAB_SCREENS.map(({ name, title, Icon, isCart }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title,
+            tabBarIcon: ({ focused }) => (
+              <Icon color={focused ? colors.primary : colorTheme.default} />
+            ),
+            ...(isCart && {
+              tabBarIconStyle: {
+                width: 54,
+                height: 56,
+                borderRadius: 50,
+                position: 'absolute',
+                boxShadow: '#8A959E1F 1px 2px 2px 1px',
+                top: -18,
+                backgroundColor: colorTheme.background,
+              },
+            }),
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
