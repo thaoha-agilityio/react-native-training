@@ -10,7 +10,7 @@ import {
 import { router } from 'expo-router';
 
 // Components
-import { Text, Image, Button } from '@/components';
+import { Text, Image, Button, PaginationDot } from '@/components';
 
 // Themes
 import { colors, fontsFamily, fontSizes } from '@/themes';
@@ -125,21 +125,12 @@ export const Onboarding = () => {
             }}
           />
 
-          <View style={styles.dots}>
-            {ONBOARDING_STEPS.map((_, i) => (
-              <View
-                key={i}
-                style={[
-                  styles.dot,
-                  {
-                    backgroundColor:
-                      i === currentIndex ? colors.dark : colors.pagination,
-                  },
-                  { width: i === currentIndex ? 40 : 8 },
-                ]}
-              />
-            ))}
-          </View>
+          <PaginationDot
+            currentIndex={currentIndex}
+            items={ONBOARDING_STEPS}
+            activeColor={colors.dark}
+            widthActive={40}
+          />
 
           {currentIndex < ONBOARDING_STEPS.length - 1 ? (
             <Button title="Next" variant="text" onPress={scrollToNext} />
@@ -204,21 +195,5 @@ const styles = StyleSheet.create({
     marginTop: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-
-  nextButton: {
-    width: 60,
-  },
-
-  dots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-
-  dot: {
-    height: 8,
-    borderRadius: 4,
-    margin: 5,
   },
 });
