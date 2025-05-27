@@ -7,11 +7,15 @@ import { colors } from '@/themes';
 interface PaginationDotProps<T = unknown> {
   currentIndex: number;
   items: T[];
+  activeColor?: string;
+  widthActive?: number;
 }
 
 const PaginationDotComponent = <T,>({
   currentIndex,
   items,
+  activeColor = colors.active,
+  widthActive,
 }: PaginationDotProps<T>) => (
   <View style={styles.dots}>
     {items.map((_, i) => (
@@ -21,8 +25,9 @@ const PaginationDotComponent = <T,>({
           styles.dot,
           {
             backgroundColor:
-              i === currentIndex ? colors.active : colors.pagination,
+              i === currentIndex ? activeColor : colors.pagination,
           },
+          !!widthActive && { width: i === currentIndex ? widthActive : 8 },
         ]}
       />
     ))}
