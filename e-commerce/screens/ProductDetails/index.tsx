@@ -48,7 +48,7 @@ import { ROUTES, VIEWABILITY_CONFIG } from '@/constants';
 
 const { width } = Dimensions.get('screen');
 
-export const ProductDetails = () => {
+export const ProductDetailsScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { id } = useLocalSearchParams();
   const { product, isLoading } = useFetchProductDetails(id.toString());

@@ -1,3 +1,3 @@
-import { Login } from '@/screens';
+import { LoginScreen } from '@/screens';
 
-export default Login;
+export default LoginScreen;

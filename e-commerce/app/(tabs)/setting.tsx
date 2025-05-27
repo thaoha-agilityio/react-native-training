@@ -1,5 +1,3 @@
-import { Setting } from '@/screens';
-
-const SettingScreen = () => <Setting />;
+import { SettingScreen } from '@/screens';
 
 export default SettingScreen;

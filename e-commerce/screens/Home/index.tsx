@@ -47,7 +47,7 @@ import { useInfiniteProducts, useTheme } from '@/hooks';
 
 const { width } = Dimensions.get('screen');
 
-export const Home = () => {
+export const HomeScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { data } = useInfiniteProducts(PAGINATION_LIMIT);
   const { colors } = useTheme();

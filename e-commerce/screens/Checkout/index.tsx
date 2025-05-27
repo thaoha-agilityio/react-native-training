@@ -32,7 +32,7 @@ import { ROUTES } from '@/constants';
 // Define shipping fee
 const SHIPPING_FEE = 5;
 
-export const Checkout = () => {
+export const CheckoutScreen = () => {
   const { colors: colorTheme } = useTheme();
 
   const [cart, getTotalPrice, clearCart] = useCartStore(
