@@ -22,11 +22,11 @@ import { ONBOARDING_STEPS, ROUTES, VIEWABILITY_CONFIG } from '@/constants';
 import { useBootstrapsStore } from '@/stores';
 
 // Types
-import { Onboarding as IOnboarding } from '@/interfaces';
+import { Onboarding } from '@/interfaces';
 
 const width = Dimensions.get('screen').width;
 
-export const Onboarding = () => {
+export const OnboardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const setFirstLoad = useBootstrapsStore((state) => state.setIsFirstLoad);
@@ -62,7 +62,7 @@ export const Onboarding = () => {
   };
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<IOnboarding>) => (
+    ({ item }: ListRenderItemInfo<Onboarding>) => (
       <View style={{ width: width - 34 }}>
         <Image source={item.image} style={styles.image} contentFit="contain" />
 
@@ -83,7 +83,7 @@ export const Onboarding = () => {
     [],
   );
 
-  const getKeyExtractor = useCallback((item: IOnboarding) => item.id, []);
+  const getKeyExtractor = useCallback((item: Onboarding) => item.id, []);
 
   return (
     <View style={styles.container}>

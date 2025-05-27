@@ -1,5 +1,3 @@
-import { EditProfile } from '@/screens';
-
-const EditProfileScreen = () => <EditProfile />;
+import { EditProfileScreen } from '@/screens';
 
 export default EditProfileScreen;

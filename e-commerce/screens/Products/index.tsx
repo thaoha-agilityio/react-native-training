@@ -18,7 +18,7 @@ import { ROUTES } from '@/constants';
 // Utils
 import { formatNumberWithUnit } from '@/utils';
 
-export const Products = () => {
+export const ProductsScreen = () => {
   const { colors } = useTheme();
   const { data, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProducts(12);

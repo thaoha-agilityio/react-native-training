@@ -1,3 +1,3 @@
-import { Onboarding } from '@/screens';
+import { OnboardingScreen } from '@/screens';
 
-export default Onboarding;
+export default OnboardingScreen;

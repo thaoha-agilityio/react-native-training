@@ -1,5 +1,3 @@
-import { ProductDetails } from '@/screens';
-
-const ProductDetailsScreen = () => <ProductDetails />;
+import { ProductDetailsScreen } from '@/screens';
 
 export default ProductDetailsScreen;

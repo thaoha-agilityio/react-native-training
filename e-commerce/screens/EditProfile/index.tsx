@@ -19,7 +19,7 @@ import { getAPIErrorMessage } from '@/utils';
 // Types
 import { UserPayload } from '@/interfaces';
 
-export const EditProfile = () => {
+export const EditProfileScreen = () => {
   const { colors } = useTheme();
   const userId = useAuthStore((state) => state.userId);
   const { user: userDetails, isLoading } = useGetUser(userId);

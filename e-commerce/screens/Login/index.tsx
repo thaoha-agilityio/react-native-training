@@ -18,7 +18,7 @@ import { getAPIErrorMessage } from '@/utils';
 // Types
 import { LoginPayload } from '@/interfaces';
 
-export const Login = () => {
+export const LoginScreen = () => {
   const { mutate: signIn, isPending } = useAuthSignIn();
   const router = useRouter();
   const { isTablet } = useMedia();

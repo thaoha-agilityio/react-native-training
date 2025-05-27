@@ -17,7 +17,7 @@ import { AVATAR_DEFAULT, ROUTES } from '@/constants';
 // Hooks
 import { useGetUser, useTheme } from '@/hooks';
 
-export const Setting = () => {
+export const SettingScreen = () => {
   const { toggleTheme, colors } = useTheme();
   const clearAuth = useAuthStore((state) => state.clearAuth);
   const clearCart = useCartStore((state) => state.clearCart);
