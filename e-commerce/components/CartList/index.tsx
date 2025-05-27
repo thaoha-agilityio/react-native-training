@@ -63,7 +63,7 @@ const CartListComponent = ({
   );
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView>
       <FlatList
         data={data}
         renderItem={renderCartItem}

@@ -24,8 +24,8 @@ interface ProductsProps {
   onNavigateProductDetails: (id: string) => void;
 }
 
-const screenWidth = Dimensions.get('window').width;
-const imgWidth = screenWidth * 0.43;
+const imgWidth = (Dimensions.get('screen').width - 32 - 16) / 2;
+
 const ProductsLimitComponent = ({
   data,
   isFetchingNextPage,

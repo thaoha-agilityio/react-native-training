@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
-import Animated, { AnimatedStyleProp } from 'react-native-reanimated';
+import Animated, { AnimatedStyle } from 'react-native-reanimated';
 
 // Icons
 import { CartIcon } from '@/components/icons';
@@ -16,7 +16,7 @@ import { useCartStore } from '@/stores';
 
 export interface ShoppingCartProps {
   onNavigation: () => void;
-  animatedStyle?: AnimatedStyleProp<ViewStyle>;
+  animatedStyle?: AnimatedStyle<ViewStyle>;
 }
 
 const ShoppingCartComponent = ({

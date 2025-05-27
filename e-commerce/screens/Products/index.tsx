@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
+import { useCallback } from 'react';
 
 // Components
 import { Input, ProductList, ProductsSkeleton, Text } from '@/components';
@@ -18,13 +19,13 @@ import { ROUTES } from '@/constants';
 import { formatNumberWithUnit } from '@/utils';
 
 export const Products = () => {
+  const { colors } = useTheme();
   const { data, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProducts(12);
 
-  const handleNavigateProductsScreen = (id: string) => {
-    router.push(ROUTES.PRODUCT_DETAILS(id) as any);
-  };
-  const { colors } = useTheme();
+  const handleNavigateProductsScreen = useCallback((id: string) => {
+    router.push(ROUTES.PRODUCT_DETAILS(id));
+  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
