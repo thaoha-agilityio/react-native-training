@@ -1,10 +1,9 @@
-import { Pressable, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
+import { Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useShallow } from 'zustand/shallow';
-import { useCallback } from 'react';
 
 // Components
-import { CartList, Text, Button } from '@/components';
+import { Button, CartList, Text } from '@/components';
 import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
 
 // Themes
@@ -17,16 +16,12 @@ import { formatPrice, formatUSPhoneNumber } from '@/utils';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Hooks
-import { useGetUser, useMedia, useTheme } from '@/hooks';
+import { useGetUser, useTheme } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
 
 export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
-  const handleGoBack = () => {
-    router.back();
-  };
-
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
@@ -53,35 +48,15 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
     router.push(ROUTES.CHECKOUT);
   };
 
-  const handleUpdateQuantity = useCallback(
-    (id: string, quantity: number) => {
-      updateQuantity(id, quantity);
-    },
-    [updateQuantity],
-  );
-
-  const handleRemoveCart = useCallback(
-    (id: string) => {
-      removeCart(id);
-    },
-    [removeCart],
-  );
-
-  const { isTablet, height: deviceHeight } = useMedia();
-
-  const heighMobile = isTabBar ? deviceHeight * 0.4 : deviceHeight * 0.5;
-  const heightTablet = isTabBar ? deviceHeight - 490 : deviceHeight - 400;
-  const height = isTablet ? heightTablet : heighMobile;
-
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.headingWrapper}>
-        {!isTabBar ? (
-          <Pressable onPress={handleGoBack}>
+        {isTabBar ? (
+          <View style={styles.block} />
+        ) : (
+          <Pressable onPress={router.back}>
             <ArrowLeftIcon color={colors.default} />
           </Pressable>
-        ) : (
-          <View style={styles.block} />
         )}
 
         <Text size="lg" style={styles.heading}>
@@ -125,14 +100,13 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
         <Text variant="label" size="sm">
           Shopping List
         </Text>
-
-        <View style={[styles.items, { height: height }]}>
-          <CartList
-            data={cart}
-            onRemove={handleRemoveCart}
-            onChangeQuantity={handleUpdateQuantity}
-          />
-        </View>
+      </View>
+      <View style={[styles.items]}>
+        <CartList
+          data={cart}
+          onRemove={removeCart}
+          onChangeQuantity={updateQuantity}
+        />
       </View>
 
       <View style={styles.footer}>
@@ -210,7 +184,9 @@ const styles = StyleSheet.create({
   },
 
   items: {
+    flex: 1,
     marginTop: 10,
+    paddingHorizontal: 22,
   },
 
   totalWrapper: {
@@ -226,7 +202,7 @@ const styles = StyleSheet.create({
 
   footer: {
     paddingHorizontal: 22,
-    flex: 1,
+    paddingTop: 40,
     justifyContent: 'flex-end',
   },
 });

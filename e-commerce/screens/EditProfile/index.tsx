@@ -22,7 +22,7 @@ import { UserPayload } from '@/interfaces';
 export const EditProfile = () => {
   const { colors } = useTheme();
   const userId = useAuthStore((state) => state.userId);
-  const { user: userDetails, isFetching } = useGetUser(userId);
+  const { user: userDetails, isLoading } = useGetUser(userId);
   const { mutate: editUser, isPending } = useEditUser(userId);
 
   const {
@@ -65,7 +65,7 @@ export const EditProfile = () => {
       <Pressable onPress={handleGoBack} style={styles.backBtn}>
         <ArrowLeftIcon color={colors.default} />
       </Pressable>
-      {isFetching ? (
+      {isLoading ? (
         <FormSkeleton />
       ) : (
         <ProfileForm

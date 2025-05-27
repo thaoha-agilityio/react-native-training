@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker';
 
@@ -15,6 +15,7 @@ import {
   requestCameraPermission,
   requestPhotoLibraryPermission,
 } from '@/utils';
+import { AVATAR_DEFAULT } from '@/constants';
 
 interface AvatarUploaderProps {
   avatar?: string;
@@ -30,23 +31,26 @@ const AvatarUploaderComponent = ({
   const [currentAvatar, setAvatarSrc] = useState(avatarUpload || avatar);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleSelectImage = (uri?: string) => {
-    if (!uri) return;
+  const handleSelectImage = useCallback(
+    (uri?: string) => {
+      if (!uri) return;
 
-    setAvatarSrc(uri);
-    onChange(uri);
-    setIsVisible(false);
-  };
+      setAvatarSrc(uri);
+      onChange(uri);
+      setIsVisible(false);
+    },
+    [onChange],
+  );
 
   const handleOpenModal = () => {
     setIsVisible(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setIsVisible(false);
-  };
+  }, []);
 
-  const handleChooseFromLibrary = async () => {
+  const handleChooseFromLibrary = useCallback(async () => {
     const hasPermission = await requestPhotoLibraryPermission();
 
     if (!hasPermission) return;
@@ -58,11 +62,11 @@ const AvatarUploaderComponent = ({
 
     if (!result.canceled) {
       handleSelectImage(result.assets[0].uri);
-      handleCloseModal();
+      setIsVisible(false);
     }
-  };
+  }, [handleSelectImage]);
 
-  const handleTakePhoto = async () => {
+  const handleTakePhoto = useCallback(async () => {
     const hasPermission = await requestCameraPermission();
     if (!hasPermission) return;
 
@@ -73,9 +77,9 @@ const AvatarUploaderComponent = ({
 
     if (!result.canceled) {
       handleSelectImage(result.assets[0].uri);
-      handleCloseModal();
+      setIsVisible(false);
     }
-  };
+  }, [handleSelectImage]);
 
   useEffect(() => {
     setAvatarSrc(avatarUpload || avatar);
@@ -87,10 +91,9 @@ const AvatarUploaderComponent = ({
         <View style={styles.avatarWrapper}>
           <Image
             source={
-              currentAvatar
-                ? { uri: currentAvatar }
-                : require('@/assets/images/avatar-default.jpg')
+              currentAvatar ? { uri: currentAvatar } : AVATAR_DEFAULT.source
             }
+            alt={AVATAR_DEFAULT.alt}
             style={styles.avatar}
           />
 

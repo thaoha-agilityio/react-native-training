@@ -53,7 +53,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="cart"
         options={{
-          title: '',
+          tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
             <CartBottomBarIcon
               color={focused ? colors.primary : colorTheme.default}

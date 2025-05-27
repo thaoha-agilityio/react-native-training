@@ -36,3 +36,7 @@ export const BANNER_DATA = [
     image: require('../assets/images/banner-1.jpg'),
   },
 ];
+
+export const VIEWABILITY_CONFIG = {
+  viewAreaCoveragePercentThreshold: 50,
+};

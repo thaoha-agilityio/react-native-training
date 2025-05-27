@@ -29,10 +29,10 @@ import { formatPrice } from '@/utils';
 // Constants
 import { ROUTES } from '@/constants';
 
-export const Checkout = () => {
-  // Define shipping fee
-  const shippingFee = 5;
+// Define shipping fee
+const SHIPPING_FEE = 5;
 
+export const Checkout = () => {
   const { colors: colorTheme } = useTheme();
 
   const [cart, getTotalPrice, clearCart] = useCartStore(
@@ -52,13 +52,13 @@ export const Checkout = () => {
 
   const totalOrderPrice = () => {
     const price = getTotalPrice();
-    return price + shippingFee;
+    return price + SHIPPING_FEE;
   };
 
   const handleOrderCreate = () => {
     const payload = {
       userId: userId.toString(),
-      shippingFee,
+      shippingFee: SHIPPING_FEE,
       total: totalOrderPrice(),
       orderItems: cart,
     };
@@ -177,7 +177,7 @@ export const Checkout = () => {
               Delivery:
             </Text>
             <Text size="md" style={styles.price}>
-              $ {shippingFee}
+              $ {SHIPPING_FEE}
             </Text>
           </View>
           <View style={styles.priceWrapper}>

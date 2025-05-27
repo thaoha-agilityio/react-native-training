@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  ViewToken,
 } from 'react-native';
 import {
   useAnimatedStyle,
@@ -43,15 +44,14 @@ import { useFetchProductDetails, useTheme } from '@/hooks';
 import { useCartStore } from '@/stores';
 
 // Constants
-import { ROUTES } from '@/constants';
+import { ROUTES, VIEWABILITY_CONFIG } from '@/constants';
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('screen');
 
 export const ProductDetails = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const flatListRef = useRef<FlatList>(null);
   const { id } = useLocalSearchParams();
-  const { product, isFetching } = useFetchProductDetails(id.toString());
+  const { product, isLoading } = useFetchProductDetails(id.toString());
   const { colors: colorTheme } = useTheme();
 
   const {
@@ -67,7 +67,6 @@ export const ProductDetails = () => {
     useShallow((state) => [state.addItemToCart]),
   );
   const scale = useSharedValue(1);
-  const liked = useSharedValue(false);
 
   const handleAddToCart = useCallback(() => {
     addItemToCart({
@@ -79,20 +78,23 @@ export const ProductDetails = () => {
       id: id.toString(),
     });
 
-    liked.value = !liked.value;
     scale.value = withSpring(1.5, { damping: 5 }, () => {
       scale.value = withSpring(1);
     });
-  }, [addItemToCart, id, images, liked, name, price, scale]);
+  }, [addItemToCart, id, images, name, price, scale]);
 
-  const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
+  const onViewableItemsChanged = ({
+    viewableItems,
+  }: {
+    viewableItems: ViewToken[];
+  }) => {
     if (viewableItems.length > 0) {
-      setCurrentIndex(viewableItems[0].index);
+      setCurrentIndex(viewableItems[0].index ?? 0);
     }
-  }).current;
+  };
 
   const renderItem = ({ item }: ListRenderItemInfo<ProductImg>) => (
-    <View style={{ width: width * 0.92 }}>
+    <View style={{ width: width - 32 }}>
       <Image source={item.image} contentFit="cover" style={styles.image} />
     </View>
   );
@@ -109,6 +111,8 @@ export const ProductDetails = () => {
     transform: [{ scale: scale.value }],
   }));
 
+  const getKeyExtractor = useCallback((item: ProductImg) => item.id, []);
+
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: colorTheme.content }]}
@@ -124,20 +128,19 @@ export const ProductDetails = () => {
         />
       </View>
 
-      {isFetching ? (
+      {isLoading ? (
         <ProductDetailsSkeleton />
       ) : (
         <>
           <View style={styles.contentWrapper}>
             <FlatList
               data={images}
-              keyExtractor={(item) => item.id}
+              keyExtractor={getKeyExtractor}
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
-              ref={flatListRef}
               onViewableItemsChanged={onViewableItemsChanged}
-              viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
+              viewabilityConfig={VIEWABILITY_CONFIG}
               renderItem={renderItem}
             />
             <PaginationDot currentIndex={currentIndex} items={images} />

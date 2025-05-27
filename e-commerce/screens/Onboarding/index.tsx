@@ -1,6 +1,13 @@
-import { useRef, useState } from 'react';
-import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  ListRenderItemInfo,
+  Dimensions,
+  ViewToken,
+} from 'react-native';
+import { router } from 'expo-router';
 
 // Components
 import { Text, Image, Button } from '@/components';
@@ -9,7 +16,7 @@ import { Text, Image, Button } from '@/components';
 import { colors, fontsFamily, fontSizes } from '@/themes';
 
 // Constants
-import { ONBOARDING_STEPS, ROUTES } from '@/constants';
+import { ONBOARDING_STEPS, ROUTES, VIEWABILITY_CONFIG } from '@/constants';
 
 // Stores
 import { useBootstrapsStore } from '@/stores';
@@ -17,15 +24,12 @@ import { useBootstrapsStore } from '@/stores';
 // Types
 import { Onboarding as IOnboarding } from '@/interfaces';
 
-// Hooks
-import { useMedia } from '@/hooks';
+const width = Dimensions.get('screen').width;
 
 export const Onboarding = () => {
-  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const setFirstLoad = useBootstrapsStore((state) => state.setIsFirstLoad);
-  const { isTablet, width } = useMedia();
 
   const scrollToNext = () => {
     if (currentIndex < ONBOARDING_STEPS.length - 1) {
@@ -35,6 +39,7 @@ export const Onboarding = () => {
       router.replace(ROUTES.LOGIN); // navigate after onboarding
     }
   };
+
   const scrollToPrev = () => {
     if (currentIndex === 0) return;
 
@@ -46,30 +51,39 @@ export const Onboarding = () => {
     router.replace(ROUTES.LOGIN);
   };
 
-  const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
+  const onViewableItemsChanged = ({
+    viewableItems,
+  }: {
+    viewableItems: ViewToken[];
+  }) => {
     if (viewableItems.length > 0) {
-      setCurrentIndex(viewableItems[0].index);
+      setCurrentIndex(viewableItems[0].index ?? 0);
     }
-  }).current;
+  };
 
-  const renderItem = ({ item }: ListRenderItemInfo<IOnboarding>) => (
-    <View style={{ width: isTablet ? width * 0.95 : width * 0.9 }}>
-      <Image source={item.image} style={styles.image} contentFit="contain" />
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<IOnboarding>) => (
+      <View style={{ width: width - 34 }}>
+        <Image source={item.image} style={styles.image} contentFit="contain" />
 
-      <View style={styles.textWrapper}>
-        <Text variant="title" size="xxl" style={styles.title}>
-          {item.title}
-        </Text>
-        <Text
-          variant="description"
-          style={styles.description}
-          numberOfLines={3}
-        >
-          {item.description}
-        </Text>
+        <View style={styles.textWrapper}>
+          <Text variant="title" size="xxl" style={styles.title}>
+            {item.title}
+          </Text>
+          <Text
+            variant="description"
+            style={styles.description}
+            numberOfLines={3}
+          >
+            {item.description}
+          </Text>
+        </View>
       </View>
-    </View>
+    ),
+    [],
   );
+
+  const getKeyExtractor = useCallback((item: IOnboarding) => item.id, []);
 
   return (
     <View style={styles.container}>
@@ -91,13 +105,13 @@ export const Onboarding = () => {
       <View style={styles.contentWrapper}>
         <FlatList
           data={ONBOARDING_STEPS}
-          keyExtractor={(item) => item.id}
+          keyExtractor={getKeyExtractor}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           ref={flatListRef}
           onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
+          viewabilityConfig={VIEWABILITY_CONFIG}
           renderItem={renderItem}
         />
 
@@ -110,7 +124,7 @@ export const Onboarding = () => {
               color: currentIndex === 0 ? colors.pagination : colors.primary,
             }}
           />
-          {/* Pagination Dots */}
+
           <View style={styles.dots}>
             {ONBOARDING_STEPS.map((_, i) => (
               <View
@@ -126,6 +140,7 @@ export const Onboarding = () => {
               />
             ))}
           </View>
+
           {currentIndex < ONBOARDING_STEPS.length - 1 ? (
             <Button title="Next" variant="text" onPress={scrollToNext} />
           ) : (
@@ -141,6 +156,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 17,
+    paddingTop: 20,
   },
 
   step: {
@@ -188,6 +204,10 @@ const styles = StyleSheet.create({
     marginTop: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+
+  nextButton: {
+    width: 60,
   },
 
   dots: {
