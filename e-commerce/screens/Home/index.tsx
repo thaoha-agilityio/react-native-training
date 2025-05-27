@@ -1,23 +1,24 @@
+import { router } from 'expo-router';
+import { useCallback, useState } from 'react';
 import {
-  View,
-  StyleSheet,
+  Dimensions,
   FlatList,
   ListRenderItemInfo,
-  Dimensions,
   ScrollView,
+  StyleSheet,
+  View,
+  ViewToken,
 } from 'react-native';
-import { useCallback, useRef, useState } from 'react';
-import { router } from 'expo-router';
 
 // Components
 import {
-  Categories,
-  Input,
-  Text,
-  Image,
   Button,
-  ProductsLimit,
+  Categories,
+  Image,
+  Input,
   PaginationDot,
+  ProductsLimit,
+  Text,
 } from '@/components';
 import {
   ChevronIcon,
@@ -27,7 +28,13 @@ import {
 } from '@/components/icons';
 
 // Constants
-import { BANNER_DATA, PAGINATION_LIMIT, ROUTES } from '@/constants';
+import {
+  BANNER_DATA,
+  ONLINE_SHOPPING,
+  PAGINATION_LIMIT,
+  ROUTES,
+  VIEWABILITY_CONFIG,
+} from '@/constants';
 
 // Types
 import { Banner } from '@/interfaces';
@@ -38,22 +45,25 @@ import { colors, fontsFamily } from '@/themes';
 // Hooks
 import { useInfiniteProducts, useTheme } from '@/hooks';
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('screen');
 
 export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const flatListRef = useRef<FlatList>(null);
   const { data } = useInfiniteProducts(PAGINATION_LIMIT);
   const { colors } = useTheme();
 
-  const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
+  const onViewableItemsChanged = ({
+    viewableItems,
+  }: {
+    viewableItems: ViewToken[];
+  }) => {
     if (viewableItems.length > 0) {
-      setCurrentIndex(viewableItems[0].index);
+      setCurrentIndex(viewableItems[0].index ?? 0);
     }
-  }).current;
+  };
 
   const renderItem = ({ item }: ListRenderItemInfo<Banner>) => (
-    <View style={{ width: width * 0.9 }}>
+    <View style={{ width: width - 32 }}>
       <Image source={item.image} contentFit="cover" style={styles.image} />
     </View>
   );
@@ -65,6 +75,8 @@ export const Home = () => {
   const handleNavigateProductDetails = useCallback((id: string) => {
     router.push(ROUTES.PRODUCT_DETAILS(id));
   }, []);
+
+  const getKeyExtractor = useCallback((item: Banner) => item.id, []);
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.content }]}>
@@ -87,13 +99,12 @@ export const Home = () => {
       <View style={styles.contentWrapper}>
         <FlatList
           data={BANNER_DATA}
-          keyExtractor={(item) => item.id}
+          keyExtractor={getKeyExtractor}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          ref={flatListRef}
           onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
+          viewabilityConfig={VIEWABILITY_CONFIG}
           renderItem={renderItem}
         />
 
@@ -133,7 +144,8 @@ export const Home = () => {
       />
       <View style={styles.imgWrapper}>
         <Image
-          source={require('@/assets/images/mac.jpg')}
+          source={ONLINE_SHOPPING.source}
+          alt={ONLINE_SHOPPING.alt}
           style={styles.image}
         />
       </View>
@@ -164,6 +176,8 @@ const styles = StyleSheet.create({
 
   image: {
     flex: 1,
+    maxWidth: '100%',
+    width: '100%',
   },
 
   dots: {

@@ -12,18 +12,18 @@ import { colors, fontsFamily, fontWeights } from '@/themes';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Constants
-import { ROUTES } from '@/constants';
+import { AVATAR_DEFAULT, ROUTES } from '@/constants';
 
 // Hooks
 import { useGetUser, useTheme } from '@/hooks';
 
 export const Setting = () => {
+  const { toggleTheme, colors } = useTheme();
   const clearAuth = useAuthStore((state) => state.clearAuth);
   const clearCart = useCartStore((state) => state.clearCart);
-  const userId = useAuthStore((state) => state.userId);
-  const { toggleTheme, colors } = useTheme();
 
-  const { user, isFetching } = useGetUser(userId);
+  const userId = useAuthStore((state) => state.userId);
+  const { user, isLoading } = useGetUser(userId);
   const { username = '', email = '', avatar = '' } = user || {};
 
   const logout = () => {
@@ -41,24 +41,21 @@ export const Setting = () => {
       <View style={styles.headerContainer}>
         <View style={styles.block} />
         <Text size="lg" style={styles.heading}>
-          Profile
+          Setting
         </Text>
         <TouchableOpacity onPress={logout}>
           <LogoutIcon color={colors.default} />
         </TouchableOpacity>
       </View>
 
-      {isFetching ? (
+      {isLoading ? (
         <ProfileSkeleton />
       ) : (
         <View style={styles.infoWrapper}>
           <View style={styles.info}>
             <Image
-              source={
-                !!avatar
-                  ? { uri: avatar }
-                  : require('@/assets/images/avatar-default.jpg')
-              }
+              source={!!avatar ? { uri: avatar } : AVATAR_DEFAULT.source}
+              alt={AVATAR_DEFAULT.alt}
               style={styles.img}
             />
             <View>
@@ -73,7 +70,11 @@ export const Setting = () => {
           </TouchableOpacity>
         </View>
       )}
-      <Button title="toggle theme" onPress={toggleTheme} />
+      <Button
+        title="toggle theme"
+        onPress={toggleTheme}
+        style={styles.toggleTheme}
+      />
     </View>
   );
 };
@@ -92,8 +93,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 12,
-    marginBottom: 20,
     alignItems: 'center',
   },
   heading: {
@@ -127,5 +126,10 @@ const styles = StyleSheet.create({
 
   block: {
     width: 20,
+  },
+
+  toggleTheme: {
+    marginTop: 20,
+    height: 50,
   },
 });

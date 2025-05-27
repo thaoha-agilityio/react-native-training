@@ -9,16 +9,14 @@ interface CategoryProps {
   title: string;
   uri: string;
 }
-const CategoryComponent = ({ title, uri }: CategoryProps) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.imageWrapper}>
-        <Image source={uri} style={styles.image} />
-      </View>
-      <Text size="tiny">{title}</Text>
+const CategoryComponent = ({ title, uri }: CategoryProps) => (
+  <View style={styles.container}>
+    <View style={styles.imageWrapper}>
+      <Image source={uri} style={styles.image} />
     </View>
-  );
-};
+    <Text size="tiny">{title}</Text>
+  </View>
+);
 
 export const Category = memo(CategoryComponent);
 
