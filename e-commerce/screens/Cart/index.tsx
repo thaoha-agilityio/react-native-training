@@ -13,10 +13,10 @@ import { fontsFamily, lineHeights } from '@/themes';
 import { formatPrice, formatUSPhoneNumber } from '@/utils';
 
 // Stores
-import { useAuthStore, useCartStore } from '@/stores';
+import { useCartStore } from '@/stores';
 
 // Hooks
-import { useGetUser, useTheme } from '@/hooks';
+import { useGetUserLogged, useTheme } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
@@ -30,9 +30,8 @@ export const CartScreen = () => {
       state.getTotalPrice,
     ]),
   );
-  const userId = useAuthStore((state) => state.userId);
 
-  const { user } = useGetUser(userId);
+  const { user } = useGetUserLogged();
 
   const { address = '', phoneNumber = '' } = user || {};
 

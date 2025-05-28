@@ -56,9 +56,9 @@ export default function RootLayout() {
             <Stack
               screenOptions={{
                 headerShown: true,
-                header: ({ navigation, route }) => {
-                  return <Header navigation={navigation} name={route.name} />;
-                },
+                header: ({ navigation, route }) => (
+                  <Header navigation={navigation} name={route.name} />
+                ),
               }}
             >
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

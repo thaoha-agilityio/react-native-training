@@ -8,20 +8,16 @@ import { EditIcon } from '@/components/icons';
 // Themes
 import { colors, fontWeights } from '@/themes';
 
-// Hooks
-import { useAuthStore } from '@/stores';
-
 // Constants
 import { AVATAR_DEFAULT, ROUTES } from '@/constants';
 
 // Hooks
-import { useGetUser, useTheme } from '@/hooks';
+import { useGetUserLogged, useTheme } from '@/hooks';
 
 export const SettingScreen = () => {
   const { toggleTheme, colors } = useTheme();
 
-  const userId = useAuthStore((state) => state.userId);
-  const { user, isLoading } = useGetUser(userId);
+  const { user, isLoading } = useGetUserLogged();
   const { username = '', email = '', avatar = '' } = user || {};
 
   const navigateProfile = () => {

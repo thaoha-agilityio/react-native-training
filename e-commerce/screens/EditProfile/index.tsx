@@ -6,11 +6,8 @@ import Toast from 'react-native-toast-message';
 // Components
 import { FormSkeleton, ProfileForm } from '@/components';
 
-// Stores
-import { useAuthStore } from '@/stores';
-
 // Hooks
-import { useEditUser, useGetUser, useTheme } from '@/hooks';
+import { useEditUser, useGetUserLogged, useTheme } from '@/hooks';
 
 // Utils
 import { getAPIErrorMessage } from '@/utils';
@@ -20,9 +17,8 @@ import { UserPayload } from '@/interfaces';
 
 export const EditProfileScreen = () => {
   const { colors } = useTheme();
-  const userId = useAuthStore((state) => state.userId);
-  const { user: userDetails, isLoading } = useGetUser(userId);
-  const { mutate: editUser, isPending } = useEditUser(userId);
+
+  const { user: userDetails, isLoading } = useGetUserLogged();
 
   const {
     username = '',
@@ -35,7 +31,9 @@ export const EditProfileScreen = () => {
     accountHolderName = '',
     bankAccountNumber = '',
     state = '',
+    id = '',
   } = userDetails || {};
+  const { mutate: editUser, isPending } = useEditUser(id);
 
   const handleGoBack = () => {
     router.back();
