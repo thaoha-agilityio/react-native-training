@@ -16,7 +16,7 @@ import { useHydration } from '@/hooks';
 import { ThemeProvider } from '@/contexts';
 
 // Components
-import { StatusBar } from '@/components';
+import { StatusBar, Header } from '@/components';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -55,9 +55,15 @@ export default function RootLayout() {
           <SafeAreaView style={{ flex: 1 }}>
             <Stack
               screenOptions={{
-                headerShown: false,
+                headerShown: true,
+                header: ({ navigation, route }) => {
+                  return <Header navigation={navigation} name={route.name} />;
+                },
               }}
-            />
+            >
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="(public)" options={{ headerShown: false }} />
+            </Stack>
 
             <StatusBar />
             <Toast />

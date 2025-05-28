@@ -1,6 +1,4 @@
 // Components
-import { Cart } from '@/screens';
-
-const CartScreen = () => <Cart isTabBar />;
+import { CartScreen } from '@/screens';
 
 export default CartScreen;

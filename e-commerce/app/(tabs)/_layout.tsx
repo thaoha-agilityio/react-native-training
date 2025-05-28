@@ -9,6 +9,9 @@ import { colors } from '@/themes';
 // Constants
 import { TAB_SCREENS } from '@/constants';
 
+// Components
+import { Header } from '@/components';
+
 export default function TabLayout() {
   const { colors: colorTheme } = useTheme();
 
@@ -26,7 +29,7 @@ export default function TabLayout() {
         },
       }}
     >
-      {TAB_SCREENS.map(({ name, title, Icon, isCart }) => (
+      {TAB_SCREENS.map(({ name, title, Icon, isCart, isSetting }) => (
         <Tabs.Screen
           key={name}
           name={name}
@@ -45,6 +48,12 @@ export default function TabLayout() {
                 top: -18,
                 backgroundColor: colorTheme.background,
               },
+            }),
+            ...(isSetting && {
+              headerShown: true,
+              header: ({ navigation, route }) => (
+                <Header navigation={navigation} name={route.name} />
+              ),
             }),
           }}
         />

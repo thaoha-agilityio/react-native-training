@@ -5,6 +5,7 @@ export * from './CartItem';
 export * from './CartList';
 export * from './Categories';
 export * from './Dropdown';
+export * from './Header';
 export * from './Image';
 export * from './Input';
 export * from './LoginForm';

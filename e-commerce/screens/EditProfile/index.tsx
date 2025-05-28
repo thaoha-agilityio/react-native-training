@@ -1,11 +1,10 @@
 import { router } from 'expo-router';
 import { useCallback } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 // Components
 import { FormSkeleton, ProfileForm } from '@/components';
-import { ArrowLeftIcon } from '@/components/icons';
 
 // Stores
 import { useAuthStore } from '@/stores';
@@ -62,9 +61,6 @@ export const EditProfileScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
-      <Pressable onPress={handleGoBack} style={styles.backBtn}>
-        <ArrowLeftIcon color={colors.default} />
-      </Pressable>
       {isLoading ? (
         <FormSkeleton />
       ) : (

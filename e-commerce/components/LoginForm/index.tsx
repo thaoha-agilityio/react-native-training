@@ -33,7 +33,7 @@ const LoginFormComponent = ({
     control,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty },
   } = useForm<LoginPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -146,7 +146,7 @@ const LoginFormComponent = ({
       <Button
         variant="secondary"
         size="lg"
-        disabled={isLoading || !isDirty || !isValid}
+        disabled={isLoading || !isDirty}
         isLoading={isLoading}
         style={styles.submitButton}
         onPress={handleSubmit(onSubmit)}

@@ -8,3 +8,11 @@ export const ROUTES = {
   CART: '/cart',
   CHECKOUT: '/checkout',
 } as const;
+
+export const SCREENS = {
+  PRODUCT_DETAILS: 'products/[id]',
+  EDIT_PROFILE: 'edit-profile/index',
+  CART: 'cart/index',
+  CHECKOUT: 'checkout/index',
+  SETTING: 'setting',
+} as const;
