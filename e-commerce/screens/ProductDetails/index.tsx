@@ -1,21 +1,14 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
   Dimensions,
   FlatList,
   ListRenderItemInfo,
-  Pressable,
   ScrollView,
   StyleSheet,
   View,
   ViewToken,
 } from 'react-native';
-import {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
-import { useShallow } from 'zustand/shallow';
 
 // Components
 import {
@@ -23,10 +16,9 @@ import {
   Image,
   PaginationDot,
   ProductDetailsSkeleton,
-  ShoppingCart,
   Text,
 } from '@/components';
-import { ArrowLeftIcon, CartIcon, StarIcon } from '@/components/icons';
+import { CartIcon, StarIcon } from '@/components/icons';
 
 // Themes
 import { colors, fontsFamily } from '@/themes';
@@ -44,7 +36,7 @@ import { useFetchProductDetails, useTheme } from '@/hooks';
 import { useCartStore } from '@/stores';
 
 // Constants
-import { ROUTES, VIEWABILITY_CONFIG } from '@/constants';
+import { VIEWABILITY_CONFIG } from '@/constants';
 
 const { width } = Dimensions.get('screen');
 
@@ -63,10 +55,7 @@ export const ProductDetailsScreen = () => {
     description = '',
   } = product || {};
 
-  const [addItemToCart] = useCartStore(
-    useShallow((state) => [state.addItemToCart]),
-  );
-  const scale = useSharedValue(1);
+  const addItemToCart = useCartStore((state) => state.addItemToCart);
 
   const handleAddToCart = useCallback(() => {
     addItemToCart({
@@ -77,11 +66,7 @@ export const ProductDetailsScreen = () => {
       image: images[0].image,
       id: id.toString(),
     });
-
-    scale.value = withSpring(1.5, { damping: 5 }, () => {
-      scale.value = withSpring(1);
-    });
-  }, [addItemToCart, id, images, name, price, scale]);
+  }, [addItemToCart, id, images, name, price]);
 
   const onViewableItemsChanged = ({
     viewableItems,
@@ -99,35 +84,12 @@ export const ProductDetailsScreen = () => {
     </View>
   );
 
-  const handleGoBack = () => {
-    router.back();
-  };
-
-  const handleGoToCart = useCallback(() => {
-    router.replace(ROUTES.CART);
-  }, []);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
-
   const getKeyExtractor = useCallback((item: ProductImg) => item.id, []);
 
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: colorTheme.content }]}
     >
-      <View style={styles.headerWrapper}>
-        <Pressable onPress={handleGoBack}>
-          <ArrowLeftIcon color={colorTheme.default} />
-        </Pressable>
-
-        <ShoppingCart
-          onNavigation={handleGoToCart}
-          animatedStyle={animatedStyle}
-        />
-      </View>
-
       {isLoading ? (
         <ProductDetailsSkeleton />
       ) : (

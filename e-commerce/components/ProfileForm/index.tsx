@@ -55,7 +55,7 @@ const ProfileFormComponent = ({
     control,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty },
   } = useForm<UserPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -335,7 +335,7 @@ const ProfileFormComponent = ({
 
       <Button
         title="Save"
-        disabled={isLoading || !isDirty || !isValid}
+        disabled={isLoading || !isDirty}
         isLoading={isLoading || isUploading}
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}

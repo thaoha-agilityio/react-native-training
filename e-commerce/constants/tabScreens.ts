@@ -32,5 +32,6 @@ export const TAB_SCREENS = [
     name: 'setting',
     title: 'Setting',
     Icon: SettingIcon,
+    isSetting: true,
   },
 ];

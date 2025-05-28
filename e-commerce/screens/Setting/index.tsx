@@ -3,13 +3,13 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 // Components
 import { Button, Image, ProfileSkeleton, Text } from '@/components';
-import { EditIcon, LogoutIcon } from '@/components/icons';
+import { EditIcon } from '@/components/icons';
 
 // Themes
-import { colors, fontsFamily, fontWeights } from '@/themes';
+import { colors, fontWeights } from '@/themes';
 
 // Hooks
-import { useAuthStore, useCartStore } from '@/stores';
+import { useAuthStore } from '@/stores';
 
 // Constants
 import { AVATAR_DEFAULT, ROUTES } from '@/constants';
@@ -19,18 +19,10 @@ import { useGetUser, useTheme } from '@/hooks';
 
 export const SettingScreen = () => {
   const { toggleTheme, colors } = useTheme();
-  const clearAuth = useAuthStore((state) => state.clearAuth);
-  const clearCart = useCartStore((state) => state.clearCart);
 
   const userId = useAuthStore((state) => state.userId);
   const { user, isLoading } = useGetUser(userId);
   const { username = '', email = '', avatar = '' } = user || {};
-
-  const logout = () => {
-    clearAuth();
-    clearCart();
-    router.push(ROUTES.LOGIN);
-  };
 
   const navigateProfile = () => {
     router.push(ROUTES.EDIT_PROFILE);
@@ -38,16 +30,6 @@ export const SettingScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
-      <View style={styles.headerContainer}>
-        <View style={styles.block} />
-        <Text size="lg" style={styles.heading}>
-          Setting
-        </Text>
-        <TouchableOpacity onPress={logout}>
-          <LogoutIcon color={colors.default} />
-        </TouchableOpacity>
-      </View>
-
       {isLoading ? (
         <ProfileSkeleton />
       ) : (
@@ -82,26 +64,10 @@ export const SettingScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 22,
-  },
-
-  logout: {
-    width: 315,
-    height: 60,
-  },
-
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  heading: {
-    textAlign: 'center',
-    fontFamily: fontsFamily.semiBold,
+    paddingHorizontal: 22,
   },
 
   infoWrapper: {
-    marginTop: 18,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -122,10 +88,6 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: fontWeights.bold,
     color: colors.text.primary,
-  },
-
-  block: {
-    width: 20,
   },
 
   toggleTheme: {

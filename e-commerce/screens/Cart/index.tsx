@@ -1,13 +1,13 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useShallow } from 'zustand/shallow';
 
 // Components
 import { Button, CartList, Text } from '@/components';
-import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
+import { LocationIcon, PositionIcon } from '@/components/icons';
 
 // Themes
-import { colors, fontsFamily, lineHeights } from '@/themes';
+import { fontsFamily, lineHeights } from '@/themes';
 
 // Utils
 import { formatPrice, formatUSPhoneNumber } from '@/utils';
@@ -21,7 +21,7 @@ import { useGetUser, useTheme } from '@/hooks';
 // Constants
 import { ROUTES } from '@/constants';
 
-export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
+export const CartScreen = () => {
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
@@ -50,21 +50,6 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
-      <View style={styles.headingWrapper}>
-        {isTabBar ? (
-          <View style={styles.block} />
-        ) : (
-          <Pressable onPress={router.back}>
-            <ArrowLeftIcon color={colors.default} />
-          </Pressable>
-        )}
-
-        <Text size="lg" style={styles.heading}>
-          Cart
-        </Text>
-        <View style={styles.block} />
-      </View>
-
       <View style={styles.addressWrapper}>
         <View style={styles.address}>
           <PositionIcon color={colors.default} />
@@ -133,24 +118,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 22,
-  },
-
-  headingWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 22,
-    borderColor: colors.border,
-    borderBottomWidth: 0.6,
-    paddingBottom: 18,
-  },
-
-  heading: {
-    textAlign: 'center',
-    fontFamily: fontsFamily.semiBold,
-  },
-
-  block: {
-    width: 20,
   },
 
   addressWrapper: {

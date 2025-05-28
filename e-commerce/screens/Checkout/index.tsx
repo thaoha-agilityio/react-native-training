@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/shallow';
 
 // Components
 import { Button, SuccessModal, Text } from '@/components';
-import { ArrowLeftIcon, DeliveryIcon, EditIcon } from '@/components/icons';
+import { DeliveryIcon, EditIcon } from '@/components/icons';
 
 // Hooks
 import { useGetUser, useOrderCreated, useTheme } from '@/hooks';
@@ -45,10 +45,6 @@ export const CheckoutScreen = () => {
   const { address = '', bankAccountNumber, username = '' } = user || {};
 
   const [isVisible, setIsVisible] = useState(false);
-
-  const handleGoBack = () => {
-    router.back();
-  };
 
   const totalOrderPrice = () => {
     const price = getTotalPrice();
@@ -92,17 +88,6 @@ export const CheckoutScreen = () => {
       style={[styles.container, { backgroundColor: colorTheme.content }]}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.headingWrapper}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <ArrowLeftIcon color={colorTheme.default} />
-        </TouchableOpacity>
-
-        <Text variant="title" size="lg" style={styles.heading}>
-          Check out
-        </Text>
-        <View style={styles.block} />
-      </View>
-
       <View style={styles.infoWrapper}>
         {/*Address  */}
         <View style={styles.wrapper}>
@@ -213,24 +198,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 22,
-  },
-
-  headingWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 22,
-    borderColor: colors.border,
-    borderBottomWidth: 0.6,
-    paddingBottom: 18,
-  },
-
-  heading: {
-    textAlign: 'center',
-    fontFamily: fontsFamily.semiBold,
-  },
-
-  block: {
-    width: 20,
   },
 
   infoWrapper: {
