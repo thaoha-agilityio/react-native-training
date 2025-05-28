@@ -9,10 +9,10 @@ import { Button, SuccessModal, Text } from '@/components';
 import { DeliveryIcon, EditIcon } from '@/components/icons';
 
 // Hooks
-import { useGetUser, useOrderCreated, useTheme } from '@/hooks';
+import { useGetUserLogged, useOrderCreated, useTheme } from '@/hooks';
 
 // Stores
-import { useAuthStore, useCartStore } from '@/stores';
+import { useCartStore } from '@/stores';
 
 // Themes
 import {
@@ -38,11 +38,16 @@ export const CheckoutScreen = () => {
   const [cart, getTotalPrice, clearCart] = useCartStore(
     useShallow((state) => [state.cart, state.getTotalPrice, state.clearCart]),
   );
-  const userId = useAuthStore((state) => state.userId);
-  const { mutate: createOrder, isPending } = useOrderCreated();
-  const { user } = useGetUser(userId);
 
-  const { address = '', bankAccountNumber, username = '' } = user || {};
+  const { mutate: createOrder, isPending } = useOrderCreated();
+  const { user } = useGetUserLogged();
+
+  const {
+    address = '',
+    bankAccountNumber,
+    username = '',
+    id = '',
+  } = user || {};
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -53,7 +58,7 @@ export const CheckoutScreen = () => {
 
   const handleOrderCreate = () => {
     const payload = {
-      userId: userId.toString(),
+      userId: id.toString(),
       shippingFee: SHIPPING_FEE,
       total: totalOrderPrice(),
       orderItems: cart,

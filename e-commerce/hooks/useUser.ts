@@ -39,3 +39,18 @@ export const useEditUser = (id: string) => {
     },
   });
 };
+
+export const useGetUserLogged = () => {
+  const token = useAuthStore((state) => state.accessToken);
+  const userId = useAuthStore((state) => state.userId);
+
+  const { data, ...rest } = useQuery<DataResponse<User>, AxiosError>({
+    queryKey: [QUERY_KEYS.USER, userId],
+    queryFn: async () => await getData(`${ENDPOINTS.USERS}/${userId}`, token),
+  });
+
+  return {
+    ...rest,
+    user: data?.data,
+  };
+};
