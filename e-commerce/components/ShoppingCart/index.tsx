@@ -1,6 +1,11 @@
-import { memo } from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
-import Animated, { AnimatedStyleProp } from 'react-native-reanimated';
+import { memo, useEffect, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+import { useShallow } from 'zustand/shallow';
 
 // Icons
 import { CartIcon } from '@/components/icons';
@@ -16,17 +21,32 @@ import { useCartStore } from '@/stores';
 
 export interface ShoppingCartProps {
   onNavigation: () => void;
-  animatedStyle?: AnimatedStyleProp<ViewStyle>;
 }
 
-const ShoppingCartComponent = ({
-  onNavigation,
-  animatedStyle,
-}: ShoppingCartProps) => {
-  const cart = useCartStore((state) => state.cart);
+const ShoppingCartComponent = ({ onNavigation }: ShoppingCartProps) => {
+  const [cart, getTotalPrice] = useCartStore(
+    useShallow((state) => [state.cart, state.getTotalPrice]),
+  );
+  const total = getTotalPrice();
+  const scale = useSharedValue(1);
+  const prevQuantityRef = useRef(total);
+
+  const animatedScaleStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  useEffect(() => {
+    if (total !== prevQuantityRef.current) {
+      scale.value = withSpring(1.5, { damping: 5 }, () => {
+        scale.value = withSpring(1);
+      });
+
+      prevQuantityRef.current = total;
+    }
+  }, [scale, total]);
 
   return (
-    <Animated.View style={[styles.container, animatedStyle]}>
+    <Animated.View style={[styles.container, animatedScaleStyle]}>
       <TouchableOpacity onPress={onNavigation} testID="cart-icon">
         <CartIcon />
       </TouchableOpacity>

@@ -17,6 +17,7 @@ export * from './LocationIcon';
 export * from './HomeIcon';
 export * from './LockIcon';
 export * from './LogoIcon';
+export * from './LogoutIcon';
 export * from './MinusIcon';
 export * from './PlusIcon';
 export * from './PositionIcon';

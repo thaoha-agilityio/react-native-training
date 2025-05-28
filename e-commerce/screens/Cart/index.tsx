@@ -1,21 +1,13 @@
-import {
-  Pressable,
-  StyleSheet,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
 import { router } from 'expo-router';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useShallow } from 'zustand/shallow';
-import { useCallback } from 'react';
 
 // Components
-import { CartList, Text, Button } from '@/components';
-import { ArrowLeftIcon, LocationIcon, PositionIcon } from '@/components/icons';
+import { Button, CartList, Text } from '@/components';
+import { LocationIcon, PositionIcon } from '@/components/icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily, lineHeights } from '@/themes';
+import { fontsFamily, lineHeights } from '@/themes';
 
 // Utils
 import { formatPrice, formatUSPhoneNumber } from '@/utils';
@@ -24,18 +16,12 @@ import { formatPrice, formatUSPhoneNumber } from '@/utils';
 import { useAuthStore, useCartStore } from '@/stores';
 
 // Hooks
-import { useGetUser } from '@/hooks';
+import { useGetUser, useTheme } from '@/hooks';
 
 // Constants
 import { ROUTES } from '@/constants';
 
-const screenHeight = Dimensions.get('window').height;
-
-export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
-  const handleGoBack = () => {
-    router.back();
-  };
-  const colorScheme = useColorScheme() ?? 'light';
+export const CartScreen = () => {
   const [cart, updateQuantity, removeCart, getTotalPrice] = useCartStore(
     useShallow((state) => [
       state.cart,
@@ -52,6 +38,8 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
 
   const hasAddress = !!address && !!phoneNumber;
 
+  const { colors } = useTheme();
+
   const navigateEditProfile = () => {
     router.push(ROUTES.EDIT_PROFILE);
   };
@@ -60,40 +48,11 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
     router.push(ROUTES.CHECKOUT);
   };
 
-  const handleUpdateQuantity = useCallback(
-    (id: string, quantity: number) => {
-      updateQuantity(id, quantity);
-    },
-    [updateQuantity],
-  );
-
-  const handleRemoveCart = useCallback(
-    (id: string) => {
-      removeCart(id);
-    },
-    [removeCart],
-  );
-
   return (
-    <View style={styles.container}>
-      <View style={styles.headingWrapper}>
-        {!isTabBar ? (
-          <Pressable onPress={handleGoBack}>
-            <ArrowLeftIcon color={colorTheme[colorScheme].default} />
-          </Pressable>
-        ) : (
-          <View style={styles.block} />
-        )}
-
-        <Text size="lg" style={styles.heading}>
-          Cart
-        </Text>
-        <View style={styles.block} />
-      </View>
-
+    <View style={[styles.container, { backgroundColor: colors.content }]}>
       <View style={styles.addressWrapper}>
         <View style={styles.address}>
-          <PositionIcon color={colorTheme[colorScheme].default} />
+          <PositionIcon color={colors.default} />
           <Text size="sm" style={styles.delivery}>
             Delivery Address
           </Text>
@@ -126,19 +85,13 @@ export const Cart = ({ isTabBar }: { isTabBar?: boolean }) => {
         <Text variant="label" size="sm">
           Shopping List
         </Text>
-
-        <View
-          style={[
-            styles.items,
-            { height: isTabBar ? screenHeight * 0.44 : screenHeight * 0.54 },
-          ]}
-        >
-          <CartList
-            data={cart}
-            onRemove={handleRemoveCart}
-            onChangeQuantity={handleUpdateQuantity}
-          />
-        </View>
+      </View>
+      <View style={[styles.items]}>
+        <CartList
+          data={cart}
+          onRemove={removeCart}
+          onChangeQuantity={updateQuantity}
+        />
       </View>
 
       <View style={styles.footer}>
@@ -165,24 +118,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 22,
-  },
-
-  headingWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 22,
-    borderColor: colors.border,
-    borderBottomWidth: 0.6,
-    paddingBottom: 18,
-  },
-
-  heading: {
-    textAlign: 'center',
-    fontFamily: fontsFamily.semiBold,
-  },
-
-  block: {
-    width: 20,
   },
 
   addressWrapper: {
@@ -216,7 +151,9 @@ const styles = StyleSheet.create({
   },
 
   items: {
+    flex: 1,
     marginTop: 10,
+    paddingHorizontal: 22,
   },
 
   totalWrapper: {
@@ -232,7 +169,7 @@ const styles = StyleSheet.create({
 
   footer: {
     paddingHorizontal: 22,
-    flex: 1,
+    paddingTop: 40,
     justifyContent: 'flex-end',
   },
 });

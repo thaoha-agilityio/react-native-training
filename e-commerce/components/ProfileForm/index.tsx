@@ -1,7 +1,8 @@
 import { memo, useCallback } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import Toast from 'react-native-toast-message';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 // Components
 import { AvatarUploader, Text, Input, Button, Dropdown } from '@/components';
@@ -94,6 +95,7 @@ const ProfileFormComponent = ({
       },
     },
     PHONE_NUMBER: {
+      required: FORM_VALIDATION_MESSAGE.REQUIRED('Phone number'),
       pattern: {
         value: REGEX.PHONE_NUMBER,
         message: FORM_VALIDATION_MESSAGE.INVALID('Phone number'),
@@ -147,7 +149,7 @@ const ProfileFormComponent = ({
   };
 
   return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+    <KeyboardAwareScrollView style={styles.container}>
       <Controller
         name="avatar"
         control={control}
@@ -338,7 +340,7 @@ const ProfileFormComponent = ({
         style={styles.saveButton}
         onPress={handleSubmit(onSubmit)}
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 

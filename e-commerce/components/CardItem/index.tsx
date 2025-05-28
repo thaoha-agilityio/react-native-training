@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 // Components
 import { Image } from '../Image';
@@ -22,6 +22,7 @@ interface CardItemProps {
   reviewNumber: number;
   height?: number;
   onPress?: (id: string) => void;
+  extraStyles?: ViewStyle;
 }
 
 const CardItemComponent = ({
@@ -34,15 +35,21 @@ const CardItemComponent = ({
   description,
   height = 124,
   onPress,
+  extraStyles,
 }: CardItemProps) => {
   const handleOnPress = () => {
     onPress?.(id);
   };
 
   return (
-    <TouchableOpacity onPress={handleOnPress} style={style.container}>
-      <View style={style.content}>
-        <View style={[style.imgWrapper, { height }]}>
+    <TouchableOpacity
+      onPress={handleOnPress}
+      style={[style.container, extraStyles]}
+    >
+      <View>
+        <View
+          style={[style.imgWrapper, { height }, { width: extraStyles?.width }]}
+        >
           <Image source={image} style={[style.img]} alt={name} />
         </View>
         <View style={style.wrapper}>
@@ -60,7 +67,7 @@ const CardItemComponent = ({
               <StarIcon key={index} />
             ))}
             <Text size="xs" style={style.reviewer}>
-              {formatNumberWithUnit(reviewNumber)}
+              {formatNumberWithUnit(reviewNumber, 'review')}
             </Text>
           </View>
         </View>
@@ -76,7 +83,7 @@ const style = StyleSheet.create({
     boxShadow: '#8A959E1F 1px 1px 2px 2px',
     borderRadius: 8,
   },
-  content: {},
+
   imgWrapper: {
     borderRadius: 8,
     overflow: 'hidden',

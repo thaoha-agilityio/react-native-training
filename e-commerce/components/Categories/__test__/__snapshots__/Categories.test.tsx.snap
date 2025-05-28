@@ -48,6 +48,26 @@ exports[`Categories should render properly 1`] = `
           "image": "https://cdn.mos.cms.futurecdn.net/n48hMQxbzBhosSMzZc8GWV.jpg",
           "title": "Casual",
         },
+        {
+          "image": "https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000/m/dd1a/25e6/5fec/d877/72ad/4d20/f4aa/dc75/7421/c9fd/c9fd.jpg",
+          "title": "Dior",
+        },
+        {
+          "image": "https://assets.vogue.com/photos/6127f6fdad6ce2332569bf44/master/w_2560%2Cc_limit/00_story.jpg",
+          "title": "Chanel",
+        },
+        {
+          "image": "https://d27fp5ulgfd7w2.cloudfront.net/wp-content/uploads/2023/01/12163716/How-to-Become-a-Fashion-Influencer-1920x1080-1.jpg",
+          "title": "YSL",
+        },
+        {
+          "image": "https://wallpapers.com/images/hd/zara-fashion-chain-store-m4g0gru4j3a7ixvs.jpg",
+          "title": "Zara",
+        },
+        {
+          "image": "https://i2-prod.derbytelegraph.co.uk/incoming/article7784489.ece/ALTERNATES/s1227b/1_SD_TEM_041122-HM-001JPG.jpg",
+          "title": "H&M",
+        },
       ]
     }
     getItem={[Function]}
@@ -118,7 +138,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -210,7 +232,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -302,7 +326,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -394,7 +420,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -486,7 +514,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -578,7 +608,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -670,7 +702,9 @@ exports[`Categories should render properly 1`] = `
               placeholder={
                 [
                   {
-                    "fallbackImage": "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
                   },
                 ]
               }
@@ -713,6 +747,295 @@ exports[`Categories should render properly 1`] = `
           </Text>
         </View>
       </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000/m/dd1a/25e6/5fec/d877/72ad/4d20/f4aa/dc75/7421/c9fd/c9fd.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 16,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Dior
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://assets.vogue.com/photos/6127f6fdad6ce2332569bf44/master/w_2560%2Cc_limit/00_story.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 16,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            Chanel
+          </Text>
+        </View>
+      </View>
+      <View
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "gap": 4,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 56,
+                "justifyContent": "center",
+                "width": 56,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoImage
+              borderRadius={50}
+              containerViewRef={"[React.ref]"}
+              contentFit="cover"
+              contentPosition={
+                {
+                  "left": "50%",
+                  "top": "50%",
+                }
+              }
+              flex={1}
+              nativeViewRef={"[React.ref]"}
+              onError={[Function]}
+              onLoad={[Function]}
+              onLoadStart={[Function]}
+              onProgress={[Function]}
+              placeholder={
+                [
+                  {
+                    "height": 16,
+                    "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
+                    "width": 16,
+                  },
+                ]
+              }
+              source={
+                [
+                  {
+                    "uri": "https://d27fp5ulgfd7w2.cloudfront.net/wp-content/uploads/2023/01/12163716/How-to-Become-a-Fashion-Influencer-1920x1080-1.jpg",
+                  },
+                ]
+              }
+              style={
+                {
+                  "borderRadius": 50,
+                  "flex": 1,
+                  "width": "100%",
+                }
+              }
+              transition={null}
+              width="100%"
+            />
+          </View>
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "Montserrat-Regular",
+                },
+                {
+                  "fontSize": 10,
+                  "lineHeight": 16,
+                },
+                {
+                  "color": "#000000",
+                },
+                undefined,
+              ]
+            }
+          >
+            YSL
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "width": 0,
+          }
+        }
+      />
     </View>
   </RCTScrollView>
 </View>

@@ -21,7 +21,12 @@ const ImagePickerModalComponent = ({
   onChooseFromLibrary,
   ...rest
 }: ImagePickerModalProps) => (
-  <Modal visible={visible} onClose={onClose} {...rest}>
+  <Modal
+    visible={visible}
+    onClose={onClose}
+    style={{ width: '100%' }}
+    {...rest}
+  >
     <TouchableOpacity style={styles.option} onPress={onTakePhoto}>
       <Text style={styles.optionText}>Take Photo</Text>
     </TouchableOpacity>

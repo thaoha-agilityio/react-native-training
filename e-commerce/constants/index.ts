@@ -10,3 +10,4 @@ export * from './pagination';
 export * from './queryKeys';
 export * from './regex';
 export * from './routes';
+export * from './tabScreens';

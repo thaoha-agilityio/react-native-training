@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Dimensions,
   FlatList,
   ListRenderItemInfo,
   StyleSheet,
@@ -20,10 +21,15 @@ interface ProductsProps {
   data: Product[];
   isLoading?: boolean;
   isFetchingNextPage?: boolean;
+  onNavigateProductDetails: (id: string) => void;
 }
+
+const imgWidth = (Dimensions.get('screen').width - 32 - 16) / 2;
+
 const ProductsLimitComponent = ({
   data,
   isFetchingNextPage,
+  onNavigateProductDetails,
 }: ProductsProps) => {
   const getKeyExtractor = useCallback((item: Product) => {
     const { id } = item || {};
@@ -31,29 +37,34 @@ const ProductsLimitComponent = ({
     return id.toString();
   }, []);
 
-  const renderItem = useCallback(({ item }: ListRenderItemInfo<Product>) => {
-    const {
-      id = '',
-      name = '',
-      images = [],
-      price = 0,
-      description = '',
-      rating = 0,
-      reviewNumber = 0,
-    } = item || {};
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<Product>) => {
+      const {
+        id = '',
+        name = '',
+        images = [],
+        price = 0,
+        description = '',
+        rating = 0,
+        reviewNumber = 0,
+      } = item || {};
 
-    return (
-      <CardItem
-        id={id}
-        name={name}
-        image={images[0].image}
-        price={price}
-        description={description}
-        rating={rating}
-        reviewNumber={reviewNumber}
-      />
-    );
-  }, []);
+      return (
+        <CardItem
+          id={id}
+          name={name}
+          image={images[0].image}
+          price={price}
+          description={description}
+          rating={rating}
+          reviewNumber={reviewNumber}
+          extraStyles={{ width: imgWidth, height: 250 }}
+          onPress={onNavigateProductDetails}
+        />
+      );
+    },
+    [onNavigateProductDetails],
+  );
 
   return (
     <View style={styles.container}>

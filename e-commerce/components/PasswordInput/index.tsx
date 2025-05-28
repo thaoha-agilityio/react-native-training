@@ -1,5 +1,5 @@
 import { Ref, forwardRef, memo, useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 
 // Components
 import { Input, TextInputProps } from '@/components';
@@ -25,7 +25,6 @@ const PasswordInputComponent = forwardRef(
           </TouchableOpacity>
         }
         secureTextEntry={!isShowPassword}
-        style={styles.text}
         {...props}
       />
     );
@@ -34,9 +33,3 @@ const PasswordInputComponent = forwardRef(
 
 PasswordInputComponent.displayName = 'PasswordInputComponent';
 export const PasswordInput = memo(PasswordInputComponent);
-
-const styles = StyleSheet.create({
-  text: {
-    color: 'black',
-  },
-});

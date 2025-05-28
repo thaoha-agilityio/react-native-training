@@ -1,11 +1,5 @@
 import { memo, useCallback } from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -22,24 +16,17 @@ import { Quantity } from '../Quantity';
 import { TrashIcon } from '../icons';
 
 // Themes
-import { colors, colorTheme, fontsFamily } from '@/themes';
+import { colors, fontsFamily } from '@/themes';
 
 // Utils
 import { formatPrice } from '@/utils';
 
-const WIDTH_CARD = Dimensions.get('window').width * 0.85;
+// Hooks
+import { useTheme } from '@/hooks';
+
+const WIDTH_CARD = Dimensions.get('window').width * 0.89;
 const ITEM_HEIGHT = 130;
 const WIDTH_SCREEN = Dimensions.get('window').width;
-
-const SHADOW = {
-  shadowColor: 'black',
-  shadowOffset: {
-    width: 0,
-    height: 10,
-  },
-  shadowOpacity: 0.5,
-  shadowRadius: 5,
-};
 
 interface CartItemProps {
   id: string;
@@ -64,8 +51,8 @@ const CartItemComponent = ({
   const swipeTranslateX = useSharedValue(0);
   const pressed = useSharedValue(false);
   const itemHeight = useSharedValue(ITEM_HEIGHT);
-  const marginVertical = useSharedValue(10);
-  const colorScheme = useColorScheme() ?? 'light';
+  const marginVertical = useSharedValue(18);
+  const { colors } = useTheme();
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -132,7 +119,7 @@ const CartItemComponent = ({
           style={[
             styles.fieldContainer,
             transformStyle,
-            { backgroundColor: colorTheme[colorScheme].background },
+            { backgroundColor: colors.background },
           ]}
         >
           <Image style={styles.img} source={img} />
@@ -165,14 +152,19 @@ const styles = StyleSheet.create({
   fieldContainer: {
     backgroundColor: colors.light,
     justifyContent: 'center',
-    width: WIDTH_CARD,
     height: ITEM_HEIGHT,
     alignItems: 'center',
     borderRadius: 20,
     flexDirection: 'row',
     gap: 20,
     paddingLeft: 10,
-    ...SHADOW,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
   },
   iconContainer: {
     position: 'absolute',

@@ -1,18 +1,15 @@
 import { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  ViewStyle,
-  TextStyle,
-  useColorScheme,
-} from 'react-native';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { Dropdown as DropdownElement } from 'react-native-element-dropdown';
 
 // Themes
-import { colors, colorTheme, fontsFamily, fontSizes } from '@/themes';
+import { colors, fontsFamily, fontSizes } from '@/themes';
 
 // Components
 import { Text } from '../Text';
+
+// Hooks
+import { useTheme } from '@/hooks';
 
 type DropdownItem = {
   label: string;
@@ -45,7 +42,7 @@ export const Dropdown = ({
   textStyle,
 }: DropdownProps) => {
   const [isFocus, setIsFocus] = useState(false);
-  const colorScheme = useColorScheme() ?? 'light';
+  const { colors: colorScheme } = useTheme();
 
   const handleFocus = () => {
     setIsFocus(true);
@@ -68,7 +65,7 @@ export const Dropdown = ({
         placeholderStyle={[styles.placeholderStyle, textStyle]}
         selectedTextStyle={[
           styles.selectedTextStyle,
-          { color: colorTheme[colorScheme].title },
+          { color: colorScheme.title },
         ]}
         data={data}
         maxHeight={maxHeight}
@@ -79,10 +76,10 @@ export const Dropdown = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
-        itemTextStyle={{ color: colorTheme[colorScheme].title }}
+        itemTextStyle={{ color: colorScheme.title }}
         containerStyle={[
           styles.containerStyle,
-          { backgroundColor: colorTheme[colorScheme].background },
+          { backgroundColor: colorScheme.background },
         ]}
         activeColor={colors.primary}
       />

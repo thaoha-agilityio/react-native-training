@@ -95,10 +95,14 @@ const LoginFormComponent = ({
         <Controller
           name="email"
           control={control}
-          render={({ field: { onChange, ...rest }, fieldState: { error } }) => (
+          render={({
+            field: { onChange, value, ...rest },
+            fieldState: { error },
+          }) => (
             <Input
               {...rest}
               ref={emailRef}
+              value={value?.trim()}
               variant="subtle"
               placeholder="Email"
               errorMessage={error?.message}

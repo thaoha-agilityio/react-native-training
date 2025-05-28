@@ -6,14 +6,14 @@ import {
   Text,
   TextStyle,
   ViewStyle,
-  Pressable,
-  PressableProps,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 
 // Styles
 import { colors, fontsFamily, fontSizes, lineHeights } from '@/themes';
 
-type ButtonProps = PropsWithChildren<PressableProps> & {
+type ButtonProps = PropsWithChildren<TouchableOpacityProps> & {
   title?: string;
   isLoading?: boolean;
   variant?: 'primary' | 'outline' | 'text' | 'secondary' | 'link';
@@ -32,7 +32,7 @@ const ButtonComponent = ({
   children,
   ...rest
 }: ButtonProps) => (
-  <Pressable
+  <TouchableOpacity
     role="button"
     disabled={disabled}
     style={[
@@ -58,7 +58,7 @@ const ButtonComponent = ({
       children
     )}
     {isLoading && <ActivityIndicator size="small" color="white" />}
-  </Pressable>
+  </TouchableOpacity>
 );
 
 export const Button = memo(ButtonComponent);
