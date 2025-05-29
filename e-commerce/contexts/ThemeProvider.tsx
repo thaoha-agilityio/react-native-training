@@ -2,12 +2,13 @@ import { createContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from 'react-native';
 
+// Constants
+import { THEME_STORAGE_KEY } from '@/constants';
+
 export const ThemeContext = createContext({
   theme: 'light',
   toggleTheme: () => {},
 });
-
-const THEME_STORAGE_KEY = '@app_theme';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const systemColorScheme = useColorScheme();

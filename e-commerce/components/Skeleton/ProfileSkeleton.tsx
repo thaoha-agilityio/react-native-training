@@ -5,13 +5,10 @@ import { Skeleton } from './Skeleton';
 import { EditIcon } from '../icons';
 
 // Hooks
-import { useColorScheme } from '@/hooks';
-
-// Themes
-import { colorTheme } from '@/themes';
+import { useTheme } from '@/hooks';
 
 export const ProfileSkeleton = () => {
-  const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   return (
     <View style={styles.infoWrapper}>
@@ -23,7 +20,7 @@ export const ProfileSkeleton = () => {
         </View>
       </View>
 
-      <EditIcon color={colorTheme[colorScheme].default} />
+      <EditIcon color={colors.default} />
     </View>
   );
 };

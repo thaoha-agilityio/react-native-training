@@ -48,14 +48,17 @@ export const EditProfileScreen = () => {
     Toast.show({ type: 'error', text1: getAPIErrorMessage(error) });
   }, []);
 
-  const handleEditProfile = (payload: UserPayload) => {
-    editUser(payload, {
-      onSuccess: handleEditSuccess,
-      onError: (error) => {
-        handleEditError(error);
-      },
-    });
-  };
+  const handleEditProfile = useCallback(
+    (payload: UserPayload) => {
+      editUser(payload, {
+        onSuccess: handleEditSuccess,
+        onError: (error) => {
+          handleEditError(error);
+        },
+      });
+    },
+    [editUser, handleEditError, handleEditSuccess],
+  );
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>
