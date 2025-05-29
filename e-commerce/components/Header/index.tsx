@@ -1,6 +1,10 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { memo, useCallback, useMemo } from 'react';
-import { router } from 'expo-router';
+import {
+  router,
+  NativeStackHeaderProps,
+  BottomTabHeaderProps,
+} from 'expo-router';
 
 // Components
 import { ArrowLeftIcon, LogoutIcon } from '../icons';
@@ -19,12 +23,10 @@ import { ROUTES, SCREENS } from '@/constants';
 // Stores
 import { useAuthStore, useCartStore } from '@/stores';
 
-interface HeaderProps {
-  name: string;
-  navigation: any;
-}
-
-const HeaderComponent = ({ name, navigation }: HeaderProps) => {
+const HeaderComponent = ({
+  route: { name },
+  navigation,
+}: NativeStackHeaderProps | BottomTabHeaderProps) => {
   const { colors } = useTheme();
   const clearAuth = useAuthStore((state) => state.clearAuth);
 
@@ -112,7 +114,9 @@ const HeaderComponent = ({ name, navigation }: HeaderProps) => {
       ]}
     >
       {!!LeftIcon ? (
-        <LeftIcon onPress={onPressLeftIcon} color={colors.default} />
+        <TouchableOpacity onPress={onPressLeftIcon}>
+          <LeftIcon color={colors.default} />
+        </TouchableOpacity>
       ) : (
         <View style={styles.block} />
       )}
@@ -122,7 +126,9 @@ const HeaderComponent = ({ name, navigation }: HeaderProps) => {
       </Text>
 
       {!!RightIcon ? (
-        <RightIcon color={colors.default} onPress={onPressRightIcon} />
+        <TouchableOpacity onPress={onPressRightIcon}>
+          <RightIcon color={colors.default} />
+        </TouchableOpacity>
       ) : (
         <View style={styles.block} />
       )}

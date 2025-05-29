@@ -51,9 +51,7 @@ export default function TabLayout() {
             }),
             ...(isSetting && {
               headerShown: true,
-              header: ({ navigation, route }) => (
-                <Header navigation={navigation} name={route.name} />
-              ),
+              header: ({ ...props }) => <Header {...props} />,
             }),
           }}
         />
