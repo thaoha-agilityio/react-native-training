@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -9,6 +9,7 @@ import {
   View,
   ViewToken,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 // Components
 import {
@@ -27,7 +28,7 @@ import { colors, fontsFamily } from '@/themes';
 import { ProductImg } from '@/interfaces';
 
 // Utils
-import { formatNumberWithUnit, formatPrice } from '@/utils';
+import { formatNumberWithUnit, formatPrice, getAPIErrorMessage } from '@/utils';
 
 // Hooks
 import { useFetchProductDetails, useTheme } from '@/hooks';
@@ -43,7 +44,7 @@ const { width } = Dimensions.get('screen');
 export const ProductDetailsScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { id } = useLocalSearchParams();
-  const { product, isLoading } = useFetchProductDetails(id.toString());
+  const { product, isLoading, error } = useFetchProductDetails(id.toString());
   const { colors: colorTheme } = useTheme();
 
   const {
@@ -85,6 +86,12 @@ export const ProductDetailsScreen = () => {
   );
 
   const getKeyExtractor = useCallback((item: ProductImg) => item.id, []);
+
+  useEffect(() => {
+    if (error) {
+      Toast.show({ type: 'error', text1: getAPIErrorMessage(error.message) });
+    }
+  }, [error]);
 
   return (
     <ScrollView

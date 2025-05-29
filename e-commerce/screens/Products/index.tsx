@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 
 // Components
 import { Input, ProductList, ProductsSkeleton, Text } from '@/components';
@@ -16,16 +17,22 @@ import { fontsFamily } from '@/themes';
 import { ROUTES } from '@/constants';
 
 // Utils
-import { formatNumberWithUnit } from '@/utils';
+import { formatNumberWithUnit, getAPIErrorMessage } from '@/utils';
 
 export const ProductsScreen = () => {
   const { colors } = useTheme();
-  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
+  const { data, fetchNextPage, isFetchingNextPage, isLoading, error } =
     useInfiniteProducts(12);
 
   const handleNavigateProductsScreen = useCallback((id: string) => {
     router.push(ROUTES.PRODUCT_DETAILS(id));
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      Toast.show({ type: 'error', text1: getAPIErrorMessage(error.message) });
+    }
+  }, [error]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.content }]}>

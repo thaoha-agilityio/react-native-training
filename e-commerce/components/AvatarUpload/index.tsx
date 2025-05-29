@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker';
+import { FileSystem } from 'react-native-file-access';
 
 // Components
 import { EditIcon } from '../icons';
@@ -15,6 +16,8 @@ import {
   requestCameraPermission,
   requestPhotoLibraryPermission,
 } from '@/utils';
+
+// Constants
 import { AVATAR_DEFAULT } from '@/constants';
 
 interface AvatarUploaderProps {
@@ -30,6 +33,7 @@ const AvatarUploaderComponent = ({
 }: AvatarUploaderProps) => {
   const [currentAvatar, setAvatarSrc] = useState(avatarUpload || avatar);
   const [isVisible, setIsVisible] = useState(false);
+  const [isRemoveCache, setIsRemoveCache] = useState(false);
 
   const handleSelectImage = useCallback(
     (uri?: string) => {
@@ -62,6 +66,7 @@ const AvatarUploaderComponent = ({
 
     if (!result.canceled) {
       handleSelectImage(result.assets[0].uri);
+      setIsRemoveCache(true);
       setIsVisible(false);
     }
   }, [handleSelectImage]);
@@ -81,6 +86,12 @@ const AvatarUploaderComponent = ({
     }
   }, [handleSelectImage]);
 
+  const handleRemoveCache = async () => {
+    if (!isRemoveCache) return;
+
+    await FileSystem.unlink(currentAvatar || '');
+  };
+
   useEffect(() => {
     setAvatarSrc(avatarUpload || avatar);
   }, [avatar, avatarUpload]);
@@ -95,6 +106,7 @@ const AvatarUploaderComponent = ({
             }
             alt={AVATAR_DEFAULT.alt}
             style={styles.avatar}
+            onLoadEnd={handleRemoveCache}
           />
 
           <View style={styles.icon}>
