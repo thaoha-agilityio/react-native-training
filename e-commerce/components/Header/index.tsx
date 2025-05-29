@@ -88,7 +88,6 @@ const HeaderComponent = ({ name, navigation }: HeaderProps) => {
       case SCREENS.SETTING:
         return {
           title: 'Setting',
-          dynamicIcon: null,
           isBorder: false,
           RightIcon: LogoutIcon,
           onPressRightIcon: handleLogout,

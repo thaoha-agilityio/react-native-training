@@ -1,5 +1,4 @@
 export * from './useAuth';
-export * from './useColorTheme';
 export * from './useInputRefs';
 export * from './useMedia';
 export * from './useOrder';

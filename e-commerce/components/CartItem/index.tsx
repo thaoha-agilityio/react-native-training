@@ -24,9 +24,9 @@ import { formatPrice } from '@/utils';
 // Hooks
 import { useTheme } from '@/hooks';
 
-const WIDTH_CARD = Dimensions.get('window').width * 0.89;
+const WIDTH_CARD = Dimensions.get('screen').width - 44;
 const ITEM_HEIGHT = 130;
-const WIDTH_SCREEN = Dimensions.get('window').width;
+const WIDTH_SCREEN = Dimensions.get('screen').width;
 
 interface CartItemProps {
   id: string;
@@ -171,11 +171,9 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     right: '10%',
     justifyContent: 'center',
+    borderRadius: 20,
   },
-  viewContainer: {
-    alignItems: 'center',
-    width: WIDTH_SCREEN,
-  },
+
   iconWrapper: {
     position: 'absolute',
     height: ITEM_HEIGHT,
