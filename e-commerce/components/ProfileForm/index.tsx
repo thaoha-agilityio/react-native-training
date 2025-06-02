@@ -265,10 +265,10 @@ const ProfileFormComponent = ({
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <Dropdown
-              data={US_STATES}
+              options={US_STATES}
               label="State"
-              onChange={onChange}
-              value={value || ''}
+              onSelect={onChange}
+              selectedValue={value || ''}
               errorMessage={error?.message}
             />
           )}

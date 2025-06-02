@@ -80,7 +80,7 @@ export const CheckoutScreen = () => {
   };
 
   const navigateToHome = useCallback(() => {
-    router.push(ROUTES.HOME);
+    router.replace(ROUTES.HOME);
     setIsVisible(false);
   }, []);
 

@@ -1,99 +1,111 @@
-import { useState } from 'react';
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
-import { Dropdown as DropdownElement } from 'react-native-element-dropdown';
+import { memo, useRef, useMemo, useCallback } from 'react';
+import { Pressable, TouchableHighlight, View, StyleSheet } from 'react-native';
+import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 
 // Themes
 import { colors, fontsFamily, fontSizes } from '@/themes';
 
 // Components
+import { ArrowDownIcon } from '@/components/icons';
 import { Text } from '../Text';
 
 // Hooks
 import { useTheme } from '@/hooks';
 
-type DropdownItem = {
+type DropdownOption = {
   label: string;
-  value: string | number;
+  value: string;
 };
 
-interface DropdownProps {
+type DropdownProps = {
+  options: DropdownOption[];
+  disabled?: boolean;
   label?: string;
-  data: DropdownItem[];
-  value: string | number | null;
+  selectedValue?: string;
   errorMessage?: string;
-  onChange: (value: string | number) => void;
-  placeholder?: string;
-  maxHeight?: number;
-  style?: ViewStyle;
-  dropdownStyle?: ViewStyle;
-  textStyle?: TextStyle;
-}
+  onSelect: (value: string) => void;
+};
 
-export const Dropdown = ({
+const DropdownComponent = ({
+  options,
+  disabled = false,
   label,
-  data,
-  value,
+  selectedValue,
   errorMessage,
-  onChange,
-  placeholder = 'Select item',
-  maxHeight = 300,
-  style,
-  dropdownStyle,
-  textStyle,
+  onSelect,
 }: DropdownProps) => {
-  const [isFocus, setIsFocus] = useState(false);
+  const actionSheetRef = useRef<ActionSheetRef>(null);
   const { colors: colorScheme } = useTheme();
 
-  const handleFocus = () => {
-    setIsFocus(true);
-  };
+  const selectedOption = useMemo(
+    () => options.find(({ value }) => value === selectedValue),
+    [options, selectedValue],
+  );
 
-  const handleBlur = () => {
-    setIsFocus(false);
-  };
+  const handleOpenActionSheet = useCallback(() => {
+    if (!disabled) {
+      actionSheetRef.current?.show();
+    }
+  }, [disabled]);
 
   return (
-    <View style={[styles.container, style]}>
-      {!!label && <Text style={styles.label}>{label}</Text>}
+    <>
+      {label && <Text style={styles.label}>{label}</Text>}
+      <Pressable
+        style={[styles.triggerContainer, disabled && styles.triggerDisabled]}
+        onPress={handleOpenActionSheet}
+      >
+        <View style={styles.triggerSelectedLabel}>
+          <Text
+            style={[styles.selectedTextStyle, { color: colorScheme.title }]}
+          >
+            {selectedOption?.label}
+          </Text>
 
-      <DropdownElement
-        style={[
-          styles.dropdown,
-          dropdownStyle,
-          isFocus && { borderColor: colors.background.secondary },
-        ]}
-        placeholderStyle={[styles.placeholderStyle, textStyle]}
-        selectedTextStyle={[
-          styles.selectedTextStyle,
-          { color: colorScheme.title },
-        ]}
-        data={data}
-        maxHeight={maxHeight}
-        labelField="label"
-        valueField="value"
-        placeholder={!isFocus ? placeholder : '...'}
-        value={value}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={onChange}
-        itemTextStyle={{ color: colorScheme.title }}
-        containerStyle={[
-          styles.containerStyle,
-          { backgroundColor: colorScheme.background },
-        ]}
-        activeColor={colors.primary}
-      />
+          <ArrowDownIcon color={colorScheme.title} />
+        </View>
+      </Pressable>
+
+      <ActionSheet ref={actionSheetRef}>
+        <View style={styles.contentContainer}>
+          {options.map(({ value, label: optionLabel }) => {
+            const isSelected = selectedOption?.value === value;
+
+            const handleSelectOption = () => {
+              onSelect(value);
+              actionSheetRef.current?.hide();
+            };
+
+            return (
+              <TouchableHighlight
+                key={value}
+                style={[
+                  styles.containerStyle,
+                  {
+                    backgroundColor: isSelected
+                      ? colors.primary
+                      : colorScheme.background,
+                  },
+                ]}
+                underlayColor={colors.primary}
+                onPress={handleSelectOption}
+              >
+                <Text size="md">{optionLabel}</Text>
+              </TouchableHighlight>
+            );
+          })}
+        </View>
+      </ActionSheet>
       {!!errorMessage && (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       )}
-    </View>
+    </>
   );
 };
 
+export const Dropdown = memo(DropdownComponent);
+
 const styles = StyleSheet.create({
-  container: {
-    gap: 15,
-  },
   label: {
     fontSize: fontSizes.xs,
     fontFamily: fontsFamily.primary,
@@ -105,15 +117,45 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
   },
-  placeholderStyle: {
-    fontSize: fontSizes.sm,
-  },
+
   selectedTextStyle: {
     fontSize: fontSizes.xs,
     fontFamily: fontsFamily.semiBold,
   },
+
   containerStyle: {
+    alignItems: 'center',
+    paddingVertical: 10,
+    gap: 10,
+  },
+
+  triggerContainer: {
+    borderWidth: 1,
+    borderColor: colors.border,
     borderRadius: 8,
+  },
+
+  triggerDisabled: {
+    opacity: 0.8,
+  },
+
+  triggerSelectedLabel: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 18,
+    alignItems: 'center',
+  },
+
+  contentContainer: {
+    width: '100%',
+  },
+
+  dropdownItem: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 20,
   },
   errorMessage: {
     marginTop: 5,

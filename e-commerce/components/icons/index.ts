@@ -1,4 +1,5 @@
 export * from './AppleIcon';
+export * from './ArrowDownIcon';
 export * from './ArrowRightIcon';
 export * from './ArrowLeftIcon';
 export * from './CartIcon';
