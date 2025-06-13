@@ -4,6 +4,7 @@ import { useColorScheme } from 'react-native';
 
 // Constants
 import { THEME_STORAGE_KEY } from '@/constants';
+import switchTheme from 'react-native-theme-switch-animation';
 
 export const ThemeContext = createContext({
   theme: 'light',
@@ -32,6 +33,20 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const toggleTheme = async () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+
+    switchTheme({
+      switchThemeFunction: () => {
+        setTheme(newTheme);
+      },
+      animationConfig: {
+        type: 'circular',
+        duration: 900,
+        startingPoint: {
+          cx: 0,
+          cy: 0,
+        },
+      },
+    });
 
     await AsyncStorage.setItem(THEME_STORAGE_KEY, newTheme);
   };
