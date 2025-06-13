@@ -62,7 +62,7 @@ Ensure sure you have completed the [React Native - Environment Setup](https://do
 
 ## Requirements
 
-- [Link](https://docs.google.com/document/d/1pHC3DfMbDdvMGoaOtOmJ0vvqB3cMPuOXpGvV-R5M5Ak/edit?tab=t.0)
+- [Link](https://docs.google.com/document/d/1QNIGQDidAIwE6AXCLPixA16liP-gVlssWqNjWuEj1Wo/edit?tab=t.0#heading=h.8wwjazh2a27g)
 
 ## Features
 
@@ -80,3 +80,10 @@ Ensure sure you have completed the [React Native - Environment Setup](https://do
 - Users can edit profile
   - Using Camera and Image Picker
 - Users can log out
+- Apply more animation below:
+  - Switch theme with animation
+- Responsive layouts
+  - Double tap/ pinch to zoom the image of the product
+- Implementing a “fly to cart” animation
+  - Update an interactive onboarding screen
+- Animated FlatList
