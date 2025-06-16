@@ -1,10 +1,10 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from 'react-native';
+import switchTheme from 'react-native-theme-switch-animation';
 
 // Constants
 import { THEME_STORAGE_KEY } from '@/constants';
-import switchTheme from 'react-native-theme-switch-animation';
 
 export const ThemeContext = createContext({
   theme: 'light',
@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         setTheme(newTheme);
       },
       animationConfig: {
-        type: 'circular',
+        type: 'fadeAnim',
         duration: 900,
         startingPoint: {
           cx: 0,
