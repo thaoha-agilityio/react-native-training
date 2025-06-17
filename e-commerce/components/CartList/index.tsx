@@ -1,6 +1,5 @@
 import { memo, useCallback, useMemo } from 'react';
 import { ListRenderItemInfo, FlatList, StyleSheet } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // Components
 import { CartItem, Text } from '@/components';
@@ -63,18 +62,16 @@ const CartListComponent = ({
   );
 
   return (
-    <GestureHandlerRootView>
-      <FlatList
-        data={data}
-        renderItem={renderCartItem}
-        keyExtractor={getKeyExtractor}
-        ListEmptyComponent={renderEmptyList}
-        showsVerticalScrollIndicator={false}
-        removeClippedSubviews={false}
-        maxToRenderPerBatch={6}
-        initialNumToRender={6}
-      />
-    </GestureHandlerRootView>
+    <FlatList
+      data={data}
+      renderItem={renderCartItem}
+      keyExtractor={getKeyExtractor}
+      ListEmptyComponent={renderEmptyList}
+      showsVerticalScrollIndicator={false}
+      removeClippedSubviews={false}
+      maxToRenderPerBatch={6}
+      initialNumToRender={6}
+    />
   );
 };
 
