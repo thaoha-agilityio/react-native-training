@@ -6,6 +6,7 @@ export * from './CartIcon';
 export * from './CartBottomBarIcon';
 export * from './ChevronIcon';
 export * from './ClockIcon';
+export * from './CloseIcon';
 export * from './DeliveryIcon';
 export * from './EditAddressIcon';
 export * from './EditIcon';

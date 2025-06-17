@@ -14,10 +14,11 @@ import Toast from 'react-native-toast-message';
 // Components
 import {
   Button,
-  Image,
+  ImageModal,
   PaginationDot,
   ProductDetailsSkeleton,
   Text,
+  ImageCarousel,
 } from '@/components';
 import { CartIcon, StarIcon } from '@/components/icons';
 
@@ -79,13 +80,32 @@ export const ProductDetailsScreen = () => {
     }
   };
 
-  const renderItem = ({ item }: ListRenderItemInfo<ProductImg>) => (
-    <View style={{ width: width - 32 }}>
-      <Image source={item.image} contentFit="cover" style={styles.image} />
-    </View>
-  );
+  const [visible, setVisible] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const handleOpenModal = useCallback((image: string) => {
+    setVisible(true);
+    setSelectedImage(image);
+  }, []);
+
+  const handleCloseImageModal = useCallback(() => {
+    setVisible(false);
+  }, []);
 
   const getKeyExtractor = useCallback((item: ProductImg) => item.id, []);
+
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<ProductImg>) => (
+      <ImageCarousel
+        image={item.image}
+        viewStyle={{ width: width - 32 }}
+        imageStyle={styles.image}
+        onOpenModal={handleOpenModal}
+      />
+    ),
+    [handleOpenModal],
+  );
 
   useEffect(() => {
     if (error) {
@@ -145,6 +165,12 @@ export const ProductDetailsScreen = () => {
           </View>
         </>
       )}
+
+      <ImageModal
+        image={selectedImage}
+        visible={visible}
+        onCloseImageModal={handleCloseImageModal}
+      />
     </ScrollView>
   );
 };

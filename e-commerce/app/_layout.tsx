@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import Toast from 'react-native-toast-message';
@@ -51,22 +51,27 @@ export default function RootLayout() {
   return (
     <KeyboardProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Stack
-              screenOptions={{
-                headerShown: true,
-                header: ({ ...props }) => <Header {...props} />,
-              }}
-            >
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="(public)" options={{ headerShown: false }} />
-            </Stack>
+        <GestureHandlerRootView>
+          <ThemeProvider>
+            <SafeAreaView style={{ flex: 1 }}>
+              <Stack
+                screenOptions={{
+                  headerShown: true,
+                  header: ({ ...props }) => <Header {...props} />,
+                }}
+              >
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(public)"
+                  options={{ headerShown: false }}
+                />
+              </Stack>
 
-            <StatusBar />
-            <Toast />
-          </SafeAreaView>
-        </ThemeProvider>
+              <StatusBar />
+              <Toast />
+            </SafeAreaView>
+          </ThemeProvider>
+        </GestureHandlerRootView>
       </QueryClientProvider>
     </KeyboardProvider>
   );

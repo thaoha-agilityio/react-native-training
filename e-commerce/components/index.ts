@@ -7,10 +7,9 @@ export * from './Categories';
 export * from './Dropdown';
 export * from './Header';
 export * from './Image';
+export * from './ImageCourasel';
 export * from './Input';
 export * from './LoginForm';
-export * from './Modal';
-export * from './Modal/SuccessModal';
 export * from './PaginationDot';
 export * from './PasswordInput';
 export * from './ProductList';
@@ -26,3 +25,8 @@ export * from './Skeleton/ProductsSkeleton';
 export * from './Skeleton/FormSkeleton';
 export * from './Skeleton/ProductDetailsSkeleton';
 export * from './Skeleton/ProfileSkeleton';
+
+// Modal
+export * from './Modal';
+export * from './Modal/SuccessModal';
+export * from './Modal/ImageModal';
