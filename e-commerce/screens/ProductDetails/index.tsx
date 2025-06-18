@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -10,6 +10,11 @@ import {
   ViewToken,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 // Components
 import {
@@ -29,7 +34,12 @@ import { colors, fontsFamily } from '@/themes';
 import { ProductImg } from '@/interfaces';
 
 // Utils
-import { formatNumberWithUnit, formatPrice, getAPIErrorMessage } from '@/utils';
+import {
+  formatNumberWithUnit,
+  formatPrice,
+  getAPIErrorMessage,
+  measureLayout,
+} from '@/utils';
 
 // Hooks
 import { useFetchProductDetails, useTheme } from '@/hooks';
@@ -59,6 +69,44 @@ export const ProductDetailsScreen = () => {
 
   const addItemToCart = useCartStore((state) => state.addItemToCart);
 
+  const productRef = useRef<View>(null);
+  const cartRef = useRef<View>(null);
+  const [showClone, setShowClone] = useState(false);
+
+  // Shared animated positions
+  const cloneX = useSharedValue(0);
+  const cloneY = useSharedValue(0);
+  const cloneScale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    position: 'absolute',
+    left: cloneX.value - 80,
+    top: cloneY.value - 300,
+    transform: [{ scale: cloneScale.value }],
+  }));
+
+  const startAnimation = useCallback(async () => {
+    const from = await measureLayout(productRef);
+    const to = await measureLayout(cartRef);
+
+    // Position clone over original image
+    cloneX.value = from.x;
+    cloneY.value = from.y;
+    cloneScale.value = 1;
+
+    setShowClone(true);
+
+    // Animate to cart position
+    cloneX.value = withTiming(to.x, { duration: 500 });
+    cloneY.value = withTiming(to.y, { duration: 500 });
+    cloneScale.value = withTiming(0.2, { duration: 500 });
+
+    // Hide clone after animation
+    setTimeout(() => {
+      setShowClone(false);
+    }, 500);
+  }, [cloneX, cloneY, cloneScale, productRef, cartRef]);
+
   const handleAddToCart = useCallback(() => {
     addItemToCart({
       productId: id.toString(),
@@ -68,7 +116,8 @@ export const ProductDetailsScreen = () => {
       image: images[0].image,
       id: id.toString(),
     });
-  }, [addItemToCart, id, images, name, price]);
+    startAnimation();
+  }, [addItemToCart, id, images, name, price, startAnimation]);
 
   const onViewableItemsChanged = ({
     viewableItems,
@@ -156,14 +205,28 @@ export const ProductDetailsScreen = () => {
               {description}
             </Text>
 
-            <Button style={styles.addToCartBtn} onPress={handleAddToCart}>
-              <CartIcon color={colors.light} />
-              <Text style={{ color: colors.light }} variant="heading">
-                Add to cart
-              </Text>
-            </Button>
+            <View ref={productRef}>
+              <Button style={styles.addToCartBtn} onPress={handleAddToCart}>
+                <CartIcon color={colors.light} />
+                <Text style={{ color: colors.light }} variant="heading">
+                  Add to cart
+                </Text>
+              </Button>
+            </View>
           </View>
         </>
+      )}
+
+      {/* Block */}
+      <View style={styles.block} ref={cartRef} />
+
+      {/* Cloned image */}
+      {showClone && (
+        <Animated.Image
+          source={{ uri: images[0].image }}
+          style={[styles.product, animatedStyle]}
+          resizeMode="contain"
+        />
       )}
 
       <ImageModal
@@ -179,13 +242,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-  },
-
-  headerWrapper: {
-    paddingVertical: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
 
   cartBtn: {
@@ -225,5 +281,16 @@ const styles = StyleSheet.create({
   customText: {
     fontFamily: fontsFamily.medium,
     marginTop: 6,
+  },
+
+  product: {
+    width: 150,
+    height: 500,
+  },
+
+  block: {
+    position: 'absolute',
+    top: -65,
+    right: 30,
   },
 });

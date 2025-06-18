@@ -5,6 +5,7 @@ import {
   UseFormClearErrors,
 } from 'react-hook-form';
 import { AxiosError } from 'axios';
+import { findNodeHandle, LayoutRectangle, UIManager, View } from 'react-native';
 
 // Constants
 import { ERROR_MESSAGES } from '@/constants';
@@ -34,4 +35,21 @@ export const getAPIErrorMessage = (error: unknown): string => {
     typeof error.response.data === 'string'
     ? error.response.data
     : ERROR_MESSAGES.DEFAULT_API_ERROR;
+};
+
+export const measureLayout = (
+  ref: React.RefObject<View>,
+): Promise<LayoutRectangle> => {
+  return new Promise((resolve, reject) => {
+    if (!ref.current) return reject('No ref found');
+
+    const handle = findNodeHandle(ref.current);
+    if (handle) {
+      UIManager.measure(handle, (_x, _y, width, height, pageX, pageY) => {
+        resolve({ x: pageX, y: pageY, width, height });
+      });
+    } else {
+      reject('No handle found');
+    }
+  });
 };
