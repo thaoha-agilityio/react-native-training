@@ -1,5 +1,10 @@
 import { memo, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 // Components
 import { Modal } from '.';
@@ -8,11 +13,6 @@ import { SuccessIcon } from '../icons';
 
 // Themes
 import { fontWeights } from '@/themes';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
 
 interface SuccessModalProps {
   visible: boolean;
