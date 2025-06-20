@@ -1,8 +1,15 @@
 import { memo, useCallback, useMemo } from 'react';
-import { ListRenderItemInfo, FlatList, StyleSheet } from 'react-native';
+import {
+  ListRenderItemInfo,
+  FlatList,
+  StyleSheet,
+  ViewToken,
+} from 'react-native';
+import { useSharedValue } from 'react-native-reanimated';
 
 // Components
-import { CartItem, Text } from '@/components';
+import { Text } from '@/components';
+import { Item } from './Item';
 
 // Types
 import { Cart } from '@/interfaces';
@@ -18,6 +25,8 @@ const CartListComponent = ({
   onRemove,
   onChangeQuantity,
 }: CartListProps) => {
+  const viewableItems = useSharedValue<ViewToken[]>([]);
+
   const getKeyExtractor = useCallback((item: Cart) => {
     const { id } = item || {};
 
@@ -37,7 +46,7 @@ const CartListComponent = ({
       const isLastItem = index === data.length - 1;
 
       return (
-        <CartItem
+        <Item
           id={id}
           img={image}
           name={name}
@@ -46,10 +55,11 @@ const CartListComponent = ({
           onRemove={onRemove}
           isLastItem={isLastItem}
           onChangeQuantity={onChangeQuantity}
+          viewableItems={viewableItems}
         />
       );
     },
-    [data.length, onChangeQuantity, onRemove],
+    [data.length, onChangeQuantity, onRemove, viewableItems],
   );
 
   const renderEmptyList = useMemo(
@@ -60,6 +70,13 @@ const CartListComponent = ({
     ),
     [],
   );
+  const handleViewableItemsChanged = ({
+    viewableItems: vItems,
+  }: {
+    viewableItems: ViewToken[];
+  }) => {
+    viewableItems.value = vItems;
+  };
 
   return (
     <FlatList
@@ -71,6 +88,7 @@ const CartListComponent = ({
       removeClippedSubviews={false}
       maxToRenderPerBatch={6}
       initialNumToRender={6}
+      onViewableItemsChanged={handleViewableItemsChanged}
     />
   );
 };
