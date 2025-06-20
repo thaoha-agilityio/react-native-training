@@ -1,6 +1,11 @@
-import { memo, useRef, useMemo, useCallback } from 'react';
+import React, { memo, useRef, useMemo, useCallback } from 'react';
 import { Pressable, TouchableHighlight, View, StyleSheet } from 'react-native';
 import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 
 // Themes
 import { colors, fontsFamily, fontSizes } from '@/themes';
@@ -37,6 +42,12 @@ const DropdownComponent = ({
   const actionSheetRef = useRef<ActionSheetRef>(null);
   const { colors: colorScheme } = useTheme();
 
+  const rotation = useSharedValue(0);
+
+  const arrowAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotation.value}deg` }],
+  }));
+
   const selectedOption = useMemo(
     () => options.find(({ value }) => value === selectedValue),
     [options, selectedValue],
@@ -44,13 +55,20 @@ const DropdownComponent = ({
 
   const handleOpenActionSheet = useCallback(() => {
     if (!disabled) {
+      rotation.value = withTiming(180, { duration: 200 });
       actionSheetRef.current?.show();
     }
-  }, [disabled]);
+  }, [disabled, rotation]);
+
+  const handleCloseActionSheet = useCallback(() => {
+    rotation.value = withTiming(0, { duration: 200 });
+    actionSheetRef.current?.hide();
+  }, [rotation]);
 
   return (
     <>
       {label && <Text style={styles.label}>{label}</Text>}
+
       <Pressable
         style={[styles.triggerContainer, disabled && styles.triggerDisabled]}
         onPress={handleOpenActionSheet}
@@ -59,43 +77,46 @@ const DropdownComponent = ({
           <Text
             style={[styles.selectedTextStyle, { color: colorScheme.title }]}
           >
-            {selectedOption?.label}
+            {selectedOption?.label || 'Select...'}
           </Text>
 
-          <ArrowDownIcon color={colorScheme.title} />
+          <Animated.View style={arrowAnimatedStyle}>
+            <ArrowDownIcon color={colorScheme.title} />
+          </Animated.View>
         </View>
       </Pressable>
 
-      <ActionSheet ref={actionSheetRef}>
-        <View style={styles.contentContainer}>
-          {options.map(({ value, label: optionLabel }) => {
-            const isSelected = selectedOption?.value === value;
+      <View>
+        <ActionSheet ref={actionSheetRef} onClose={handleCloseActionSheet}>
+          <View style={styles.contentContainer}>
+            {options.map(({ value, label: optionLabel }) => {
+              const isSelected = selectedOption?.value === value;
 
-            const handleSelectOption = () => {
-              onSelect(value);
-              actionSheetRef.current?.hide();
-            };
+              return (
+                <TouchableHighlight
+                  key={value}
+                  style={[
+                    styles.containerStyle,
+                    {
+                      backgroundColor: isSelected
+                        ? colors.primary
+                        : colorScheme.background,
+                    },
+                  ]}
+                  underlayColor={colors.primary}
+                  onPress={() => {
+                    onSelect(value);
+                    handleCloseActionSheet();
+                  }}
+                >
+                  <Text size="md">{optionLabel}</Text>
+                </TouchableHighlight>
+              );
+            })}
+          </View>
+        </ActionSheet>
+      </View>
 
-            return (
-              <TouchableHighlight
-                key={value}
-                style={[
-                  styles.containerStyle,
-                  {
-                    backgroundColor: isSelected
-                      ? colors.primary
-                      : colorScheme.background,
-                  },
-                ]}
-                underlayColor={colors.primary}
-                onPress={handleSelectOption}
-              >
-                <Text size="md">{optionLabel}</Text>
-              </TouchableHighlight>
-            );
-          })}
-        </View>
-      </ActionSheet>
       {!!errorMessage && (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       )}
@@ -110,35 +131,14 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.xs,
     fontFamily: fontsFamily.primary,
   },
-  dropdown: {
-    height: 50,
-    borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-
-  selectedTextStyle: {
-    fontSize: fontSizes.xs,
-    fontFamily: fontsFamily.semiBold,
-  },
-
-  containerStyle: {
-    alignItems: 'center',
-    paddingVertical: 10,
-    gap: 10,
-  },
-
   triggerContainer: {
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: 8,
   },
-
   triggerDisabled: {
     opacity: 0.8,
   },
-
   triggerSelectedLabel: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -147,15 +147,17 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     alignItems: 'center',
   },
-
+  selectedTextStyle: {
+    fontSize: fontSizes.xs,
+    fontFamily: fontsFamily.semiBold,
+  },
   contentContainer: {
     width: '100%',
   },
-
-  dropdownItem: {
-    width: '100%',
+  containerStyle: {
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
+    gap: 10,
   },
   errorMessage: {
     marginTop: 5,
