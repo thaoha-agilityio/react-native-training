@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { memo, useEffect, useRef } from 'react';
+import { View, StyleSheet, Animated } from 'react-native';
 
 // Themes
 import { colors } from '@/themes';
@@ -15,24 +15,48 @@ const PaginationDotComponent = <T,>({
   currentIndex,
   items,
   activeColor = colors.active,
-  widthActive,
-}: PaginationDotProps<T>) => (
-  <View style={styles.dots}>
-    {items.map((_, i) => (
-      <View
-        key={i}
+  widthActive = 16, // fallback for animation target
+}: PaginationDotProps<T>) => {
+  // Create animated values for each dot
+  const animations = useRef(items.map(() => new Animated.Value(0))).current;
+
+  useEffect(() => {
+    animations.forEach((anim, i) => {
+      Animated.timing(anim, {
+        toValue: i === currentIndex ? 1 : 0,
+        duration: 300,
+        useNativeDriver: false, // width and backgroundColor can't use native driver
+      }).start();
+    });
+  }, [currentIndex, animations]);
+
+  const renderDot = (index: number) => {
+    const width = animations[index].interpolate({
+      inputRange: [0, 1],
+      outputRange: [8, widthActive],
+    });
+
+    const backgroundColor = animations[index].interpolate({
+      inputRange: [0, 1],
+      outputRange: [colors.pagination, activeColor],
+    });
+
+    return (
+      <Animated.View
+        key={index}
         style={[
           styles.dot,
           {
-            backgroundColor:
-              i === currentIndex ? activeColor : colors.pagination,
+            width,
+            backgroundColor,
           },
-          !!widthActive && { width: i === currentIndex ? widthActive : 8 },
         ]}
       />
-    ))}
-  </View>
-);
+    );
+  };
+
+  return <View style={styles.dots}>{items.map((_, i) => renderDot(i))}</View>;
+};
 
 export const PaginationDot = memo(PaginationDotComponent);
 
@@ -44,7 +68,6 @@ const styles = StyleSheet.create({
   },
 
   dot: {
-    width: 8,
     height: 8,
     borderRadius: 4,
     margin: 5,

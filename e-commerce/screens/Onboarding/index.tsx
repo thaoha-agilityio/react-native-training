@@ -1,16 +1,22 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   View,
   StyleSheet,
-  FlatList,
   ListRenderItemInfo,
   Dimensions,
   ViewToken,
 } from 'react-native';
 import { router } from 'expo-router';
+import Animated, {
+  runOnJS,
+  useAnimatedRef,
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 // Components
-import { Text, Image, Button, PaginationDot } from '@/components';
+import { Text, Button, PaginationDot } from '@/components';
+import ListItem from './ListItem';
 
 // Themes
 import { colors, fontsFamily, fontSizes } from '@/themes';
@@ -28,8 +34,10 @@ const width = Dimensions.get('screen').width;
 
 export const OnboardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const flatListRef = useRef<FlatList>(null);
   const setFirstLoad = useBootstrapsStore((state) => state.setIsFirstLoad);
+  const x = useSharedValue(0);
+  const flatListIndex = useSharedValue(0);
+  const flatListRef = useAnimatedRef<Animated.FlatList<Onboarding>>();
 
   const scrollToNext = () => {
     if (currentIndex < ONBOARDING_STEPS.length - 1) {
@@ -39,6 +47,15 @@ export const OnboardingScreen = () => {
       router.replace(ROUTES.LOGIN); // navigate after onboarding
     }
   };
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      x.value = event.contentOffset.x;
+      // derive page index from offset
+      const index = Math.round(event.contentOffset.x / width);
+      runOnJS(setCurrentIndex)(index);
+    },
+  });
 
   const scrollToPrev = () => {
     if (currentIndex === 0) return;
@@ -57,30 +74,15 @@ export const OnboardingScreen = () => {
     viewableItems: ViewToken[];
   }) => {
     if (viewableItems.length > 0) {
-      setCurrentIndex(viewableItems[0].index ?? 0);
+      flatListIndex.value = viewableItems[0].index ?? 0;
     }
   };
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<Onboarding>) => (
-      <View style={{ width: width - 34 }}>
-        <Image source={item.image} style={styles.image} contentFit="contain" />
-
-        <View style={styles.textWrapper}>
-          <Text variant="title" size="xxl" style={styles.title}>
-            {item.title}
-          </Text>
-          <Text
-            variant="description"
-            style={styles.description}
-            numberOfLines={3}
-          >
-            {item.description}
-          </Text>
-        </View>
-      </View>
+    ({ item, index }: ListRenderItemInfo<Onboarding>) => (
+      <ListItem item={item} index={index} x={x} />
     ),
-    [],
+    [x],
   );
 
   const getKeyExtractor = useCallback((item: Onboarding) => item.id, []);
@@ -103,13 +105,16 @@ export const OnboardingScreen = () => {
       </View>
 
       <View style={styles.contentWrapper}>
-        <FlatList
+        <Animated.FlatList
+          ref={flatListRef}
           data={ONBOARDING_STEPS}
+          bounces={false}
+          scrollEventThrottle={16}
+          onScroll={scrollHandler}
           keyExtractor={getKeyExtractor}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          ref={flatListRef}
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={VIEWABILITY_CONFIG}
           renderItem={renderItem}
@@ -169,25 +174,6 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
     justifyContent: 'flex-start',
-  },
-
-  image: {
-    flex: 1,
-    paddingHorizontal: 30,
-  },
-
-  textWrapper: {
-    marginTop: 33,
-  },
-
-  title: {
-    textAlign: 'center',
-  },
-
-  description: {
-    marginTop: 10,
-    textAlign: 'center',
-    fontFamily: fontsFamily.semiBold,
   },
 
   bottomContainer: {
