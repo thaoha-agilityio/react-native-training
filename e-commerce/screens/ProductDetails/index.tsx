@@ -80,7 +80,7 @@ export const ProductDetailsScreen = () => {
 
   const animatedStyle = useAnimatedStyle(() => ({
     position: 'absolute',
-    left: cloneX.value - 80,
+    left: cloneX.value - 100,
     top: cloneY.value - 300,
     transform: [{ scale: cloneScale.value }],
   }));
