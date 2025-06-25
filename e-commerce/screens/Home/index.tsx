@@ -63,6 +63,7 @@ export const HomeScreen = () => {
   };
 
   const renderItem = ({ item }: ListRenderItemInfo<Banner>) => (
+    // subtract  padding
     <View style={{ width: width - 32 }}>
       <Image source={item.image} contentFit="cover" style={styles.image} />
     </View>

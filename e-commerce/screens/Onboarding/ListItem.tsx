@@ -57,6 +57,7 @@ const ListItem = ({ item, index, x }: ListItemProps) => {
   }, [index, x]);
 
   return (
+    // subtract  padding
     <View style={[{ width: width - 34 }, styles.itemContainer]}>
       <Animated.Image
         source={item.image as ImageSourcePropType}

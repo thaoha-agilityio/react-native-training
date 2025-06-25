@@ -148,7 +148,7 @@ export const ProductDetailsScreen = () => {
     ({ item }: ListRenderItemInfo<ProductImg>) => (
       <ImageCarousel
         image={item.image}
-        viewStyle={{ width: width - 32 }}
+        viewStyle={{ width: width - 32 }} // subtract padding
         imageStyle={styles.image}
         onOpenModal={handleOpenModal}
       />
