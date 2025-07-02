@@ -1,2 +1,2 @@
 cd e-commerce
-npm run coverage
+npm test
