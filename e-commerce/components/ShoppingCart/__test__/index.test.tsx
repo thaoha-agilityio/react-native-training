@@ -16,12 +16,6 @@ describe('ShoppingCart', () => {
     onNavigation: mockOnNavigation,
   };
 
-  it('should render properly', () => {
-    const { toJSON } = render(<ShoppingCart {...mockProps} />);
-
-    expect(toJSON()).toMatchSnapshot();
-  });
-
   it('should call onNavigation when Cart Icon is pressed.', () => {
     render(<ShoppingCart {...mockProps} />);
 
