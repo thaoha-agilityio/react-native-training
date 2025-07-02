@@ -227,9 +227,7 @@ exports[`LoginForm should render properly 1`] = `
                 {
                   "borderColor": "#C8C8C8",
                 },
-                {
-                  "color": "black",
-                },
+                undefined,
               ]
             }
           />
@@ -366,35 +364,24 @@ exports[`LoginForm should render properly 1`] = `
     }
     accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
+    focusable={false}
     onClick={[Function]}
-    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 6,
-          "flexDirection": "row",
-          "gap": 10,
-          "justifyContent": "center",
-        },
-        {},
-        {
-          "paddingVertical": 2,
-        },
-        {
-          "justifyContent": "flex-end",
-        },
-        {},
-      ]
+      {
+        "alignItems": "center",
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "gap": 10,
+        "justifyContent": "flex-end",
+        "opacity": 1,
+        "paddingVertical": 2,
+      }
     }
   >
     <Text
@@ -434,40 +421,28 @@ exports[`LoginForm should render properly 1`] = `
     }
     accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
+    focusable={false}
     onClick={[Function]}
-    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 6,
-          "flexDirection": "row",
-          "gap": 10,
-          "justifyContent": "center",
-        },
-        {
-          "backgroundColor": "#F83758",
-        },
-        {},
-        {
-          "fontSize": 20,
-          "height": 55,
-          "marginBottom": 30,
-          "marginTop": 52,
-        },
-        {
-          "opacity": 0.7,
-        },
-      ]
+      {
+        "alignItems": "center",
+        "backgroundColor": "#F83758",
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "fontSize": 20,
+        "gap": 10,
+        "height": 55,
+        "justifyContent": "center",
+        "marginBottom": 30,
+        "marginTop": 52,
+        "opacity": 0.7,
+      }
     }
   >
     <Text
