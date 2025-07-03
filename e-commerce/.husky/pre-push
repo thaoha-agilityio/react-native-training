@@ -1,1 +1,2 @@
 cd e-commerce
+npm test
