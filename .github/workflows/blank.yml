@@ -71,7 +71,7 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android app
-        run: eas build --platform android --profile production --local --output ${{ github.workspace }}/e-commerce/app/android/app/build/outputs/apk/app-release.apk
+        run: eas build --platform android --profile production --local --output ${{ github.workspace }}/app-release.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
