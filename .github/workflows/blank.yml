@@ -62,6 +62,20 @@ jobs:
           distribution: "temurin"
           cache: gradle
 
+      # Set environment variables
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_EXPO_PUBLIC_API_URL: ${{ vars.EXPO_PUBLIC_API_URL }}
+          envkey_IMGBB_URL: ${{ vars.IMGBB_URL }}
+          envkey_IMGBB_API_KEY: ${{ vars.IMGBB_API_KEY }}
+          directory: ./e-commerce
+          file_name: .env
+
+      # Run the build and tests
+      - name: Run Tests
+        run: npm test
+
       # Setup Expo and EAS with EXPO_TOKEN secret
       - name: Setup Expo
         uses: expo/expo-github-action@v8
@@ -71,10 +85,10 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android app
-        run: eas build --platform android --profile production --local --output ${{ github.workspace }}/app-release.apk
+        run: eas build --platform android --profile production --local --output ${{ github.workspace }}/e-commerce.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: expo-apk
-          path: ${{ github.workspace }}/app-release.apk
+          path: ${{ github.workspace }}/e-commerce.apk
