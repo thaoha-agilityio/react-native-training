@@ -1,6 +1,6 @@
 export * from './api';
 export * from './categories';
-export * from './images';
+export * from './images1';
 export * from './keychain';
 export * from './mediaScreen';
 export * from './messages';
