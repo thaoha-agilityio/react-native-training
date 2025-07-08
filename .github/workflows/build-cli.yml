@@ -31,8 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment || 'development' }}
     env:
-      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-      EXPO_PUBLIC_API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
+      API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
       IMGBB_URL: ${{ secrets.IMGBB_URL }}
       IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
     defaults:
@@ -53,7 +52,7 @@ jobs:
         run: |
           echo "ENVIRONMENT: ${{ vars.ENVIRONMENT }}"
 
-        # Sign and upload the APK
+      # Sign and upload the APK
       - name: Decode keystore
         shell: bash
         run: |
