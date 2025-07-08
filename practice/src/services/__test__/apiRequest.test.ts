@@ -1,7 +1,7 @@
 import axios from '../config';
 
 // Services
-import {getData, postData} from '../APIRequest';
+import {getData, postData} from '../apiRequest';
 
 // Mocks
 import {MOCK_PRODUCTS} from '@/mocks';
