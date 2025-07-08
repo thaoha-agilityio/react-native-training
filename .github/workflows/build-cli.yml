@@ -101,7 +101,7 @@ jobs:
         run: npm test
 
       - name: Build apk
-        run: npm build
+        run: npm run build
 
       - name: Rename signed APK
         shell: bash
