@@ -2,6 +2,8 @@ name: Build Android APK with React CLI
 
 on:
   push:
+    tags:
+      - "cli-v*.*.*"
     branches: ["develop"]
   pull_request:
     branches: ["develop"]
@@ -93,3 +95,49 @@ jobs:
           envkey_MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           directory: ./practice
           file_name: .env
+
+      # Run the build and tests
+      - name: Run Tests
+        run: npm test
+
+      - name: Build apk
+        run: npm build
+
+      - name: Rename signed APK
+        shell: bash
+        run: |
+          mv "android/app/build/outputs/apk/release/app-release.apk" "${{ github.workspace }}/Furniture.apk"
+
+      - name: Upload application
+        uses: actions/upload-artifact@v4
+        with:
+          name: cli-apk
+          path: ${{ github.workspace }}/Furniture.apk
+          retention-days: 3
+
+  release:
+    needs: build
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Download CLI APK
+        uses: actions/download-artifact@v4
+        with:
+          name: cli-apk
+          path: dist
+
+      # Generate release notes and create a GitHub release
+      - name: Generate CHANGELOG
+        run: |
+          echo "# Release Notes for FurnitureStore CLI ${{ github.ref_name }}" > dist/CHANGELOG.md
+          echo "- The CLI APK FurnitureStore" >> dist/CHANGELOG.md
+
+      - name: Create GitHub Release with APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*.apk"
+          tag: ${{ github.ref_name }}
+          bodyFile: dist/CHANGELOG.md
