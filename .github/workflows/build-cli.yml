@@ -1,0 +1,143 @@
+name: Build Android APK with React CLI
+
+on:
+  push:
+    tags:
+      - "cli-v*.*.*"
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+
+  workflow_dispatch:
+    inputs:
+      runsOn:
+        description: "Choose GitHub runner"
+        required: true
+        type: choice
+        default: ubuntu-latest
+        options:
+          - ubuntu-latest
+          - macos-latest
+      environment:
+        description: "Select the environment"
+        type: environment
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment || 'development' }}
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EXPO_PUBLIC_API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
+      IMGBB_URL: ${{ secrets.IMGBB_URL }}
+      IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+    defaults:
+      run:
+        working-directory: ./practice
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Check out the code
+      - uses: actions/checkout@v4
+
+      # Check the actual runner OS
+      - name: Show actual runner OS
+        run: echo "ACTUAL RUNNER OS '${{ runner.os }}'"
+
+      # Check environment variables
+      - name: Check environment variables
+        run: |
+          echo "ENVIRONMENT: ${{ vars.ENVIRONMENT }}"
+
+        # Sign and upload the APK
+      - name: Decode keystore
+        shell: bash
+        run: |
+          mkdir -p android/app
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > android/app/my-upload-key.keystore
+
+      # Set up Node.js and install dependencies
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: ./e-commerce/package-lock.json
+
+      - name: install app
+        run: npm install --immutable --immutable-cache --check-cache
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: gradle
+
+      - name: Grant Gradlew permission
+        if: runner.os != 'Windows'
+        run: chmod +x android/gradlew
+
+      # Set environment variables
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_API_URL: ${{ vars.API_URL }}
+          envkey_IMGBB_URL: ${{ vars.UPLOAD_IMGBB_URL }}
+          envkey_IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+          envkey_MYAPP_UPLOAD_STORE_FILE: ${{ secrets.STORE_FILE}}
+          envkey_MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          envkey_MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          envkey_MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          directory: ./practice
+          file_name: .env
+
+      # Run the build and tests
+      - name: Run Tests
+        run: npm test
+
+      - name: Build apk
+        run: npm run build
+
+      - name: Rename signed APK
+        shell: bash
+        run: |
+          mv "android/app/build/outputs/apk/release/app-release.apk" "${{ github.workspace }}/Furniture.apk"
+
+      - name: Upload application
+        uses: actions/upload-artifact@v4
+        with:
+          name: cli-apk
+          path: ${{ github.workspace }}/Furniture.apk
+          retention-days: 3
+
+  release:
+    needs: build
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Download CLI APK
+        uses: actions/download-artifact@v4
+        with:
+          name: cli-apk
+          path: dist
+
+      # Generate release notes and create a GitHub release
+      - name: Generate CHANGELOG
+        run: |
+          echo "# Release Notes for FurnitureStore CLI ${{ github.ref_name }}" > dist/CHANGELOG.md
+          echo "- The CLI APK FurnitureStore" >> dist/CHANGELOG.md
+
+      - name: Create GitHub Release with APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*.apk"
+          tag: ${{ github.ref_name }}
+          bodyFile: dist/CHANGELOG.md
