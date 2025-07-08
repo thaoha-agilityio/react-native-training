@@ -13,7 +13,7 @@
     "storybook-generate": "sb-rn-get-stories",
     "analyze": "react-native-bundle-visualizer",
     "postinstall": "patch-package",
-    "build": "cd android && gradlew.bat assembleRelease"
+    "build": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@notifee/react-native": "^9.1.8",
