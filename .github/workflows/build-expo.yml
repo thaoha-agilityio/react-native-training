@@ -6,6 +6,8 @@ name: Build Android APK with Expo
 on:
   # Triggers the workflow on push or pull request events but only for the "develop" branch
   push:
+    tags:
+      - "expo-v*.*.*"
     branches: ["develop"]
   pull_request:
     branches: ["develop"]
