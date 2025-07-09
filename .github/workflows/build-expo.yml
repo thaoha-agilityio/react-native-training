@@ -127,8 +127,9 @@ jobs:
       # Generate release notes and create a GitHub release
       - name: Generate CHANGELOG
         run: |
-          # echo "# Release Notes for E-Commerce Expo ${{ github.ref_name }}" > dist/CHANGELOG.md
-          echo "- The Expo APK of E-Commerce has been released" >> dist/CHANGELOG.md
+          mkdir -p dist
+          # echo "# Release Notes for E-commerce Expo ${{ github.ref_name }}" > dist/CHANGELOG.md
+          echo "- The Expo APK of E-commerce" >> dist/CHANGELOG.md
 
       - name: Create GitHub Release with APK
         uses: ncipollo/release-action@v1
