@@ -127,7 +127,6 @@ jobs:
       # Generate release notes and create a GitHub release
       - name: Generate CHANGELOG
         run: |
-          mkdir -p dist
           # echo "# Release Notes for E-commerce Expo ${{ github.ref_name }}" > dist/CHANGELOG.md
           echo "- The Expo APK of E-commerce" >> dist/CHANGELOG.md
 
