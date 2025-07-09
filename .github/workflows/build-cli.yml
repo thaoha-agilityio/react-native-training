@@ -85,7 +85,7 @@ jobs:
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v2.0
         with:
-          envkey_API_URL: ${{ vars.API_URL }}
+          envkey_API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
           envkey_IMGBB_URL: ${{ vars.UPLOAD_IMGBB_URL }}
           envkey_IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
           envkey_MYAPP_UPLOAD_STORE_FILE: ${{ secrets.STORE_FILE}}
