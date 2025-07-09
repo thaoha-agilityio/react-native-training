@@ -5,8 +5,14 @@ on:
     tags:
       - "cli-v*.*.*"
     branches: ["develop"]
+    paths:
+      - "practice/**"
+      - ".github/workflows/build-cli.yml"
   pull_request:
     branches: ["develop"]
+    paths:
+      - "practice/**"
+      - ".github/workflows/build-cli.yml"
 
   workflow_dispatch:
     inputs:
@@ -18,6 +24,7 @@ on:
         options:
           - ubuntu-latest
           - macos-latest
+          - windows-latest
       environment:
         description: "Select the environment"
         type: environment
@@ -28,7 +35,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'workflow_dispatch' && inputs.runsOn || 'ubuntu-latest' }}
     environment: ${{ inputs.environment || 'development' }}
     env:
       API_URL: ${{ secrets.EXPO_PUBLIC_API_URL }}
